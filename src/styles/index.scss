@@ -1,0 +1,57 @@
+/** 全局样式 */
+@use 'element-plus/theme-chalk/src/mixins/function.scss' as *;
+@use './transition.scss' as *;
+
+body {
+  margin: 0;
+  line-height: 1.58;
+  color: getCssVar('text-color', 'regular');
+  font-size: getCssVar('font-size', 'base');
+  font-family: getCssVar('font-family');
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+/* 按钮加图标减少间距 */
+.ele-btn-icon.el-button,
+.ele-btn-icon.el-button.is-round {
+  padding-left: 10px;
+  padding-right: 12px;
+
+  &.el-button--small {
+    padding-left: 5px;
+    padding-right: 6px;
+  }
+
+  &.el-button--large {
+    padding-left: 14px;
+    padding-right: 16px;
+  }
+}
+
+/* 间距组件样式优化 */
+.el-space--horizontal > .el-space__item:last-child {
+  margin-right: 0 !important;
+}
+
+.el-space--vertical > .el-space__item:last-child {
+  padding-bottom: 0 !important;
+}
+
+/* echarts */
+.echarts > div > div {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* 小屏幕时分页去掉一些组件 */
+@media screen and (max-width: 768px) {
+  .ele-pro-table .el-pagination {
+    .el-pagination__sizes,
+    .el-pagination__jump {
+      display: none;
+    }
+  }
+}

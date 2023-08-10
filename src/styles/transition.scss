@@ -1,0 +1,92 @@
+/** 路由切换动画 */
+
+/* 执行动画时隐藏页脚 */
+.fade-enter-active,
+.fade-leave-active,
+.slide-bottom-enter-active,
+.slide-bottom-leave-active,
+.slide-right-leave-active,
+.slide-right-enter-active,
+.zoom-in-enter-active,
+.zoom-in-leave-active,
+.zoom-out-leave-active,
+.zoom-out-enter-active {
+  & + .ele-footer {
+    display: none;
+  }
+}
+
+/* 渐变 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* 底部消退 */
+.slide-bottom-enter-active,
+.slide-bottom-leave-active {
+  transition: (opacity 0.2s ease-out, transform 0.25s ease-out);
+}
+
+.slide-bottom-enter-from {
+  opacity: 0;
+  transform: translateY(-10%);
+}
+
+.slide-bottom-leave-to {
+  opacity: 0;
+  transform: translateY(10%);
+}
+
+/* 右侧消退 */
+.slide-right-leave-active,
+.slide-right-enter-active {
+  transition: (opacity 0.2s ease-out, transform 0.25s ease-out);
+}
+
+.slide-right-enter-from {
+  opacity: 0;
+  transform: translateX(-60px);
+}
+
+.slide-right-leave-to {
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+/* 放大渐变 */
+.zoom-in-enter-active,
+.zoom-in-leave-active {
+  transition: (opacity 0.2s ease-out, transform 0.25s ease-out);
+}
+
+.zoom-in-enter-from {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.zoom-in-leave-to {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+/* 缩小渐变 */
+.zoom-out-leave-active,
+.zoom-out-enter-active {
+  transition: (opacity 0.2s ease-out, transform 0.25s ease-out);
+}
+
+.zoom-out-enter-from {
+  opacity: 0;
+  transform: scale(1.2);
+}
+
+.zoom-out-leave-to {
+  opacity: 0;
+  transform: scale(0.8);
+}

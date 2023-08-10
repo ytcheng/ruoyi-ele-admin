@@ -1,0 +1,279 @@
+<template>
+  <user-search @search="reload" @add="openEdit()" />
+  <!-- 表格 -->
+  <ele-pro-table
+    ref="tableRef"
+    row-key="userId"
+    :columns="columns"
+    :datasource="datasource"
+    v-model:selections="selections"
+    highlight-current-row
+    cache-key="systemUserTable"
+    :toolbar="{ bodyStyle: { marginTop: 0 } }"
+  >
+    <template #toolbar>
+      <el-space>
+        <el-button
+          type="primary"
+          class="ele-btn-icon"
+          :icon="Plus"
+          @click="openEdit()"
+        >
+          新建
+        </el-button>
+        <el-button
+          type="danger"
+          class="ele-btn-icon"
+          :icon="Delete"
+          @click="removeBatch"
+        >
+          删除
+        </el-button>
+      </el-space>
+    </template>
+    <template #status="{ row }">
+      <el-switch
+        :model-value="row.status == 0"
+        @change="(checked) => editStatus(checked, row)"
+      />
+    </template>
+    <template #action="{ row }">
+      <el-space>
+        <el-link type="primary" :underline="false" @click="openEdit(row)">
+          修改
+        </el-link>
+        <el-divider direction="vertical" style="margin: 0" />
+        <ele-popconfirm
+          :width="226"
+          placement="top-end"
+          :title="'是否确认删除用户编号为“' + row.userId + '”的数据项？'"
+          :popper-options="{
+            modifiers: [
+              { name: 'arrow', options: { padding: 20 } },
+              { name: 'offset', options: { offset: [20, 6] } }
+            ]
+          }"
+          @confirm="remove(row)"
+        >
+          <template #reference>
+            <el-link type="danger" :underline="false">删除</el-link>
+          </template>
+        </ele-popconfirm>
+        <el-divider direction="vertical" style="margin: 0" />
+        <ele-dropdown
+          :items="[
+            { title: '重置密码', command: 'password' },
+            { title: '分配角色', command: 'role' }
+          ]"
+          @command="(key) => dropClick(key, row)"
+        >
+          <el-link type="primary" :underline="false">
+            <span>更多&nbsp;</span>
+            <el-icon :size="12">
+              <arrow-down />
+            </el-icon>
+          </el-link>
+        </ele-dropdown>
+      </el-space>
+    </template>
+  </ele-pro-table>
+  <!-- 编辑弹窗 -->
+  <user-edit
+    :data="current"
+    v-model="showEdit"
+    :dept-id="deptId"
+    @done="reload"
+  />
+</template>
+
+<script setup>
+  import { ref, watch } from 'vue';
+  import { Plus, Delete, ArrowDown } from '@element-plus/icons-vue';
+  import { ElMessageBox } from 'element-plus';
+  import { EleMessage } from 'ele-admin-plus/es';
+  import UserSearch from './user-search.vue';
+  import UserEdit from './user-edit.vue';
+  import {
+    pageUsers,
+    removeUser,
+    removeUsers,
+    updateUserStatus
+  } from '@/api/system/user';
+
+  const props = defineProps({
+    // 部门id
+    deptId: Number
+  });
+
+  // 表格实例
+  const tableRef = ref(null);
+
+  // 表格列配置
+  const columns = ref([
+    {
+      type: 'selection',
+      columnKey: 'selection',
+      width: 48,
+      align: 'center',
+      fixed: 'left'
+    },
+    {
+      type: 'index',
+      columnKey: 'index',
+      width: 48,
+      align: 'center',
+      showOverflowTooltip: true,
+      fixed: 'left'
+    },
+    {
+      prop: 'userName',
+      label: '用户名称',
+      align: 'center',
+      showOverflowTooltip: true
+    },
+    {
+      prop: 'nickName',
+      label: '用户昵称',
+      align: 'center',
+      showOverflowTooltip: true
+    },
+    {
+      prop: 'dept.deptName',
+      label: '部门',
+      align: 'center',
+      showOverflowTooltip: true
+    },
+    {
+      prop: 'phonenumber',
+      label: '手机号码',
+      align: 'center',
+      showOverflowTooltip: true,
+      slot: 'roles'
+    },
+    {
+      prop: 'status',
+      label: '状态',
+      width: 90,
+      align: 'center',
+      showOverflowTooltip: true,
+      slot: 'status'
+    },
+    {
+      prop: 'createTime',
+      label: '创建时间',
+      align: 'center',
+      showOverflowTooltip: true
+    },
+    {
+      columnKey: 'action',
+      label: '操作',
+      width: 180,
+      align: 'center',
+      slot: 'action'
+    }
+  ]);
+
+  // 表格选中数据
+  const selections = ref([]);
+
+  // 当前编辑数据
+  const current = ref(null);
+
+  // 是否显示编辑弹窗
+  const showEdit = ref(false);
+
+  // 表格数据源
+  const datasource = ({ page, limit, where, orders }) => {
+    return pageUsers({
+      ...where,
+      ...orders,
+      pageNum: page,
+      pageSize: limit,
+      deptId: props.deptId
+    });
+  };
+
+  /* 搜索 */
+  const reload = (where) => {
+    tableRef?.value?.reload?.({ page: 1, where });
+  };
+
+  /* 打开编辑弹窗 */
+  const openEdit = (row) => {
+    current.value = row ?? null;
+    showEdit.value = true;
+  };
+
+  /* 删除单个 */
+  const remove = (row) => {
+    const loading = EleMessage.loading('请求中..');
+    removeUser(row.userId)
+      .then((msg) => {
+        loading.close();
+        EleMessage.success(msg);
+        reload();
+      })
+      .catch((e) => {
+        loading.close();
+        EleMessage.error(e.message);
+      });
+  };
+
+  /* 批量删除 */
+  const removeBatch = () => {
+    if (!selections.value.length) {
+      EleMessage.error('请至少选择一条数据');
+      return;
+    }
+    const ids = selections.value.map((d) => d.userId);
+    ElMessageBox.confirm(
+      `是否确认删除用户编号为"${ids.join()}"的数据项？`,
+      '系统提示',
+      { type: 'warning', draggable: true }
+    )
+      .then(() => {
+        const loading = EleMessage.loading('请求中..');
+        removeUsers(ids)
+          .then((msg) => {
+            loading.close();
+            EleMessage.success(msg);
+            reload();
+          })
+          .catch((e) => {
+            loading.close();
+            EleMessage.error(e.message);
+          });
+      })
+      .catch(() => {});
+  };
+
+  /* 修改用户状态 */
+  const editStatus = (checked, row) => {
+    const status = checked ? '0' : '1';
+    updateUserStatus(row.userId, status)
+      .then((msg) => {
+        row.status = status;
+        EleMessage.success(msg);
+      })
+      .catch((e) => {
+        EleMessage.error(e.message);
+      });
+  };
+
+  /* 下拉菜单点击事件 */
+  const dropClick = (key, _row) => {
+    if (key === 'password') {
+      //
+    } else if (key === 'role') {
+      //
+    }
+  };
+
+  // 监听机构 id 变化
+  watch(
+    () => props.deptId,
+    () => {
+      reload();
+    }
+  );
+</script>
