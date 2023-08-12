@@ -7,7 +7,7 @@
     :data="data"
     node-key="deptId"
     :props="{ label: 'deptName' }"
-    :model-value="modelValue"
+    :model-value="modelValue || void 0"
     :placeholder="placeholder"
     class="ele-fluid"
     @update:modelValue="updateValue"
@@ -36,7 +36,7 @@
 
   /* 更新选中数据 */
   const updateValue = (value) => {
-    emit('update:modelValue', value);
+    emit('update:modelValue', value || 0);
   };
 
   /* 获取部门数据 */

@@ -103,7 +103,7 @@
   import { useFormData } from '@/utils/use-form-data';
   import RoleSelect from './role-select.vue';
   import PostSelect from './post-select.vue';
-  import DeptSelect from './dept-select.vue';
+  import DeptSelect from '../../dept/components/dept-select.vue';
   import { addUser, updateUser, getUser } from '@/api/system/user';
 
   const emit = defineEmits(['done', 'update:modelValue']);

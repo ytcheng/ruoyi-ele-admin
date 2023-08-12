@@ -3,25 +3,16 @@
   <ele-card :body-style="{ paddingBottom: '2px' }">
     <el-form label-width="72px">
       <el-row :gutter="8">
-        <el-col :lg="6" :md="12" :sm="12" :xs="24">
-          <el-form-item label="岗位编码">
+        <el-col :lg="6" :md="8" :sm="12" :xs="24">
+          <el-form-item label="部门名称">
             <el-input
               clearable
-              v-model.trim="form.postCode"
+              v-model.trim="form.deptName"
               placeholder="请输入"
             />
           </el-form-item>
         </el-col>
-        <el-col :lg="6" :md="12" :sm="12" :xs="24">
-          <el-form-item label="岗位名称">
-            <el-input
-              clearable
-              v-model.trim="form.postName"
-              placeholder="请输入"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col :lg="6" :md="12" :sm="12" :xs="24">
+        <el-col :lg="6" :md="8" :sm="12" :xs="24">
           <el-form-item label="状态">
             <dict-data
               code="sys_normal_disable"
@@ -30,7 +21,7 @@
             />
           </el-form-item>
         </el-col>
-        <el-col :lg="6" :md="12" :sm="12" :xs="24">
+        <el-col :lg="12" :md="8" :sm="24" :xs="24">
           <el-form-item label-width="16px">
             <el-space>
               <el-button type="primary" @click="search">查询</el-button>
@@ -50,8 +41,7 @@
 
   // 表单数据
   const { form, resetFields } = useFormData({
-    postCode: '',
-    postName: '',
+    deptName: '',
     status: void 0
   });
 
