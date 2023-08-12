@@ -182,9 +182,9 @@
   const remove = (row) => {
     const loading = EleMessage.loading('请求中..');
     removePost(row.postId)
-      .then((msg) => {
+      .then(() => {
         loading.close();
-        EleMessage.success(msg);
+        EleMessage.success('删除成功');
         reload();
       })
       .catch((e) => {
@@ -208,9 +208,9 @@
       .then(() => {
         const loading = EleMessage.loading('请求中..');
         removePosts(ids)
-          .then((msg) => {
+          .then(() => {
             loading.close();
-            EleMessage.success(msg);
+            EleMessage.success('删除成功');
             reload();
           })
           .catch((e) => {

@@ -184,9 +184,9 @@
   const remove = (row) => {
     const loading = EleMessage.loading('请求中..');
     removeDept(row.deptId)
-      .then((msg) => {
+      .then(() => {
         loading.close();
-        EleMessage.success(msg);
+        EleMessage.success('删除成功');
         reload();
       })
       .catch((e) => {

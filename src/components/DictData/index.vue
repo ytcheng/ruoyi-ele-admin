@@ -1,8 +1,15 @@
 <template>
-  <template v-if="type === 'tag'">
+  <template v-if="type === 'text'">
+    <template v-for="item in data">
+      <span v-if="modelValue == item.dictValue" :key="item.dictCode">
+        {{ item.dictLabel }}
+      </span>
+    </template>
+  </template>
+  <template v-else-if="type === 'tag'">
     <template v-for="item in data">
       <el-tag
-        v-if="modelValue === item.dictValue"
+        v-if="modelValue == item.dictValue"
         :key="item.dictCode"
         size="small"
         :type="item.listClass == 'primary' ? '' : item.listClass"
@@ -49,7 +56,7 @@
 
   const props = defineProps({
     // 值
-    modelValue: String,
+    modelValue: [String, Number],
     // 提示文本
     placeholder: String,
     // 类型

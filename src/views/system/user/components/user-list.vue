@@ -233,9 +233,9 @@
   const remove = (row) => {
     const loading = EleMessage.loading('请求中..');
     removeUser(row.userId)
-      .then((msg) => {
+      .then(() => {
         loading.close();
-        EleMessage.success(msg);
+        EleMessage.success('删除成功');
         reload();
       })
       .catch((e) => {
@@ -259,9 +259,9 @@
       .then(() => {
         const loading = EleMessage.loading('请求中..');
         removeUsers(ids)
-          .then((msg) => {
+          .then(() => {
             loading.close();
-            EleMessage.success(msg);
+            EleMessage.success('删除成功');
             reload();
           })
           .catch((e) => {
