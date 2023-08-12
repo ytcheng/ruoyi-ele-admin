@@ -4,6 +4,7 @@
 import { defineStore } from 'pinia';
 import { mapTree, isExternalLink } from 'ele-admin-plus/es';
 import { getUserInfo, getUserMenu } from '@/api/layout';
+import { API_BASE_URL } from '@/config/setting';
 
 export const useUserStore = defineStore({
   id: 'user',
@@ -76,10 +77,11 @@ export function formatMenus(data, childField = 'children') {
   const menus = mapTree(
     data,
     (item, index, parent) => {
+      const meta = item.meta;
       const menu = {
-        path: (parent?.path ? `${parent.path}/` : '') + item.path,
-        component: item.component ? `/${item.component}` : void 0,
-        meta: { ...item.meta, hide: item.hidden }
+        path: (!meta.link && parent?.path ? `${parent.path}/` : '') + item.path,
+        component: formatComponent(item.component),
+        meta: { ...meta, hide: item.hidden, keepAlive: !meta.noCache }
       };
       const children = item[childField]?.filter?.(
         (d) => !(d.meta?.hide ?? d.hide)
@@ -109,4 +111,21 @@ export function formatMenus(data, childField = 'children') {
     childField
   );
   return { menus, homePath, homeTitle };
+}
+
+/**
+ * 组件路径处理
+ * @param component 组件路径
+ */
+function formatComponent(component) {
+  if (!component) {
+    return;
+  }
+  if ('tool/swagger/index' === component) {
+    return `${API_BASE_URL}/swagger-ui/index.html`;
+  }
+  if ('monitor/druid/index' === component) {
+    return `${API_BASE_URL}/druid/login.html`;
+  }
+  return `/${component}`;
 }

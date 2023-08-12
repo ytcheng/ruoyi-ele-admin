@@ -73,3 +73,14 @@ export async function exportConfigs(params) {
   });
   download(res.data, `config_${new Date().getTime()}.xlsx`);
 }
+
+/**
+ * 刷新缓存配置
+ */
+export async function refreshConfigs() {
+  const res = await request.delete('/system/config/refreshCache');
+  if (res.data.code === 200) {
+    return res.data.msg;
+  }
+  return Promise.reject(new Error(res.data.msg));
+}

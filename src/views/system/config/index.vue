@@ -38,6 +38,13 @@
             >
               导出
             </el-button>
+            <el-button
+              class="ele-btn-icon"
+              :icon="Refresh"
+              @click="refreshCache"
+            >
+              刷新缓存
+            </el-button>
           </el-space>
         </template>
         <template #configType="{ row }">
@@ -80,7 +87,7 @@
 
 <script setup>
   import { ref } from 'vue';
-  import { Plus, Delete, Download } from '@element-plus/icons-vue';
+  import { Plus, Delete, Download, Refresh } from '@element-plus/icons-vue';
   import { ElMessageBox } from 'element-plus';
   import { EleMessage } from 'ele-admin-plus';
   import ConfigSearch from './components/config-search.vue';
@@ -89,7 +96,8 @@
     pageConfigs,
     removeConfig,
     removeConfigs,
-    exportConfigs
+    exportConfigs,
+    refreshConfigs
   } from '@/api/system/config';
 
   // 表格实例
@@ -240,6 +248,20 @@
           EleMessage.error(e.message);
         });
     });
+  };
+
+  /* 刷新缓存 */
+  const refreshCache = () => {
+    const loading = EleMessage.loading('请求中..');
+    refreshConfigs()
+      .then(() => {
+        loading.close();
+        EleMessage.success('刷新成功');
+      })
+      .catch((e) => {
+        loading.close();
+        EleMessage.error(e.message);
+      });
   };
 </script>
 
