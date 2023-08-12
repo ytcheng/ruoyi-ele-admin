@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import request, { download } from '@/utils/request';
 
 /**
  * 分页查询用户
@@ -83,11 +83,56 @@ export async function updateUserStatus(userId, status) {
 /**
  * 重置用户密码
  */
-export async function updateUserPassword(userId, password = '123456') {
+export async function updateUserPassword(userId, password) {
   const res = await request.put('/system/user/resetPwd', {
     userId,
     password
   });
+  if (res.data.code === 200) {
+    return res.data.msg;
+  }
+  return Promise.reject(new Error(res.data.msg));
+}
+
+/**
+ * 导出用户列表
+ */
+export async function exportUsers(params) {
+  const formData = new FormData();
+  Object.keys(params).forEach((key) => {
+    if (params[key] != null) {
+      formData.append(key, params[key]);
+    }
+  });
+  const res = await request({
+    url: '/system/user/export',
+    method: 'POST',
+    data: formData,
+    responseType: 'blob'
+  });
+  download(res.data, `user_${new Date().getTime()}.xlsx`);
+}
+
+/**
+ * 下载用户导入模板
+ */
+export async function downloadTemplate() {
+  const res = await request({
+    url: '/system/user/importTemplate',
+    method: 'POST',
+    responseType: 'blob'
+  });
+  download(res.data, `user_template_${new Date().getTime()}.xlsx`);
+}
+
+/**
+ * 导入用户
+ */
+export async function importUsers(file, isUpdate) {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('updateSupport', isUpdate);
+  const res = await request.post('/system/user/importData', formData);
   if (res.data.code === 200) {
     return res.data.msg;
   }

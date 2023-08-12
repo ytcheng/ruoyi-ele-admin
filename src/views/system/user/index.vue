@@ -103,11 +103,18 @@
 
     :deep(.el-tree-node__content) {
       height: 36px;
-      border-radius: var(--el-border-radius-base);
+      line-height: 36px;
+      border-radius: calc((var(--el-border-radius-small) - 2px) * 3);
+      transition: all 0.2s;
 
       & > .el-tree-node__expand-icon {
         padding: 12px;
       }
+    }
+
+    :deep(.el-tree-node.is-current > .el-tree-node__content) {
+      color: var(--el-color-primary);
+      font-weight: bold;
     }
   }
 </style>

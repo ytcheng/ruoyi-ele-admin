@@ -29,6 +29,12 @@
         >
           删除
         </el-button>
+        <el-button class="ele-btn-icon" :icon="Upload" @click="openImport">
+          导入
+        </el-button>
+        <el-button class="ele-btn-icon" :icon="Download" @click="exportData">
+          导出
+        </el-button>
       </el-space>
     </template>
     <template #status="{ row }">
@@ -84,20 +90,31 @@
     :dept-id="deptId"
     @done="reload"
   />
+  <!-- 导入弹窗 -->
+  <user-import v-model="showImport" @done="reload" />
 </template>
 
 <script setup>
   import { ref, watch } from 'vue';
-  import { Plus, Delete, ArrowDown } from '@element-plus/icons-vue';
+  import {
+    Plus,
+    Delete,
+    ArrowDown,
+    Upload,
+    Download
+  } from '@element-plus/icons-vue';
   import { ElMessageBox } from 'element-plus';
   import { EleMessage } from 'ele-admin-plus/es';
   import UserSearch from './user-search.vue';
   import UserEdit from './user-edit.vue';
+  import UserImport from './user-import.vue';
   import {
     pageUsers,
     removeUser,
     removeUsers,
-    updateUserStatus
+    updateUserStatus,
+    updateUserPassword,
+    exportUsers
   } from '@/api/system/user';
 
   const props = defineProps({
@@ -182,6 +199,9 @@
   // 是否显示编辑弹窗
   const showEdit = ref(false);
 
+  // 是否显示用户导入弹窗
+  const showImport = ref(false);
+
   // 表格数据源
   const datasource = ({ page, limit, where, orders }) => {
     return pageUsers({
@@ -202,6 +222,11 @@
   const openEdit = (row) => {
     current.value = row ?? null;
     showEdit.value = true;
+  };
+
+  /* 打开编辑弹窗 */
+  const openImport = () => {
+    showImport.value = true;
   };
 
   /* 删除单个 */
@@ -261,12 +286,42 @@
   };
 
   /* 下拉菜单点击事件 */
-  const dropClick = (key, _row) => {
+  const dropClick = (key, row) => {
     if (key === 'password') {
-      //
+      ElMessageBox.prompt(`请输入"${row.userName}"的新密码`, '提示', {
+        inputPattern: /^[\S]{5,18}$/,
+        inputErrorMessage: '密码必须为5-18位非空白字符',
+        customStyle: { '--ele-message-box-body-padding': '8px 20px 0 20px' },
+        draggable: true
+      })
+        .then(({ value }) => {
+          updateUserPassword(row.userId, value)
+            .then((msg) => {
+              EleMessage.success(msg);
+            })
+            .catch((e) => {
+              EleMessage.error(e.message);
+            });
+        })
+        .catch(() => {});
     } else if (key === 'role') {
       //
     }
+  };
+
+  /* 导出数据 */
+  const exportData = () => {
+    const loading = EleMessage.loading('请求中..');
+    tableRef.value?.fetch?.(({ where, orders, filters }) => {
+      exportUsers({ ...where, ...orders, ...filters })
+        .then(() => {
+          loading.close();
+        })
+        .catch((e) => {
+          loading.close();
+          EleMessage.error(e.message);
+        });
+    });
   };
 
   // 监听机构 id 变化

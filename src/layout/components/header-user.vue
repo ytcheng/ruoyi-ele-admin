@@ -50,7 +50,6 @@
 
   // 当前用户信息
   const loginUser = computed(() => userStore.info ?? {});
-  console.log(loginUser.value);
 
   /* 用户信息下拉点击 */
   const onUserDropClick = (command) => {
