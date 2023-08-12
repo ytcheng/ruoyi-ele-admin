@@ -2,6 +2,7 @@
  * 主题状态管理
  */
 import { defineStore } from 'pinia';
+import { changeColor } from 'ele-admin-plus/es/utils/theme-util';
 import { THEME_CACHE_NAME, TAB_KEEP_ALIVE } from '@/config/setting';
 
 /**
@@ -46,6 +47,8 @@ const DEFAULT_STATE = Object.freeze({
   fixedHome: true,
   // 路由切换动画
   transitionName: 'slide-right',
+  // 是否暗黑模式
+  darkMode: false,
   // 内容区宽度
   contentWidth: null
 });
@@ -77,6 +80,20 @@ function cacheSetting(key, value) {
     cache[key] = value;
     localStorage.setItem(THEME_CACHE_NAME, JSON.stringify(cache));
   }
+}
+
+/**
+ * 切换主题
+ */
+function changeTheme(value, dark) {
+  return new Promise((resolve, reject) => {
+    try {
+      changeColor(value, dark);
+      resolve();
+    } catch (e) {
+      reject(e);
+    }
+  });
 }
 
 export const useThemeStore = defineStore({
@@ -187,6 +204,34 @@ export const useThemeStore = defineStore({
     },
     setContentWidth(value) {
       this.contentWidth = value;
+    },
+    /**
+     * 切换暗黑模式
+     * @param value 是否是暗黑模式
+     */
+    setDarkMode(value) {
+      return new Promise((resolve, reject) => {
+        changeTheme(void 0, value)
+          .then(() => {
+            this.darkMode = value;
+            cacheSetting('darkMode', value);
+            resolve();
+          })
+          .catch((e) => {
+            reject(e);
+          });
+      });
+    },
+    /**
+     * 恢复主题
+     */
+    recoverTheme() {
+      // 恢复主题色
+      if (this.darkMode) {
+        changeTheme(void 0, this.darkMode).catch((e) => {
+          console.error(e);
+        });
+      }
     },
     /**
      * 添加页签或更新页签数据
