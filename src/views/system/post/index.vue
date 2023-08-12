@@ -41,17 +41,11 @@
           </el-space>
         </template>
         <template #status="{ row }">
-          <el-tag
-            v-if="row.status === '0'"
-            size="small"
-            type="success"
-            :disable-transitions="true"
-          >
-            正常
-          </el-tag>
-          <el-tag v-else size="small" type="danger" :disable-transitions="true">
-            停用
-          </el-tag>
+          <dict-data
+            :model-value="row.status"
+            type="tag"
+            code="sys_normal_disable"
+          />
         </template>
         <template #action="{ row }">
           <el-space>

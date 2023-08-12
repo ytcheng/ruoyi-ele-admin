@@ -1,6 +1,19 @@
 <template>
+  <template v-if="type === 'tag'">
+    <template v-for="item in data">
+      <el-tag
+        v-if="modelValue === item.dictValue"
+        :key="item.dictCode"
+        size="small"
+        :type="item.listClass == 'primary' ? '' : item.listClass"
+        :disable-transitions="true"
+      >
+        {{ item.dictLabel }}
+      </el-tag>
+    </template>
+  </template>
   <el-radio-group
-    v-if="type === 'radio'"
+    v-else-if="type === 'radio'"
     :model-value="modelValue"
     @update:modelValue="updateValue"
   >
@@ -26,8 +39,10 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue';
+  import { computed } from 'vue';
   import { EleMessage } from 'ele-admin-plus/es';
+  import { storeToRefs } from 'pinia';
+  import { useUserStore } from '@/store/modules/user';
   import { listDictDatas } from '@/api/system/dict-data';
 
   const emit = defineEmits(['update:modelValue']);
@@ -43,8 +58,11 @@
     code: String
   });
 
+  const userStore = useUserStore();
+  const { dicts } = storeToRefs(userStore);
+
   // 字典数据
-  const data = ref([]);
+  const data = computed(() => dicts.value[props.code] || []);
 
   /* 更新选中数据 */
   const updateValue = (value) => {
@@ -52,11 +70,14 @@
   };
 
   /* 获取字典数据 */
-  listDictDatas(props.code)
-    .then((list) => {
-      data.value = list;
-    })
-    .catch((e) => {
-      EleMessage.error(e.message);
-    });
+  if (dicts.value[props.code] == null) {
+    userStore.setDicts([], props.code);
+    listDictDatas(props.code)
+      .then((list) => {
+        userStore.setDicts(list, props.code);
+      })
+      .catch((e) => {
+        EleMessage.error(e.message);
+      });
+  }
 </script>

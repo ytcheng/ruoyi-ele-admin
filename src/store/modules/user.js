@@ -15,7 +15,9 @@ export const useUserStore = defineStore({
     // 当前登录用户的权限
     authorities: [],
     // 当前登录用户的角色
-    roles: []
+    roles: [],
+    // 字典数据缓存
+    dicts: {}
   }),
   actions: {
     /**
@@ -51,8 +53,18 @@ export const useUserStore = defineStore({
     /**
      * 更新菜单数据
      */
-    setMenus(menus) {
-      this.menus = menus;
+    setMenus(value) {
+      this.menus = value;
+    },
+    /**
+     * 更新字典数据
+     */
+    setDicts(value, code) {
+      if (code == null) {
+        this.dicts = value;
+        return;
+      }
+      this.dicts[code] = value;
     }
   }
 });
