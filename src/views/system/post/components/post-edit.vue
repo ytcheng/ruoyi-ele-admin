@@ -90,7 +90,7 @@
     postCode: '',
     postSort: 0,
     status: '0',
-    comments: ''
+    remark: ''
   });
 
   // 表单验证规则

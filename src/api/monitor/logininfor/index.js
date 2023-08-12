@@ -29,7 +29,7 @@ export async function exportLogininfors(params) {
     data: formData,
     responseType: 'blob'
   });
-  download(res.data, `post_${new Date().getTime()}.xlsx`);
+  download(res.data, `logininfor_${new Date().getTime()}.xlsx`);
 }
 
 /**

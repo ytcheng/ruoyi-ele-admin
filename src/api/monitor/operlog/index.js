@@ -29,7 +29,7 @@ export async function exportOperlogs(params) {
     data: formData,
     responseType: 'blob'
   });
-  download(res.data, `post_${new Date().getTime()}.xlsx`);
+  download(res.data, `operlog_${new Date().getTime()}.xlsx`);
 }
 
 /**
