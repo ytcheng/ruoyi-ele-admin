@@ -1,6 +1,11 @@
 <template>
   <el-config-provider :locale="zh_CN">
-    <ele-config-provider :license="LICENSE_CODE" :table="tableConfig">
+    <ele-config-provider
+      :locale="eleZh_CN"
+      :map-key="MAP_KEY"
+      :table="tableConfig"
+      :license="LICENSE_CODE"
+    >
       <ele-app>
         <router-view />
       </ele-app>
@@ -10,8 +15,9 @@
 
 <script setup>
   import { ref } from 'vue';
-  import { LICENSE_CODE } from '@/config/setting';
+  import { MAP_KEY, LICENSE_CODE } from '@/config/setting';
   import zh_CN from 'element-plus/es/locale/lang/zh-cn';
+  import eleZh_CN from 'ele-admin-plus/es/lang/zh_CN';
   import dayjs from 'dayjs';
   import 'dayjs/locale/zh-cn';
 
@@ -22,6 +28,12 @@
     response: {
       dataName: 'rows',
       countName: 'total'
+    },
+    request: {
+      sortName: 'orderByColumn',
+      orderName: 'isAsc',
+      ascValue: 'ascending',
+      descValue: 'descending'
     }
   });
 </script>

@@ -36,11 +36,7 @@ export const useUserStore = defineStore({
       if (!userMenu) {
         return {};
       }
-      const { menus, homePath } = formatMenus(
-        mapTree(userMenu, (item) => {
-          return { ...item };
-        })
-      );
+      const { menus, homePath } = formatMenus(userMenu);
       this.setMenus(menus);
       return { menus, homePath };
     },

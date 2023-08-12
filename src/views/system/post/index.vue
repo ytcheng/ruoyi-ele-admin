@@ -42,9 +42,9 @@
         </template>
         <template #status="{ row }">
           <dict-data
-            :model-value="row.status"
-            type="tag"
             code="sys_normal_disable"
+            type="tag"
+            :model-value="row.status"
           />
         </template>
         <template #action="{ row }">
@@ -224,8 +224,8 @@
   /* 导出数据 */
   const exportData = () => {
     const loading = EleMessage.loading('请求中..');
-    tableRef.value?.fetch?.(({ where, orders, filters }) => {
-      exportPosts({ ...where, ...orders, ...filters })
+    tableRef.value?.fetch?.(({ where, orders }) => {
+      exportPosts({ ...where, ...orders })
         .then(() => {
           loading.close();
         })
