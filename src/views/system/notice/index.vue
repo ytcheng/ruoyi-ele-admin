@@ -115,7 +115,6 @@
       prop: 'noticeTitle',
       label: '公告标题',
       minWidth: 160,
-      align: 'center',
       showOverflowTooltip: true
     },
     {

@@ -3,7 +3,7 @@
   <ele-card :body-style="{ paddingBottom: '2px' }">
     <el-form label-width="72px">
       <el-row :gutter="8">
-        <el-col :lg="8" :md="8" :sm="12" :xs="24">
+        <el-col :lg="6" :md="8" :sm="12" :xs="24">
           <el-form-item label="菜单名称">
             <el-input
               clearable
@@ -12,7 +12,7 @@
             />
           </el-form-item>
         </el-col>
-        <el-col :lg="8" :md="8" :sm="12" :xs="24">
+        <el-col :lg="6" :md="8" :sm="12" :xs="24">
           <el-form-item label="状态">
             <dict-data
               code="sys_normal_disable"
@@ -21,7 +21,7 @@
             />
           </el-form-item>
         </el-col>
-        <el-col :lg="8" :md="8" :sm="12" :xs="24">
+        <el-col :lg="12" :md="8" :sm="24" :xs="24">
           <el-form-item label-width="16px">
             <el-space>
               <el-button type="primary" @click="search">查询</el-button>

@@ -7,7 +7,7 @@
     :title="isUpdate ? '修改字典数据' : '添加字典数据'"
     @update:modelValue="updateModelValue"
   >
-    <el-form ref="formRef" :model="form" :rules="rules" label-width="94px">
+    <el-form ref="formRef" :model="form" :rules="rules" label-width="80px">
       <el-form-item label="数据标签" prop="dictLabel">
         <el-input
           clearable
