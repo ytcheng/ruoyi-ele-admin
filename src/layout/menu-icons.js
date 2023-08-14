@@ -5,25 +5,27 @@ export {
   Tickets,
   Calendar,
   Operation,
-  Folder,
   ChatDotSquare,
   Postcard,
   House,
   User,
-  CircleCheck,
   Link,
   Coin,
   Setting,
   Monitor,
-  Compass,
   SetUp,
   Odometer,
-  DataAnalysis
+  DataAnalysis,
+  Suitcase,
+  Memo,
+  Connection,
+  Timer,
+  DataLine,
+  DataBoard,
+  Collection,
+  SuitcaseLine,
+  MagicStick,
+  Aim
 } from '@element-plus/icons-vue';
 
-export {
-  AppstoreAddOutlined,
-  ProtectOutlined,
-  WarningOutlined,
-  TableOutlined
-} from '@/components/icons';
+export { ProtectOutlined } from '@/components/icons';

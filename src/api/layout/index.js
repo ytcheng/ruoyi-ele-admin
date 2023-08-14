@@ -18,52 +18,23 @@ export async function getUserInfo() {
 export async function getUserMenu() {
   const res = await request.get('/getRouters');
   if (res.data.code === 200 && res.data.data) {
+    // 增加首页
+    const temp = res.data.data;
+    temp.unshift({
+      path: '/index',
+      component: 'index',
+      meta: { title: '首页', icon: 'House' }
+    });
     // 修改图标
-    const icons = {
-      system: 'Setting',
-      peoples: 'Postcard',
-      'tree-table': 'Operation',
-      tree: 'OfficeBuilding',
-      post: 'OfficeBuilding',
-      dict: 'Coin',
-      edit: 'SetUp',
-      message: 'ChatDotSquare',
-      log: 'Tickets',
-      form: 'Tickets',
-      logininfor: 'Calendar',
-      monitor: 'Odometer',
-      online: 'Link',
-      job: 'Link',
-      druid: 'Link',
-      server: 'Link',
-      redis: 'Link',
-      'redis-list': 'Link',
-      tool: 'Link',
-      build: 'Link',
-      code: 'Link',
-      swagger: 'Link',
-      guide: 'Link'
-    };
-    return mapTree(
-      [
-        // 增加首页
-        {
-          path: '/index',
-          component: 'index',
-          meta: { title: '首页', icon: 'House' }
-        },
-        ...res.data.data
-      ],
-      (item) => {
-        return {
-          ...item,
-          meta: {
-            ...item.meta,
-            icon: icons[item.meta.icon] ?? item.meta.icon
-          }
-        };
-      }
-    );
+    return mapTree(temp, (item) => {
+      return {
+        ...item,
+        meta: {
+          ...item.meta,
+          icon: ruoYiIcons[item.meta.icon] ?? item.meta.icon
+        }
+      };
+    });
   }
   return Promise.reject(new Error(res.data.msg));
 }
@@ -78,3 +49,30 @@ export async function updatePassword(data) {
   }
   return Promise.reject(new Error(res.data.message));
 }
+
+// 若依默认菜单图标名称
+export const ruoYiIcons = {
+  system: 'Setting',
+  peoples: 'Postcard',
+  'tree-table': 'Operation',
+  tree: 'OfficeBuilding',
+  post: 'Suitcase',
+  dict: 'Collection',
+  edit: 'SetUp',
+  message: 'ChatDotSquare',
+  log: 'Memo',
+  form: 'Tickets',
+  logininfor: 'Calendar',
+  monitor: 'Odometer',
+  online: 'Connection',
+  job: 'Timer',
+  druid: 'DataLine',
+  server: 'DataAnalysis',
+  redis: 'DataBoard',
+  'redis-list': 'Coin',
+  tool: 'SuitcaseLine',
+  build: 'Edit',
+  code: 'MagicStick',
+  swagger: 'Aim',
+  guide: 'Link'
+};
