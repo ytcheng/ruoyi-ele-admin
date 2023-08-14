@@ -21,6 +21,7 @@
   </template>
   <el-radio-group
     v-else-if="type === 'radio'"
+    :disabled="disabled"
     :model-value="modelValue"
     @update:modelValue="updateValue"
   >
@@ -31,6 +32,7 @@
   <el-select
     v-else
     clearable
+    :disabled="disabled"
     :model-value="modelValue"
     :placeholder="placeholder"
     class="ele-fluid"
@@ -57,6 +59,8 @@
   const props = defineProps({
     // 值
     modelValue: [String, Number],
+    // 是否禁用
+    disabled: Boolean,
     // 提示文本
     placeholder: String,
     // 类型
