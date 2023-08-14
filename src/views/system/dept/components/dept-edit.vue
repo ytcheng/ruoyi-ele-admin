@@ -143,7 +143,7 @@
       }
       loading.value = true;
       const saveOrUpdate = isUpdate.value ? updateDept : addDept;
-      saveOrUpdate(form)
+      saveOrUpdate({ ...form, parentId: form.parentId || 0 })
         .then((msg) => {
           loading.value = false;
           EleMessage.success(msg);
@@ -167,7 +167,10 @@
     (modelValue) => {
       if (modelValue) {
         if (props.data) {
-          assignFields(props.data);
+          assignFields({
+            ...props.data,
+            parentId: props.data.parentId || void 0
+          });
           isUpdate.value = true;
         } else {
           form.parentId = props.parentId;
