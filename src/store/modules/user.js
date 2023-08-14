@@ -71,17 +71,24 @@ export const useUserStore = defineStore({
  * @param data 菜单数据
  * @param childField 子级的字段名称
  */
-export function formatMenus(data, childField = 'children') {
+function formatMenus(data, childField = 'children') {
   let homePath;
   let homeTitle;
   const menus = mapTree(
     data,
     (item, index, parent) => {
       const meta = item.meta;
+      const { path, rPath } = formatPath(item.path, parent?.path, item.query);
       const menu = {
-        path: (!meta.link && parent?.path ? `${parent.path}/` : '') + item.path,
+        path: path,
         component: formatComponent(item.component),
-        meta: { ...meta, hide: item.hidden, keepAlive: !meta.noCache }
+        meta: {
+          title: meta.title,
+          icon: meta.icon,
+          hide: item.hidden,
+          keepAlive: !meta.noCache,
+          routePath: rPath
+        }
       };
       const children = item[childField]?.filter?.(
         (d) => !(d.meta?.hide ?? d.hide)
@@ -114,12 +121,12 @@ export function formatMenus(data, childField = 'children') {
 }
 
 /**
- * 组件路径处理
+ * 组件路径处理以兼容若依默认数据
  * @param component 组件路径
  */
 function formatComponent(component) {
-  if (!component) {
-    return;
+  if (!component || isExternalLink(component)) {
+    return component;
   }
   if ('tool/swagger/index' === component) {
     return `${API_BASE_URL}/swagger-ui/index.html`;
@@ -127,5 +134,29 @@ function formatComponent(component) {
   if ('monitor/druid/index' === component) {
     return `${API_BASE_URL}/druid/login.html`;
   }
-  return `/${component}`;
+  return component.startsWith('/') ? component : `/${component}`;
+}
+
+/**
+ * 菜单地址处理以兼容若依
+ * @param mPath 菜单地址
+ * @param pPath 父级菜单地址
+ * @param query 路由参数
+ */
+function formatPath(mPath, pPath, query) {
+  if (!mPath || isExternalLink(mPath)) {
+    return { path: mPath };
+  }
+  const path = !pPath || mPath.startsWith('/') ? mPath : `${pPath}/${mPath}`;
+  if (query) {
+    try {
+      const params = new URLSearchParams(JSON.parse(query)).toString();
+      if (params) {
+        return { path: `${path}?${params}`, rPath: path };
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  return { path };
 }

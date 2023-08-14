@@ -53,7 +53,7 @@ service.interceptors.response.use(
           draggable: true
         });
       }
-      return Promise.reject(new Error(res.data.message));
+      return Promise.reject(new Error(res.data.msg));
     }
     return res;
   },
