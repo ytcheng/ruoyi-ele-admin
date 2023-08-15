@@ -251,7 +251,7 @@
   // 请求状态
   const loading = ref(true);
 
-  // 请求数据
+  /* 请求数据 */
   getServer()
     .then((result) => {
       loading.value = false;
