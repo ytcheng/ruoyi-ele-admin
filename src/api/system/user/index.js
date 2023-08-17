@@ -1,4 +1,5 @@
-import request, { download } from '@/utils/request';
+import request from '@/utils/request';
+import { download, toFormData } from '@/utils';
 
 /**
  * 分页查询用户
@@ -98,16 +99,10 @@ export async function updateUserPassword(userId, password) {
  * 导出用户列表
  */
 export async function exportUsers(params) {
-  const formData = new FormData();
-  Object.keys(params).forEach((key) => {
-    if (params[key] != null) {
-      formData.append(key, params[key]);
-    }
-  });
   const res = await request({
     url: '/system/user/export',
     method: 'POST',
-    data: formData,
+    data: toFormData(params),
     responseType: 'blob'
   });
   download(res.data, `user_${new Date().getTime()}.xlsx`);

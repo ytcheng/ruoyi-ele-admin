@@ -63,19 +63,3 @@ service.interceptors.response.use(
 );
 
 export default service;
-
-/**
- * 下载文件
- */
-export function download(data, name) {
-  const blob = new Blob([data], { type: 'application/octet-stream' });
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = name;
-  a.style.display = 'none';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  window.URL.revokeObjectURL(url);
-}

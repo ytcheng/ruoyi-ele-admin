@@ -1,4 +1,5 @@
-import request, { download } from '@/utils/request';
+import request from '@/utils/request';
+import { download, toFormData } from '@/utils';
 
 /**
  * 分页查询岗位
@@ -59,16 +60,10 @@ export async function removePosts(ids) {
  * 导出岗位列表
  */
 export async function exportPosts(params) {
-  const formData = new FormData();
-  Object.keys(params).forEach((key) => {
-    if (params[key] != null) {
-      formData.append(key, params[key]);
-    }
-  });
   const res = await request({
     url: '/system/post/export',
     method: 'POST',
-    data: formData,
+    data: toFormData(params),
     responseType: 'blob'
   });
   download(res.data, `post_${new Date().getTime()}.xlsx`);

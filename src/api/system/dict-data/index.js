@@ -1,4 +1,5 @@
-import request, { download } from '@/utils/request';
+import request from '@/utils/request';
+import { download, toFormData } from '@/utils';
 
 /**
  * 查询字典数据列表
@@ -70,16 +71,10 @@ export async function removeDictDataBatch(ids) {
  * 导出字典数据列表
  */
 export async function exportDictDatas(params) {
-  const formData = new FormData();
-  Object.keys(params).forEach((key) => {
-    if (params[key] != null) {
-      formData.append(key, params[key]);
-    }
-  });
   const res = await request({
     url: '/system/dict/data/export',
     method: 'POST',
-    data: formData,
+    data: toFormData(params),
     responseType: 'blob'
   });
   download(res.data, `dict_data_${new Date().getTime()}.xlsx`);
