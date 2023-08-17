@@ -1,7 +1,7 @@
 <!-- 选择用户 -->
 <template>
   <ele-modal
-    :width="920"
+    :width="880"
     title="选择用户"
     :destroy-on-close="true"
     :model-value="modelValue"

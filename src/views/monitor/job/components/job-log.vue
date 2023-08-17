@@ -193,8 +193,6 @@
 
   /* 搜索 */
   const reload = (where) => {
-    console.log('where:', where);
-    console.log('params:', new URLSearchParams(where).toString());
     tableRef?.value?.reload?.({ where });
   };
 
@@ -284,6 +282,8 @@
     (modelValue) => {
       if (modelValue) {
         reload();
+      } else {
+        selections.value = [];
       }
     }
   );

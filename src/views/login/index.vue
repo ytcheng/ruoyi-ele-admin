@@ -156,8 +156,8 @@
       }
       loading.value = true;
       login(form)
-        .then((msg) => {
-          EleMessage.success(msg);
+        .then(() => {
+          EleMessage.success('登录成功');
           cleanPageTabs();
           goHome();
         })

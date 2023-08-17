@@ -167,8 +167,7 @@
       prop: 'phonenumber',
       label: '手机号码',
       align: 'center',
-      showOverflowTooltip: true,
-      slot: 'roles'
+      showOverflowTooltip: true
     },
     {
       prop: 'status',
