@@ -17,6 +17,14 @@
         :body-style="{ padding: '16px 16px 16px 0', overflow: 'hidden' }"
         :style="{ height: '100%', overflow: 'visible' }"
       >
+        <div style="padding: 0 16px 10px 0">
+          <el-input
+            clearable
+            :maxlength="20"
+            v-model="keywords"
+            placeholder="输入部门名称搜索"
+          />
+        </div>
         <div class="org-tree">
           <el-tree
             ref="treeRef"
@@ -26,6 +34,7 @@
             :props="{ label: 'deptName' }"
             :expand-on-click-node="false"
             :default-expand-all="true"
+            :filter-node-method="filterNode"
             @node-click="onNodeClick"
           />
         </div>
@@ -38,7 +47,7 @@
 </template>
 
 <script setup>
-  import { ref, nextTick } from 'vue';
+  import { ref, nextTick, watch } from 'vue';
   import { EleMessage, toTree } from 'ele-admin-plus/es';
   import UserList from './components/user-list.vue';
   import { listDepts } from '@/api/system/dept';
@@ -54,6 +63,9 @@
 
   // 选中数据
   const current = ref(null);
+
+  // 部门搜索关键字
+  const keywords = ref('');
 
   /* 查询 */
   const query = () => {
@@ -85,6 +97,19 @@
       current.value = null;
     }
   };
+
+  /* 树过滤方法 */
+  const filterNode = (value, data) => {
+    if (value) {
+      return data.deptName && data.deptName.includes(value);
+    }
+    return true;
+  };
+
+  /* 树过滤 */
+  watch(keywords, (value) => {
+    treeRef.value?.filter?.(value);
+  });
 
   query();
 </script>
