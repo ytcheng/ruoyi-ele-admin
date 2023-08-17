@@ -133,3 +133,25 @@ export async function importUsers(file, isUpdate) {
   }
   return Promise.reject(new Error(res.data.msg));
 }
+
+/**
+ * 查询用户角色
+ */
+export async function getUserRole(id) {
+  const res = await request.get('/system/user/authRole/' + id);
+  if (res.data.code === 200) {
+    return res.data;
+  }
+  return Promise.reject(new Error(res.data.msg));
+}
+
+/**
+ * 修改用户角色
+ */
+export async function setUserRole(data) {
+  const res = await request.put('/system/user/authRole', toFormData(data));
+  if (res.data.code === 200) {
+    return res.data.msg;
+  }
+  return Promise.reject(new Error(res.data.msg));
+}

@@ -92,6 +92,8 @@
   />
   <!-- 导入弹窗 -->
   <user-import v-model="showImport" @done="reload" />
+  <!-- 分配角色弹窗 -->
+  <user-role v-model="showRole" :data="current" />
 </template>
 
 <script setup>
@@ -108,6 +110,7 @@
   import UserSearch from './user-search.vue';
   import UserEdit from './user-edit.vue';
   import UserImport from './user-import.vue';
+  import UserRole from './user-role.vue';
   import {
     pageUsers,
     removeUser,
@@ -201,6 +204,9 @@
 
   // 是否显示用户导入弹窗
   const showImport = ref(false);
+
+  // 是否显示分配角色弹窗
+  const showRole = ref(false);
 
   // 表格数据源
   const datasource = ({ page, limit, where, orders }) => {
@@ -305,7 +311,8 @@
         })
         .catch(() => {});
     } else if (key === 'role') {
-      //
+      current.value = row ?? null;
+      showRole.value = true;
     }
   };
 
