@@ -121,3 +121,68 @@ export async function setDataScope(data) {
   }
   return Promise.reject(new Error(res.data.msg));
 }
+
+/**
+ * 查询角色用户
+ */
+export async function listRoleUsers(params) {
+  const res = await request.get('/system/role/authUser/allocatedList', {
+    params
+  });
+  if (res.data.code === 200) {
+    return res.data;
+  }
+  return Promise.reject(new Error(res.data.msg));
+}
+
+/**
+ * 取消角色用户
+ */
+export async function removeRoleUser(data) {
+  const res = await request.put('/system/role/authUser/cancel', data);
+  if (res.data.code === 200) {
+    return res.data.msg;
+  }
+  return Promise.reject(new Error(res.data.msg));
+}
+
+/**
+ * 批量取消角色用户
+ */
+export async function removeRoleUsers(params) {
+  const res = await request.put(
+    '/system/role/authUser/cancelAll',
+    toFormData(params)
+  );
+  if (res.data.code === 200) {
+    return res.data.msg;
+  }
+  return Promise.reject(new Error(res.data.msg));
+}
+
+/**
+ * 查询可选择的用户
+ */
+export async function listUnallocatedUsers(params) {
+  const res = await request.get('/system/role/authUser/unallocatedList', {
+    params
+  });
+  if (res.data.code === 200) {
+    return res.data;
+  }
+  return Promise.reject(new Error(res.data.msg));
+}
+
+/**
+ * 添加角色用户
+ */
+export async function addRoleUsers(params) {
+  const res = await request.put(
+    '/system/role/authUser/selectAll',
+    toFormData(params)
+  );
+  if (res.data.code === 200) {
+    return res.data.msg;
+  }
+  return Promise.reject(new Error(res.data.msg));
+}

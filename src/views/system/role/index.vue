@@ -92,6 +92,8 @@
     <role-edit v-model="showEdit" :data="current" @done="reload" />
     <!-- 分配数据权限弹窗 -->
     <role-auth v-model="showAuth" :data="current" @done="reload" />
+    <!-- 分配用户弹窗 -->
+    <role-user v-model="showUser" :data="current" />
   </ele-page>
 </template>
 
@@ -103,6 +105,7 @@
   import RoleSearch from './components/role-search.vue';
   import RoleEdit from './components/role-edit.vue';
   import RoleAuth from './components/role-auth.vue';
+  import RoleUser from './components/role-user.vue';
   import {
     pageRoles,
     removeRole,
@@ -182,6 +185,9 @@
 
   // 是否显示分配数据权限弹窗
   const showAuth = ref(false);
+
+  // 是否显示分配用户弹窗
+  const showUser = ref(false);
 
   // 表格数据源
   const datasource = ({ page, limit, where }) => {
@@ -263,7 +269,8 @@
       current.value = row ?? null;
       showAuth.value = true;
     } else if (key === 'user') {
-      //
+      current.value = row ?? null;
+      showUser.value = true;
     }
   };
 </script>
