@@ -1,15 +1,21 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <ele-modal
-    :width="980"
+    :width="1000"
     title="代码预览"
     position="center"
     :body-style="{ padding: '0 16px 16px 16px', height: 'calc(100vh - 86px)' }"
     :model-value="modelValue"
     @update:modelValue="updateModelValue"
+    @opened="onOpened"
   >
     <ele-loading :loading="loading" class="code-wrapper">
-      <ele-tabs :items="data" v-model="active" :mousewheel="true">
+      <ele-tabs
+        v-if="data.length"
+        :items="data"
+        v-model="active"
+        :mousewheel="true"
+      >
         <template v-for="d in data" :key="d.name" #[d.name]="{ item }">
           <pre v-html="item.meta?.code" class="code-view"></pre>
         </template>
@@ -43,7 +49,7 @@
   });
 
   // 请求状态
-  const loading = ref(false);
+  const loading = ref(true);
 
   // 数据
   const data = ref([]);
@@ -84,12 +90,17 @@
       });
   };
 
+  /* 查询数据 */
+  const onOpened = () => {
+    if (props.id) {
+      query();
+    }
+  };
+
   watch(
     () => props.modelValue,
     (modelValue) => {
-      if (modelValue && props.id) {
-        query();
-      } else {
+      if (!modelValue) {
         data.value = [];
       }
     }

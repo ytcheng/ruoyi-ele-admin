@@ -1,388 +1,405 @@
 <!-- 编辑弹窗 -->
 <template>
   <ele-drawer
-    :size="1200"
+    :size="1320"
     :append-to-body="true"
     :destroy-on-close="true"
+    :body-style="{ padding: '16px 10px' }"
     :title="`修改[${data?.tableName}]生成配置`"
     :model-value="modelValue"
     @update:modelValue="updateModelValue"
+    @opened="onOpened"
   >
-    <el-form ref="formRef" :model="form" :rules="rules" label-width="128px">
-      <el-row :gutter="16">
-        <el-col :sm="8" :xs="24">
-          <el-form-item label="表名称" prop="tableName">
-            <el-input
-              clearable
-              :maxlength="20"
-              v-model="form.tableName"
-              placeholder="请输入表名称"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col :sm="8" :xs="24">
-          <el-form-item label="表描述" prop="tableComment">
-            <el-input
-              clearable
-              :maxlength="100"
-              v-model="form.tableComment"
-              placeholder="请输入表描述"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col :sm="8" :xs="24">
-          <el-form-item label="作者" prop="functionAuthor">
-            <el-input
-              clearable
-              :maxlength="20"
-              v-model="form.functionAuthor"
-              placeholder="请输入作者"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col :sm="8" :xs="24">
-          <el-form-item label="实体类名称" prop="className">
-            <el-input
-              clearable
-              :maxlength="20"
-              v-model="form.className"
-              placeholder="请输入实体类名称"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col :sm="8" :xs="24">
-          <el-form-item label="生成功能名" prop="functionName">
-            <el-input
-              clearable
-              :maxlength="20"
-              v-model="form.functionName"
-              placeholder="请输入生成功能名"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col :sm="8" :xs="24">
-          <el-form-item label="生成业务名" prop="businessName">
-            <el-input
-              clearable
-              :maxlength="20"
-              v-model="form.businessName"
-              placeholder="请输入生成业务名"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col :sm="8" :xs="24">
-          <el-form-item label="生成模块名" prop="moduleName">
-            <el-input
-              clearable
-              :maxlength="20"
-              v-model="form.moduleName"
-              placeholder="请输入生成模块名"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col :sm="16" :xs="24">
-          <el-form-item label="生成包路径" prop="packageName">
-            <el-input
-              clearable
-              :maxlength="100"
-              v-model="form.packageName"
-              placeholder="请输入生成包路径"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col :sm="8" :xs="24">
-          <el-form-item label="上级菜单">
-            <menu-select v-model="form.parentMenuId" />
-          </el-form-item>
-        </el-col>
-        <el-col :sm="8" :xs="24">
-          <el-form-item label="生成模板" prop="tplCategory">
-            <el-select
-              v-model="form.tplCategory"
-              placeholder="请选择生成模板"
-              class="ele-fluid"
-            >
-              <el-option label="单表(增删改查)" value="crud" />
-              <el-option label="树表(增删改查)" value="tree" />
-              <el-option label="主子表(增删改查)" value="sub" />
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :sm="8" :xs="24">
-          <el-form-item label="生成代码方式">
-            <el-radio-group v-model="form.genType">
-              <el-radio label="0">zip压缩包</el-radio>
-              <el-radio label="1">自定义路径</el-radio>
-            </el-radio-group>
-          </el-form-item>
-        </el-col>
-        <el-col v-if="form.tplCategory == 'tree'" :sm="8" :xs="24">
-          <el-form-item label="树编码字段">
-            <column-select
-              :data="cols"
-              v-model="form.treeCode"
-              placeholder="请选择树编码字段"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col v-if="form.tplCategory == 'tree'" :sm="8" :xs="24">
-          <el-form-item label="树父编码字段">
-            <column-select
-              :data="cols"
-              v-model="form.treeParentCode"
-              placeholder="请选择树父编码字段"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col v-if="form.tplCategory == 'tree'" :sm="8" :xs="24">
-          <el-form-item label="树名称字段">
-            <column-select
-              :data="cols"
-              v-model="form.treeName"
-              placeholder="请选择树名称字段"
-            />
-          </el-form-item>
-        </el-col>
-        <el-col v-if="form.tplCategory == 'sub'" :sm="8" :xs="24">
-          <el-form-item label="关联子表的表名">
-            <el-select
-              clearable
-              v-model="form.subTableName"
-              placeholder="请选择关联子表的表名"
-              class="ele-fluid"
-            >
-              <el-option
-                v-for="item in tables"
-                :key="item.tableName"
-                :value="item.tableName"
-                :label="`${item.tableName}: ${item.tableComment}`"
+    <ele-loading :loading="initLoading">
+      <el-form ref="formRef" :model="form" :rules="rules" label-width="128px">
+        <el-row :gutter="16">
+          <el-col :sm="8" :xs="24">
+            <el-form-item label="表名称" prop="tableName">
+              <el-input
+                clearable
+                :maxlength="20"
+                v-model="form.tableName"
+                placeholder="请输入表名称"
               />
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col v-if="form.tplCategory == 'sub'" :sm="8" :xs="24">
-          <el-form-item label="子表关联的外键名">
-            <el-select
-              clearable
-              v-model="form.subTableFkName"
-              placeholder="请选择子表关联的外键名"
-              class="ele-fluid"
-            >
-              <el-option
-                v-for="item in tableCols"
-                :key="item.columnName"
-                :value="item.columnName"
-                :label="`${item.columnName}: ${item.columnComment}`"
+            </el-form-item>
+          </el-col>
+          <el-col :sm="8" :xs="24">
+            <el-form-item label="表描述" prop="tableComment">
+              <el-input
+                clearable
+                :maxlength="100"
+                v-model="form.tableComment"
+                placeholder="请输入表描述"
               />
-            </el-select>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-form-item v-if="form.genType == '1'" label="自定义路径">
-        <el-input
-          clearable
-          :maxlength="200"
-          v-model="form.genPath"
-          placeholder="请输入自定义路径"
-        />
-      </el-form-item>
-      <el-form-item label="备注">
-        <el-input
-          :rows="2"
-          type="textarea"
-          :maxlength="200"
-          v-model="form.remark"
-          placeholder="请输入备注"
-        />
-      </el-form-item>
-      <ele-pro-table
-        row-key="columnId"
-        :columns="columns"
-        :datasource="form.columns"
-        highlight-current-row
-        :pagination="false"
-        :toolbar="false"
-        cell-class-name="form-table-cell"
-        class="form-table"
-      >
-        <template #columnComment="{ row, $index }">
-          <el-form-item
-            v-if="$index != -1"
-            label-width="0px"
-            class="form-error-popper"
-            style="margin-bottom: 0"
-          >
-            <el-input v-model="row.columnComment" placeholder="请输入" />
-          </el-form-item>
-        </template>
-        <template #javaType="{ row, $index }">
-          <el-form-item
-            v-if="$index != -1"
-            label-width="0px"
-            class="form-error-popper"
-            style="margin-bottom: 0"
-          >
-            <el-select
-              v-model="row.javaType"
-              placeholder="请选择"
-              class="ele-fluid"
-            >
-              <el-option label="Long" value="Long" />
-              <el-option label="String" value="String" />
-              <el-option label="Integer" value="Integer" />
-              <el-option label="Double" value="Double" />
-              <el-option label="BigDecimal" value="BigDecimal" />
-              <el-option label="Date" value="Date" />
-              <el-option label="Boolean" value="Boolean" />
-            </el-select>
-          </el-form-item>
-        </template>
-        <template #javaField="{ row, $index }">
-          <el-form-item
-            v-if="$index != -1"
-            label-width="0px"
-            :prop="'columns.' + $index + '.javaField'"
-            :rules="{
-              required: true,
-              message: '请输入Java属性',
-              type: 'string',
-              trigger: 'blur'
-            }"
-            class="form-error-popper"
-            style="margin-bottom: 0"
-          >
-            <el-input v-model="row.javaField" placeholder="请输入" />
-          </el-form-item>
-        </template>
-        <template #isInsert="{ row, $index }">
-          <el-form-item
-            v-if="$index != -1"
-            label-width="0px"
-            class="form-error-popper"
-            style="margin-bottom: 0"
-          >
-            <el-checkbox
-              v-model="row.isInsert"
-              true-label="1"
-              false-label="0"
-            />
-          </el-form-item>
-        </template>
-        <template #isEdit="{ row, $index }">
-          <el-form-item
-            v-if="$index != -1"
-            label-width="0px"
-            class="form-error-popper"
-            style="margin-bottom: 0"
-          >
-            <el-checkbox v-model="row.isEdit" true-label="1" false-label="0" />
-          </el-form-item>
-        </template>
-        <template #isList="{ row, $index }">
-          <el-form-item
-            v-if="$index != -1"
-            label-width="0px"
-            class="form-error-popper"
-            style="margin-bottom: 0"
-          >
-            <el-checkbox v-model="row.isList" true-label="1" false-label="0" />
-          </el-form-item>
-        </template>
-        <template #isQuery="{ row, $index }">
-          <el-form-item
-            v-if="$index != -1"
-            label-width="0px"
-            class="form-error-popper"
-            style="margin-bottom: 0"
-          >
-            <el-checkbox v-model="row.isQuery" true-label="1" false-label="0" />
-          </el-form-item>
-        </template>
-        <template #queryType="{ row, $index }">
-          <el-form-item
-            v-if="$index != -1"
-            label-width="0px"
-            class="form-error-popper"
-            style="margin-bottom: 0"
-          >
-            <el-select
-              v-model="row.queryType"
-              placeholder="请选择"
-              class="ele-fluid"
-            >
-              <el-option label="=" value="EQ" />
-              <el-option label="!=" value="NE" />
-              <el-option label=">" value="GT" />
-              <el-option label=">=" value="GTE" />
-              <el-option label="<" value="LT" />
-              <el-option label="<=" value="LTE" />
-              <el-option label="LIKE" value="LIKE" />
-              <el-option label="BETWEEN" value="BETWEEN" />
-            </el-select>
-          </el-form-item>
-        </template>
-        <template #isRequired="{ row, $index }">
-          <el-form-item
-            v-if="$index != -1"
-            label-width="0px"
-            class="form-error-popper"
-            style="margin-bottom: 0"
-          >
-            <el-checkbox
-              v-model="row.isRequired"
-              true-label="1"
-              false-label="0"
-            />
-          </el-form-item>
-        </template>
-        <template #htmlType="{ row, $index }">
-          <el-form-item
-            v-if="$index != -1"
-            label-width="0px"
-            class="form-error-popper"
-            style="margin-bottom: 0"
-          >
-            <el-select
-              v-model="row.htmlType"
-              placeholder="请选择"
-              class="ele-fluid"
-            >
-              <el-option label="文本框" value="input" />
-              <el-option label="文本域" value="textarea" />
-              <el-option label="下拉框" value="select" />
-              <el-option label="单选框" value="radio" />
-              <el-option label="复选框" value="checkbox" />
-              <el-option label="日期控件" value="datetime" />
-              <el-option label="图片上传" value="imageUpload" />
-              <el-option label="文件上传" value="fileUpload" />
-              <el-option label="富文本控件" value="editor" />
-            </el-select>
-          </el-form-item>
-        </template>
-        <template #dictType="{ row, $index }">
-          <el-form-item
-            v-if="$index != -1"
-            label-width="0px"
-            class="form-error-popper"
-            style="margin-bottom: 0"
-          >
-            <el-select
-              clearable
-              v-model="row.dictType"
-              placeholder="请选择"
-              class="ele-fluid"
-            >
-              <el-option
-                v-for="item in dictOptions"
-                :key="item.dictType"
-                :value="item.dictType"
-                :label="`${item.dictName}(${item.dictType})`"
+            </el-form-item>
+          </el-col>
+          <el-col :sm="8" :xs="24">
+            <el-form-item label="作者" prop="functionAuthor">
+              <el-input
+                clearable
+                :maxlength="20"
+                v-model="form.functionAuthor"
+                placeholder="请输入作者"
               />
-            </el-select>
-          </el-form-item>
-        </template>
-      </ele-pro-table>
-    </el-form>
+            </el-form-item>
+          </el-col>
+          <el-col :sm="8" :xs="24">
+            <el-form-item label="实体类名称" prop="className">
+              <el-input
+                clearable
+                :maxlength="20"
+                v-model="form.className"
+                placeholder="请输入实体类名称"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :sm="8" :xs="24">
+            <el-form-item label="生成功能名" prop="functionName">
+              <el-input
+                clearable
+                :maxlength="20"
+                v-model="form.functionName"
+                placeholder="请输入生成功能名"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :sm="8" :xs="24">
+            <el-form-item label="生成业务名" prop="businessName">
+              <el-input
+                clearable
+                :maxlength="20"
+                v-model="form.businessName"
+                placeholder="请输入生成业务名"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :sm="8" :xs="24">
+            <el-form-item label="生成模块名" prop="moduleName">
+              <el-input
+                clearable
+                :maxlength="20"
+                v-model="form.moduleName"
+                placeholder="请输入生成模块名"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :sm="16" :xs="24">
+            <el-form-item label="生成包路径" prop="packageName">
+              <el-input
+                clearable
+                :maxlength="100"
+                v-model="form.packageName"
+                placeholder="请输入生成包路径"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :sm="8" :xs="24">
+            <el-form-item label="上级菜单">
+              <menu-select v-model="form.parentMenuId" />
+            </el-form-item>
+          </el-col>
+          <el-col :sm="8" :xs="24">
+            <el-form-item label="生成模板" prop="tplCategory">
+              <el-select
+                v-model="form.tplCategory"
+                placeholder="请选择生成模板"
+                class="ele-fluid"
+              >
+                <el-option label="单表(增删改查)" value="crud" />
+                <el-option label="树表(增删改查)" value="tree" />
+                <el-option label="主子表(增删改查)" value="sub" />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :sm="8" :xs="24">
+            <el-form-item label="生成代码方式">
+              <el-radio-group v-model="form.genType">
+                <el-radio label="0">zip压缩包</el-radio>
+                <el-radio label="1">自定义路径</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+          <el-col v-if="form.tplCategory == 'tree'" :sm="8" :xs="24">
+            <el-form-item label="树编码字段">
+              <column-select
+                :data="cols"
+                v-model="form.treeCode"
+                placeholder="请选择树编码字段"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col v-if="form.tplCategory == 'tree'" :sm="8" :xs="24">
+            <el-form-item label="树父编码字段">
+              <column-select
+                :data="cols"
+                v-model="form.treeParentCode"
+                placeholder="请选择树父编码字段"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col v-if="form.tplCategory == 'tree'" :sm="8" :xs="24">
+            <el-form-item label="树名称字段">
+              <column-select
+                :data="cols"
+                v-model="form.treeName"
+                placeholder="请选择树名称字段"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col v-if="form.tplCategory == 'sub'" :sm="8" :xs="24">
+            <el-form-item label="关联子表的表名">
+              <el-select
+                clearable
+                v-model="form.subTableName"
+                placeholder="请选择关联子表的表名"
+                class="ele-fluid"
+              >
+                <el-option
+                  v-for="item in tables"
+                  :key="item.tableName"
+                  :value="item.tableName"
+                  :label="`${item.tableName}: ${item.tableComment}`"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col v-if="form.tplCategory == 'sub'" :sm="8" :xs="24">
+            <el-form-item label="子表关联的外键名">
+              <el-select
+                clearable
+                v-model="form.subTableFkName"
+                placeholder="请选择子表关联的外键名"
+                class="ele-fluid"
+              >
+                <el-option
+                  v-for="item in tableCols"
+                  :key="item.columnName"
+                  :value="item.columnName"
+                  :label="`${item.columnName}: ${item.columnComment}`"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item v-if="form.genType == '1'" label="自定义路径">
+          <el-input
+            clearable
+            :maxlength="200"
+            v-model="form.genPath"
+            placeholder="请输入自定义路径"
+          />
+        </el-form-item>
+        <el-form-item label="备注">
+          <el-input
+            :rows="2"
+            type="textarea"
+            :maxlength="200"
+            v-model="form.remark"
+            placeholder="请输入备注"
+          />
+        </el-form-item>
+        <ele-pro-table
+          sticky
+          row-key="columnId"
+          :columns="columns"
+          :datasource="form.columns"
+          highlight-current-row
+          :pagination="false"
+          :toolbar="false"
+          cell-class-name="form-table-cell"
+          class="form-table"
+        >
+          <template #columnComment="{ row, $index }">
+            <el-form-item
+              v-if="$index != -1"
+              label-width="0px"
+              class="form-error-popper"
+              style="margin-bottom: 0"
+            >
+              <el-input v-model="row.columnComment" placeholder="请输入" />
+            </el-form-item>
+          </template>
+          <template #javaType="{ row, $index }">
+            <el-form-item
+              v-if="$index != -1"
+              label-width="0px"
+              class="form-error-popper"
+              style="margin-bottom: 0"
+            >
+              <el-select
+                v-model="row.javaType"
+                placeholder="请选择"
+                class="ele-fluid"
+              >
+                <el-option label="Long" value="Long" />
+                <el-option label="String" value="String" />
+                <el-option label="Integer" value="Integer" />
+                <el-option label="Double" value="Double" />
+                <el-option label="BigDecimal" value="BigDecimal" />
+                <el-option label="Date" value="Date" />
+                <el-option label="Boolean" value="Boolean" />
+              </el-select>
+            </el-form-item>
+          </template>
+          <template #javaField="{ row, $index }">
+            <el-form-item
+              v-if="$index != -1"
+              label-width="0px"
+              :prop="'columns.' + $index + '.javaField'"
+              :rules="{
+                required: true,
+                message: '请输入Java属性',
+                type: 'string',
+                trigger: 'blur'
+              }"
+              class="form-error-popper"
+              style="margin-bottom: 0"
+            >
+              <el-input v-model="row.javaField" placeholder="请输入" />
+            </el-form-item>
+          </template>
+          <template #isInsert="{ row, $index }">
+            <el-form-item
+              v-if="$index != -1"
+              label-width="0px"
+              class="form-error-popper"
+              style="margin-bottom: 0"
+            >
+              <el-checkbox
+                v-model="row.isInsert"
+                true-label="1"
+                false-label="0"
+              />
+            </el-form-item>
+          </template>
+          <template #isEdit="{ row, $index }">
+            <el-form-item
+              v-if="$index != -1"
+              label-width="0px"
+              class="form-error-popper"
+              style="margin-bottom: 0"
+            >
+              <el-checkbox
+                v-model="row.isEdit"
+                true-label="1"
+                false-label="0"
+              />
+            </el-form-item>
+          </template>
+          <template #isList="{ row, $index }">
+            <el-form-item
+              v-if="$index != -1"
+              label-width="0px"
+              class="form-error-popper"
+              style="margin-bottom: 0"
+            >
+              <el-checkbox
+                v-model="row.isList"
+                true-label="1"
+                false-label="0"
+              />
+            </el-form-item>
+          </template>
+          <template #isQuery="{ row, $index }">
+            <el-form-item
+              v-if="$index != -1"
+              label-width="0px"
+              class="form-error-popper"
+              style="margin-bottom: 0"
+            >
+              <el-checkbox
+                v-model="row.isQuery"
+                true-label="1"
+                false-label="0"
+              />
+            </el-form-item>
+          </template>
+          <template #queryType="{ row, $index }">
+            <el-form-item
+              v-if="$index != -1"
+              label-width="0px"
+              class="form-error-popper"
+              style="margin-bottom: 0"
+            >
+              <el-select
+                v-model="row.queryType"
+                placeholder="请选择"
+                class="ele-fluid"
+              >
+                <el-option label="=" value="EQ" />
+                <el-option label="!=" value="NE" />
+                <el-option label=">" value="GT" />
+                <el-option label=">=" value="GTE" />
+                <el-option label="<" value="LT" />
+                <el-option label="<=" value="LTE" />
+                <el-option label="LIKE" value="LIKE" />
+                <el-option label="BETWEEN" value="BETWEEN" />
+              </el-select>
+            </el-form-item>
+          </template>
+          <template #isRequired="{ row, $index }">
+            <el-form-item
+              v-if="$index != -1"
+              label-width="0px"
+              class="form-error-popper"
+              style="margin-bottom: 0"
+            >
+              <el-checkbox
+                v-model="row.isRequired"
+                true-label="1"
+                false-label="0"
+              />
+            </el-form-item>
+          </template>
+          <template #htmlType="{ row, $index }">
+            <el-form-item
+              v-if="$index != -1"
+              label-width="0px"
+              class="form-error-popper"
+              style="margin-bottom: 0"
+            >
+              <el-select
+                v-model="row.htmlType"
+                placeholder="请选择"
+                class="ele-fluid"
+              >
+                <el-option label="文本框" value="input" />
+                <el-option label="文本域" value="textarea" />
+                <el-option label="下拉框" value="select" />
+                <el-option label="单选框" value="radio" />
+                <el-option label="复选框" value="checkbox" />
+                <el-option label="日期控件" value="datetime" />
+                <el-option label="图片上传" value="imageUpload" />
+                <el-option label="文件上传" value="fileUpload" />
+                <el-option label="富文本控件" value="editor" />
+              </el-select>
+            </el-form-item>
+          </template>
+          <template #dictType="{ row, $index }">
+            <el-form-item
+              v-if="$index != -1"
+              label-width="0px"
+              class="form-error-popper"
+              style="margin-bottom: 0"
+            >
+              <el-select
+                clearable
+                v-model="row.dictType"
+                placeholder="请选择"
+                class="ele-fluid"
+              >
+                <el-option
+                  v-for="item in dictOptions"
+                  :key="item.dictType"
+                  :value="item.dictType"
+                  :label="`${item.dictName}(${item.dictType})`"
+                />
+              </el-select>
+            </el-form-item>
+          </template>
+        </ele-pro-table>
+      </el-form>
+    </ele-loading>
     <template #footer>
       <el-button @click="updateModelValue(false)">取消</el-button>
       <el-button type="primary" :loading="loading" @click="save">
@@ -427,6 +444,9 @@
 
   // 字典类型下拉数据
   const dictOptions = ref([]);
+
+  // 回显查询状态
+  const initLoading = ref(true);
 
   // 提交状态
   const loading = ref(false);
@@ -669,25 +689,29 @@
     emit('update:modelValue', value);
   };
 
-  // 查询回显数据
+  /* 查询回显数据 */
+  const onOpened = () => {
+    if (!props.data?.tableId) {
+      return;
+    }
+    initLoading.value = true;
+    getGenTable(props.data.tableId)
+      .then((res) => {
+        assignFields(res.info);
+        cols.value = res.info.cols;
+        tables.value = res.tables;
+        initLoading.value = false;
+      })
+      .catch((e) => {
+        console.error(e);
+        EleMessage.error(e.message);
+      });
+  };
+
   watch(
     () => props.modelValue,
     (modelValue) => {
-      if (modelValue) {
-        if (props.data?.tableId) {
-          assignFields(props.data);
-          getGenTable(props.data.tableId)
-            .then((res) => {
-              assignFields(res.info);
-              cols.value = res.info.cols;
-              tables.value = res.tables;
-            })
-            .catch((e) => {
-              console.error(e);
-              EleMessage.error(e.message);
-            });
-        }
-      } else {
+      if (!modelValue) {
         resetFields();
         formRef.value?.clearValidate?.();
       }
