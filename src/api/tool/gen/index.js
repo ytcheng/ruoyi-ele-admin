@@ -101,3 +101,25 @@ export async function genCodeZip(params) {
   });
   download(res.data, `ruoyi_${new Date().getTime()}.zip`);
 }
+
+/**
+ * 预览代码
+ */
+export async function previewCode(id) {
+  const res = await request.get('/tool/gen/preview/' + id);
+  if (res.data.code === 200 && res.data.data) {
+    return res.data.data;
+  }
+  return Promise.reject(new Error(res.data.msg));
+}
+
+/**
+ * 查询代码生成详情
+ */
+export async function getGenTable(id) {
+  const res = await request.get('/tool/gen/' + id);
+  if (res.data.code === 200 && res.data.data) {
+    return res.data.data;
+  }
+  return Promise.reject(new Error(res.data.msg));
+}
