@@ -28,12 +28,16 @@
               @confirm="clearAll"
             >
               <template #reference>
-                <ele-text
-                  type="danger"
-                  :icon="Delete"
-                  :icon-props="{ size: 16 }"
-                  style="cursor: pointer"
-                />
+                <div>
+                  <ele-tooltip content="清空" placement="top" :offset="4">
+                    <ele-text
+                      type="danger"
+                      :icon="Delete"
+                      :icon-props="{ size: 16 }"
+                      style="cursor: pointer"
+                    />
+                  </ele-tooltip>
+                </div>
               </template>
             </ele-popconfirm>
           </template>
@@ -80,13 +84,15 @@
             <span>键名列表</span>
           </template>
           <template #extra>
-            <ele-text
-              type="primary"
-              :icon="RefreshRight"
-              :icon-props="{ size: 17 }"
-              style="cursor: pointer"
-              @click="refresh"
-            />
+            <ele-tooltip content="刷新" placement="top" :offset="4">
+              <ele-text
+                type="primary"
+                :icon="RefreshRight"
+                :icon-props="{ size: 17 }"
+                style="cursor: pointer"
+                @click="refresh"
+              />
+            </ele-tooltip>
           </template>
           <ele-pro-table
             ref="table2Ref"
@@ -135,13 +141,15 @@
             <span>缓存内容</span>
           </template>
           <template #extra>
-            <ele-text
-              type="primary"
-              :icon="RefreshRight"
-              :icon-props="{ size: 17 }"
-              style="cursor: pointer"
-              @click="query"
-            />
+            <ele-tooltip content="刷新" placement="top" :offset="4">
+              <ele-text
+                type="primary"
+                :icon="RefreshRight"
+                :icon-props="{ size: 17 }"
+                style="cursor: pointer"
+                @click="query"
+              />
+            </ele-tooltip>
           </template>
           <ele-loading :loading="loading">
             <el-descriptions :border="true" :column="1" class="detail-table">
