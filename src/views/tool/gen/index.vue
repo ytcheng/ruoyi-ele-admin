@@ -38,7 +38,11 @@
         </template>
         <template #action="{ row }">
           <el-space>
-            <el-link type="primary" :underline="false" @click="openEdit(row)">
+            <el-link
+              type="primary"
+              :underline="false"
+              @click="openPreview(row)"
+            >
               预览
             </el-link>
             <el-divider direction="vertical" style="margin: 0" />
@@ -88,6 +92,8 @@
     <gen-edit v-model="showEdit" :data="current" @done="reload" />
     <!-- 导入弹窗 -->
     <gen-import v-model="showImport" @done="reload" />
+    <!-- 预览弹窗 -->
+    <gen-preview :id="current?.tableId" v-model="showPreview" />
   </ele-page>
 </template>
 
@@ -99,6 +105,7 @@
   import GenSearch from './components/gen-search.vue';
   import GenEdit from './components/gen-edit.vue';
   import GenImport from './components/gen-import.vue';
+  import GenPreview from './components/gen-preview.vue';
   import {
     pageGens,
     removeGen,
@@ -179,6 +186,9 @@
   // 是否显示导入弹窗
   const showImport = ref(false);
 
+  // 是否显示预览弹窗
+  const showPreview = ref(false);
+
   // 表格数据源
   const datasource = ({ page, limit, where }) => {
     return pageGens({ ...where, pageNum: page, pageSize: limit });
@@ -198,6 +208,12 @@
   /* 打开导入弹窗 */
   const openImport = () => {
     showImport.value = true;
+  };
+
+  /* 打开预览弹窗 */
+  const openPreview = (row) => {
+    current.value = row ?? null;
+    showPreview.value = true;
   };
 
   /* 删除单个 */

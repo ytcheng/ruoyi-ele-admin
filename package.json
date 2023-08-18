@@ -21,6 +21,7 @@
     "echarts": "^5.4.3",
     "ele-admin-plus": "^1.1.3",
     "element-plus": "^2.3.9",
+    "highlight.js": "^11.8.0",
     "jsbarcode": "^3.11.5",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.6",
