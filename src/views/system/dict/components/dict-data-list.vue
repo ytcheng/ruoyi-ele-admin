@@ -50,7 +50,7 @@
         <ele-popconfirm
           :width="226"
           placement="top-end"
-          :title="'是否确认删除字典编码为“' + row.dictCode + '”的数据项？'"
+          :title="'是否确认删除数据标签为“' + row.dictLabel + '”的数据项？'"
           :popper-options="{
             modifiers: [
               { name: 'arrow', options: { padding: 20 } },
@@ -108,19 +108,19 @@
     },
     {
       prop: 'dictLabel',
-      label: '字典标签',
+      label: '数据标签',
       align: 'center',
       showOverflowTooltip: true
     },
     {
       prop: 'dictValue',
-      label: '字典键值',
+      label: '数据键值',
       align: 'center',
       showOverflowTooltip: true
     },
     {
       prop: 'dictSort',
-      label: '字典排序',
+      label: '显示排序',
       width: 120,
       align: 'center'
     },
@@ -200,8 +200,9 @@
       return;
     }
     const ids = selections.value.map((d) => d.dictCode);
+    const names = selections.value.map((d) => d.dictLabel).join();
     ElMessageBox.confirm(
-      `是否确认删除字典编码为"${ids.join()}"的数据项?`,
+      `是否确认删除数据标签为"${names}"的数据项?`,
       '系统提示',
       {
         type: 'warning',

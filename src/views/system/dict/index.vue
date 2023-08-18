@@ -143,8 +143,9 @@
   /* 删除 */
   const remove = () => {
     const id = current.value?.dictId;
+    const name = current.value?.dictType;
     ElMessageBox.confirm(
-      `是否确认删除字典编号为"${id}"的数据项？`,
+      `是否确认删除字典类型为"${name}"的数据项？`,
       '系统提示',
       { type: 'warning', draggable: true }
     )

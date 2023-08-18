@@ -63,7 +63,7 @@
             <ele-popconfirm
               :width="226"
               placement="top-end"
-              :title="'是否确认删除参数编号为“' + row.configId + '”的数据项？'"
+              :title="'是否确认删除参数键名为“' + row.configKey + '”的数据项？'"
               :popper-options="{
                 modifiers: [
                   { name: 'arrow', options: { padding: 20 } },
@@ -214,8 +214,9 @@
       return;
     }
     const ids = selections.value.map((d) => d.configId);
+    const names = selections.value.map((d) => d.configKey).join();
     ElMessageBox.confirm(
-      `是否确认删除参数编号为"${ids.join()}"的数据项?`,
+      `是否确认删除参数键名为"${names}"的数据项?`,
       '系统提示',
       { type: 'warning', draggable: true }
     )

@@ -207,7 +207,8 @@
       return;
     }
     const userIds = selections.value.map((d) => d.userId).join();
-    ElMessageBox.confirm('是否取消选中用户授权数据项?', '系统提示', {
+    const names = selections.value.map((d) => d.userName).join();
+    ElMessageBox.confirm(`确认要取消该用户“${names}”的角色吗?`, '系统提示', {
       type: 'warning',
       draggable: true
     })

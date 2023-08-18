@@ -56,7 +56,7 @@
             <ele-popconfirm
               :width="226"
               placement="top-end"
-              :title="'是否确认删除角色编号为“' + row.roleId + '”的数据项？'"
+              :title="'是否确认删除角色名称为“' + row.roleName + '”的数据项？'"
               :popper-options="{
                 modifiers: [
                   { name: 'arrow', options: { padding: 20 } },
@@ -227,8 +227,9 @@
       return;
     }
     const ids = selections.value.map((d) => d.roleId);
+    const names = selections.value.map((d) => d.roleName).join();
     ElMessageBox.confirm(
-      `是否确认删除角色编号为"${ids.join()}"的数据项?`,
+      `是否确认删除角色名称为"${names}"的数据项?`,
       '系统提示',
       { type: 'warning', draggable: true }
     )

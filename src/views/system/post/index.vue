@@ -56,7 +56,7 @@
             <ele-popconfirm
               :width="226"
               placement="top-end"
-              :title="'是否确认删除岗位编号为“' + row.postId + '”的数据项？'"
+              :title="'是否确认删除岗位编码为“' + row.postCode + '”的数据项？'"
               :popper-options="{
                 modifiers: [
                   { name: 'arrow', options: { padding: 20 } },
@@ -200,8 +200,9 @@
       return;
     }
     const ids = selections.value.map((d) => d.postId);
+    const names = selections.value.map((d) => d.postCode).join();
     ElMessageBox.confirm(
-      `是否确认删除岗位编号为"${ids.join()}"的数据项?`,
+      `是否确认删除岗位编码为"${names}"的数据项?`,
       '系统提示',
       { type: 'warning', draggable: true }
     )

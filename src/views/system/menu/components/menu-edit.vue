@@ -104,6 +104,20 @@
             />
           </el-form-item>
           <el-form-item label="路由参数" prop="query">
+            <template #label>
+              <ele-tooltip>
+                <el-icon
+                  :size="16"
+                  style="align-self: center; margin-right: 4px; cursor: help"
+                >
+                  <warning style="opacity: 0.6" />
+                </el-icon>
+                <template #content>
+                  访问路由的默认传递参数, 如: {"id": 1, "name": "ry"}
+                </template>
+              </ele-tooltip>
+              <span>路由参数</span>
+            </template>
             <el-input
               clearable
               :maxlength="200"

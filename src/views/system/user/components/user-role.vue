@@ -128,6 +128,8 @@
     (modelValue) => {
       if (modelValue && props.data) {
         query();
+      } else {
+        selections.value = [];
       }
     }
   );

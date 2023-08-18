@@ -16,6 +16,7 @@
               :maxlength="20"
               v-model="form.nickName"
               placeholder="请输入用户名"
+              autocomplete="off"
             />
           </el-form-item>
           <el-form-item label="手机号码" prop="phonenumber">
@@ -55,6 +56,7 @@
               :maxlength="100"
               v-model="form.email"
               placeholder="请输入邮箱"
+              autocomplete="off"
             />
           </el-form-item>
           <el-form-item v-if="!isUpdate" label="用户密码" prop="password">
@@ -64,6 +66,7 @@
               :maxlength="20"
               v-model="form.password"
               placeholder="请输入用户密码"
+              autocomplete="off"
             />
           </el-form-item>
           <el-form-item label="状态" prop="status">
