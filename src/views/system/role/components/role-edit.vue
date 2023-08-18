@@ -2,7 +2,8 @@
 <template>
   <ele-modal
     form
-    :width="640"
+    :width="680"
+    position="center"
     :model-value="modelValue"
     :body-style="{ paddingLeft: '0px' }"
     :title="isUpdate ? '修改角色' : '添加角色'"
@@ -79,13 +80,15 @@
               </el-button>
             </el-space>
           </div>
-          <el-tree
-            ref="treeRef"
-            show-checkbox
-            node-key="id"
-            :data="menuData"
-            :default-checked-keys="checkedKeys"
-          />
+          <div style="height: 260px; overflow: auto">
+            <el-tree
+              ref="treeRef"
+              show-checkbox
+              node-key="id"
+              :data="menuData"
+              :default-checked-keys="checkedKeys"
+            />
+          </div>
         </ele-loading>
       </el-form-item>
       <el-form-item label="备注">

@@ -1,8 +1,8 @@
-<!-- 用户导入弹窗 -->
 <template>
   <ele-modal
     :width="460"
     title="用户导入"
+    :body-style="{ paddingTop: '8px' }"
     :model-value="modelValue"
     @update:modelValue="updateModelValue"
   >

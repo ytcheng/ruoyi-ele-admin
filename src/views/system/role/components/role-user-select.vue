@@ -2,6 +2,7 @@
   <ele-modal
     :width="880"
     title="选择用户"
+    :body-style="{ padding: '4px 16px' }"
     :destroy-on-close="true"
     :model-value="modelValue"
     @update:modelValue="updateModelValue"

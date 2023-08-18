@@ -1,4 +1,3 @@
-<!-- 数据权限 -->
 <template>
   <ele-modal
     form
@@ -39,14 +38,16 @@
               </el-button>
             </el-space>
           </div>
-          <el-tree
-            ref="treeRef"
-            show-checkbox
-            node-key="id"
-            :data="treeData"
-            :default-expand-all="true"
-            :default-checked-keys="checkedKeys"
-          />
+          <div style="height: 260px; overflow: auto">
+            <el-tree
+              ref="treeRef"
+              show-checkbox
+              node-key="id"
+              :data="treeData"
+              :default-expand-all="true"
+              :default-checked-keys="checkedKeys"
+            />
+          </div>
         </ele-loading>
       </el-form-item>
     </el-form>

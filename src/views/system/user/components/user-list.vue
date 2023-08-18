@@ -294,7 +294,8 @@
   /* 下拉菜单点击事件 */
   const dropClick = (key, row) => {
     if (key === 'password') {
-      ElMessageBox.prompt(`请输入"${row.userName}"的新密码`, '提示', {
+      ElMessageBox.prompt(`请输入"${row.userName}"的新密码:`, '重置密码', {
+        inputPlaceholder: '请输入5-18位非空白字符',
         inputPattern: /^[\S]{5,18}$/,
         inputErrorMessage: '密码必须为5-18位非空白字符',
         customStyle: { '--ele-message-box-body-padding': '8px 20px 0 20px' },

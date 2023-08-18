@@ -1,4 +1,3 @@
-<!-- 分配用户 -->
 <template>
   <ele-drawer
     :size="980"

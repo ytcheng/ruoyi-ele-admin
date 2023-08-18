@@ -2,6 +2,7 @@
   <ele-modal
     :width="880"
     title="导入表"
+    :body-style="{ padding: '4px 16px' }"
     :destroy-on-close="true"
     :model-value="modelValue"
     @update:modelValue="updateModelValue"
@@ -15,6 +16,7 @@
       v-model:selections="selections"
       highlight-current-row
       :toolbar="false"
+      :pagination="{ pageSize: 6, pageSizes: [6, 10, 20, 40, 100] }"
     />
     <template #footer>
       <el-button @click="updateModelValue(false)">取消</el-button>

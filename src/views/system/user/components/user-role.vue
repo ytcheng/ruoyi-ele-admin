@@ -1,8 +1,8 @@
-<!-- 调度日志 -->
 <template>
   <ele-modal
     :width="640"
     title="分配角色"
+    :body-style="{ padding: '4px 16px 8px 16px' }"
     :destroy-on-close="true"
     :model-value="modelValue"
     @update:modelValue="updateModelValue"

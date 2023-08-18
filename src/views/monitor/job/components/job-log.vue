@@ -1,4 +1,3 @@
-<!-- 调度日志 -->
 <template>
   <ele-drawer
     :size="1200"
@@ -17,6 +16,7 @@
       v-model:selections="selections"
       highlight-current-row
       cache-key="monitorJobLogTable"
+      :toolbar="{ bodyStyle: { marginTop: 0 } }"
     >
       <template #toolbar>
         <el-space>

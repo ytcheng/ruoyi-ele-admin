@@ -1,8 +1,8 @@
-<!-- 详情弹窗 -->
 <template>
   <ele-modal
     title="任务详情"
     :width="720"
+    :body-style="{ paddingTop: '6px' }"
     :model-value="modelValue"
     @update:modelValue="updateModelValue"
   >
