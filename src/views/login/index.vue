@@ -2,8 +2,8 @@
   <div class="login-wrapper">
     <ele-card shadow="always" class="login-card">
       <div class="login-cover">
-        <h1 class="login-title">EleAdmin Plus</h1>
-        <h4 class="login-subtitle">组件最丰富的中后台前端解决方案</h4>
+        <h1 class="login-title">RuoYi EleAdmin</h1>
+        <h4 class="login-subtitle">界面美观组件丰富的中后台前端解决方案</h4>
       </div>
       <div class="login-body">
         <ele-text type="heading" style="font-size: 24px; margin-bottom: 18px">
@@ -16,6 +16,7 @@
             { label: '扫码登录', value: 2 }
           ]"
           style="margin-bottom: 18px"
+          @change="onTabChange"
         />
         <el-form
           v-if="tabActive == 1"
@@ -76,6 +77,12 @@
             :value="qrcode"
             class="login-qrcode"
           />
+          <div style="margin-top: 16px; cursor: pointer" @click="refreshQrCode">
+            <el-icon :size="17" style="vertical-align: -3px; margin-right: 6px">
+              <refresh-right />
+            </el-icon>
+            <span>刷新二维码</span>
+          </div>
         </div>
       </div>
     </ele-card>
@@ -86,7 +93,7 @@
   import { ref, reactive, unref, computed } from 'vue';
   import { useRouter } from 'vue-router';
   import { EleMessage } from 'ele-admin-plus/es';
-  import { User, Lock } from '@element-plus/icons-vue';
+  import { User, Lock, RefreshRight } from '@element-plus/icons-vue';
   import { ProtectOutlined } from '@/components/icons';
   import { getToken } from '@/utils/token-util';
   import { usePageTab } from '@/utils/use-page-tab';
@@ -147,7 +154,7 @@
   const captcha = ref('');
 
   // 二维码
-  const qrcode = ref('https://api.eleadmin.com/v2/auth/login');
+  const qrcode = ref('');
 
   /* 提交 */
   const submit = () => {
@@ -183,13 +190,25 @@
       });
   };
 
+  /* 刷新二维码 */
+  const refreshQrCode = () => {
+    qrcode.value = `https://api.eleadmin.com/v2/auth/login?code=${new Date().getTime()}`;
+  };
+
+  /* 选项卡切换事件 */
+  const onTabChange = (active) => {
+    if (active === 2) {
+      refreshQrCode();
+    }
+  };
+
   /* 跳转到首页 */
   const goHome = () => {
     const { query } = unref(currentRoute);
     goHomeRoute(query.from);
   };
 
-  //
+  // 如果已登录直接进入首页
   if (getToken()) {
     goHome();
   } else {
