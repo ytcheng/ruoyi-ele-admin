@@ -2,9 +2,11 @@
 <template>
   <ele-drawer
     :size="1320"
+    style="max-width: 100%"
     :append-to-body="true"
     :destroy-on-close="true"
     :body-style="{ padding: '16px 10px' }"
+    :footer-style="{ display: 'flex', alignItems: 'center' }"
     :title="`修改[${data?.tableName}]生成配置`"
     :model-value="modelValue"
     @update:modelValue="updateModelValue"
@@ -198,209 +200,234 @@
             placeholder="请输入备注"
           />
         </el-form-item>
-        <ele-pro-table
-          sticky
-          row-key="columnId"
-          :columns="columns"
-          :datasource="form.columns"
-          highlight-current-row
-          :pagination="false"
-          :toolbar="false"
-          cell-class-name="form-table-cell"
-          class="form-table"
-        >
-          <template #columnComment="{ row, $index }">
-            <el-form-item
-              v-if="$index != -1"
-              label-width="0px"
-              class="form-error-popper"
-              style="margin-bottom: 0"
-            >
-              <el-input v-model="row.columnComment" placeholder="请输入" />
-            </el-form-item>
+        <sticky-table class="form-table" :table-style="{ minWidth: '1280px' }">
+          <template #colgroup>
+            <col width="38px" />
+            <col />
+            <col width="140px" />
+            <col />
+            <col width="120px" />
+            <col width="120px" />
+            <col width="48px" />
+            <col width="48px" />
+            <col width="48px" />
+            <col width="48px" />
+            <col width="100px" />
+            <col width="48px" />
+            <col width="128px" />
+            <col width="128px" />
           </template>
-          <template #javaType="{ row, $index }">
-            <el-form-item
-              v-if="$index != -1"
-              label-width="0px"
-              class="form-error-popper"
-              style="margin-bottom: 0"
-            >
-              <el-select
-                v-model="row.javaType"
-                placeholder="请选择"
-                class="ele-fluid"
-              >
-                <el-option label="Long" value="Long" />
-                <el-option label="String" value="String" />
-                <el-option label="Integer" value="Integer" />
-                <el-option label="Double" value="Double" />
-                <el-option label="BigDecimal" value="BigDecimal" />
-                <el-option label="Date" value="Date" />
-                <el-option label="Boolean" value="Boolean" />
-              </el-select>
-            </el-form-item>
+          <template #thead>
+            <tr>
+              <th class="form-table-index"></th>
+              <th>字段列名</th>
+              <th>字段描述</th>
+              <th>物理类型</th>
+              <th>Java类型</th>
+              <th>Java属性</th>
+              <th>插入</th>
+              <th>编辑</th>
+              <th>列表</th>
+              <th>查询</th>
+              <th>查询方式</th>
+              <th>必填</th>
+              <th>显示类型</th>
+              <th>字典类型</th>
+            </tr>
           </template>
-          <template #javaField="{ row, $index }">
-            <el-form-item
-              v-if="$index != -1"
-              label-width="0px"
-              :prop="'columns.' + $index + '.javaField'"
-              :rules="{
-                required: true,
-                message: '请输入Java属性',
-                type: 'string',
-                trigger: 'blur'
-              }"
-              class="form-error-popper"
-              style="margin-bottom: 0"
-            >
-              <el-input v-model="row.javaField" placeholder="请输入" />
-            </el-form-item>
+          <template #tbody>
+            <tr v-for="(row, index) in form.columns" :key="row.columnId">
+              <td class="form-table-index">{{ index + 1 }}</td>
+              <td>{{ row.columnName }}</td>
+              <td>
+                <el-form-item
+                  label-width="0px"
+                  class="form-error-popper"
+                  style="margin-bottom: 0"
+                >
+                  <el-input v-model="row.columnComment" placeholder="请输入" />
+                </el-form-item>
+              </td>
+              <td>{{ row.columnType }}</td>
+              <td>
+                <el-form-item
+                  label-width="0px"
+                  class="form-error-popper"
+                  style="margin-bottom: 0"
+                >
+                  <el-select
+                    v-model="row.javaType"
+                    placeholder="请选择"
+                    class="ele-fluid"
+                  >
+                    <el-option label="Long" value="Long" />
+                    <el-option label="String" value="String" />
+                    <el-option label="Integer" value="Integer" />
+                    <el-option label="Double" value="Double" />
+                    <el-option label="BigDecimal" value="BigDecimal" />
+                    <el-option label="Date" value="Date" />
+                    <el-option label="Boolean" value="Boolean" />
+                  </el-select>
+                </el-form-item>
+              </td>
+              <td>
+                <el-form-item
+                  label-width="0px"
+                  :prop="'columns.' + index + '.javaField'"
+                  :rules="{
+                    required: true,
+                    message: '请输入Java属性',
+                    type: 'string',
+                    trigger: 'blur'
+                  }"
+                  class="form-error-popper"
+                  style="margin-bottom: 0"
+                >
+                  <el-input v-model="row.javaField" placeholder="请输入" />
+                </el-form-item>
+              </td>
+              <td>
+                <el-form-item
+                  label-width="0px"
+                  class="form-error-popper"
+                  style="margin-bottom: 0"
+                >
+                  <el-checkbox
+                    v-model="row.isInsert"
+                    true-label="1"
+                    false-label="0"
+                  />
+                </el-form-item>
+              </td>
+              <td>
+                <el-form-item
+                  label-width="0px"
+                  class="form-error-popper"
+                  style="margin-bottom: 0"
+                >
+                  <el-checkbox
+                    v-model="row.isEdit"
+                    true-label="1"
+                    false-label="0"
+                  />
+                </el-form-item>
+              </td>
+              <td>
+                <el-form-item
+                  label-width="0px"
+                  class="form-error-popper"
+                  style="margin-bottom: 0"
+                >
+                  <el-checkbox
+                    v-model="row.isList"
+                    true-label="1"
+                    false-label="0"
+                  />
+                </el-form-item>
+              </td>
+              <td>
+                <el-form-item
+                  label-width="0px"
+                  class="form-error-popper"
+                  style="margin-bottom: 0"
+                >
+                  <el-checkbox
+                    v-model="row.isQuery"
+                    true-label="1"
+                    false-label="0"
+                  />
+                </el-form-item>
+              </td>
+              <td>
+                <el-form-item
+                  label-width="0px"
+                  class="form-error-popper"
+                  style="margin-bottom: 0"
+                >
+                  <el-select
+                    v-model="row.queryType"
+                    placeholder="请选择"
+                    class="ele-fluid"
+                  >
+                    <el-option label="=" value="EQ" />
+                    <el-option label="!=" value="NE" />
+                    <el-option label=">" value="GT" />
+                    <el-option label=">=" value="GTE" />
+                    <el-option label="<" value="LT" />
+                    <el-option label="<=" value="LTE" />
+                    <el-option label="LIKE" value="LIKE" />
+                    <el-option label="BETWEEN" value="BETWEEN" />
+                  </el-select>
+                </el-form-item>
+              </td>
+              <td>
+                <el-form-item
+                  label-width="0px"
+                  class="form-error-popper"
+                  style="margin-bottom: 0"
+                >
+                  <el-checkbox
+                    v-model="row.isRequired"
+                    true-label="1"
+                    false-label="0"
+                  />
+                </el-form-item>
+              </td>
+              <td>
+                <el-form-item
+                  label-width="0px"
+                  class="form-error-popper"
+                  style="margin-bottom: 0"
+                >
+                  <el-select
+                    v-model="row.htmlType"
+                    placeholder="请选择"
+                    class="ele-fluid"
+                  >
+                    <el-option label="文本框" value="input" />
+                    <el-option label="文本域" value="textarea" />
+                    <el-option label="下拉框" value="select" />
+                    <el-option label="单选框" value="radio" />
+                    <el-option label="复选框" value="checkbox" />
+                    <el-option label="日期控件" value="datetime" />
+                    <el-option label="图片上传" value="imageUpload" />
+                    <el-option label="文件上传" value="fileUpload" />
+                    <el-option label="富文本控件" value="editor" />
+                  </el-select>
+                </el-form-item>
+              </td>
+              <td>
+                <el-form-item
+                  label-width="0px"
+                  class="form-error-popper"
+                  style="margin-bottom: 0"
+                >
+                  <el-select
+                    clearable
+                    v-model="row.dictType"
+                    placeholder="请选择"
+                    class="ele-fluid"
+                  >
+                    <el-option
+                      v-for="item in dictOptions"
+                      :key="item.dictType"
+                      :value="item.dictType"
+                      :label="`${item.dictName}(${item.dictType})`"
+                    />
+                  </el-select>
+                </el-form-item>
+              </td>
+            </tr>
           </template>
-          <template #isInsert="{ row, $index }">
-            <el-form-item
-              v-if="$index != -1"
-              label-width="0px"
-              class="form-error-popper"
-              style="margin-bottom: 0"
-            >
-              <el-checkbox
-                v-model="row.isInsert"
-                true-label="1"
-                false-label="0"
-              />
-            </el-form-item>
-          </template>
-          <template #isEdit="{ row, $index }">
-            <el-form-item
-              v-if="$index != -1"
-              label-width="0px"
-              class="form-error-popper"
-              style="margin-bottom: 0"
-            >
-              <el-checkbox
-                v-model="row.isEdit"
-                true-label="1"
-                false-label="0"
-              />
-            </el-form-item>
-          </template>
-          <template #isList="{ row, $index }">
-            <el-form-item
-              v-if="$index != -1"
-              label-width="0px"
-              class="form-error-popper"
-              style="margin-bottom: 0"
-            >
-              <el-checkbox
-                v-model="row.isList"
-                true-label="1"
-                false-label="0"
-              />
-            </el-form-item>
-          </template>
-          <template #isQuery="{ row, $index }">
-            <el-form-item
-              v-if="$index != -1"
-              label-width="0px"
-              class="form-error-popper"
-              style="margin-bottom: 0"
-            >
-              <el-checkbox
-                v-model="row.isQuery"
-                true-label="1"
-                false-label="0"
-              />
-            </el-form-item>
-          </template>
-          <template #queryType="{ row, $index }">
-            <el-form-item
-              v-if="$index != -1"
-              label-width="0px"
-              class="form-error-popper"
-              style="margin-bottom: 0"
-            >
-              <el-select
-                v-model="row.queryType"
-                placeholder="请选择"
-                class="ele-fluid"
-              >
-                <el-option label="=" value="EQ" />
-                <el-option label="!=" value="NE" />
-                <el-option label=">" value="GT" />
-                <el-option label=">=" value="GTE" />
-                <el-option label="<" value="LT" />
-                <el-option label="<=" value="LTE" />
-                <el-option label="LIKE" value="LIKE" />
-                <el-option label="BETWEEN" value="BETWEEN" />
-              </el-select>
-            </el-form-item>
-          </template>
-          <template #isRequired="{ row, $index }">
-            <el-form-item
-              v-if="$index != -1"
-              label-width="0px"
-              class="form-error-popper"
-              style="margin-bottom: 0"
-            >
-              <el-checkbox
-                v-model="row.isRequired"
-                true-label="1"
-                false-label="0"
-              />
-            </el-form-item>
-          </template>
-          <template #htmlType="{ row, $index }">
-            <el-form-item
-              v-if="$index != -1"
-              label-width="0px"
-              class="form-error-popper"
-              style="margin-bottom: 0"
-            >
-              <el-select
-                v-model="row.htmlType"
-                placeholder="请选择"
-                class="ele-fluid"
-              >
-                <el-option label="文本框" value="input" />
-                <el-option label="文本域" value="textarea" />
-                <el-option label="下拉框" value="select" />
-                <el-option label="单选框" value="radio" />
-                <el-option label="复选框" value="checkbox" />
-                <el-option label="日期控件" value="datetime" />
-                <el-option label="图片上传" value="imageUpload" />
-                <el-option label="文件上传" value="fileUpload" />
-                <el-option label="富文本控件" value="editor" />
-              </el-select>
-            </el-form-item>
-          </template>
-          <template #dictType="{ row, $index }">
-            <el-form-item
-              v-if="$index != -1"
-              label-width="0px"
-              class="form-error-popper"
-              style="margin-bottom: 0"
-            >
-              <el-select
-                clearable
-                v-model="row.dictType"
-                placeholder="请选择"
-                class="ele-fluid"
-              >
-                <el-option
-                  v-for="item in dictOptions"
-                  :key="item.dictType"
-                  :value="item.dictType"
-                  :label="`${item.dictName}(${item.dictType})`"
-                />
-              </el-select>
-            </el-form-item>
-          </template>
-        </ele-pro-table>
+        </sticky-table>
       </el-form>
     </ele-loading>
     <template #footer>
+      <div style="flex: 1; text-align: left">
+        <ele-text v-if="validMsg" type="danger" :icon="CircleClose">
+          <span>{{ validMsg }}</span>
+        </ele-text>
+      </div>
       <el-button @click="updateModelValue(false)">取消</el-button>
       <el-button type="primary" :loading="loading" @click="save">
         保存
@@ -411,10 +438,12 @@
 
 <script setup>
   import { ref, reactive, watch, computed } from 'vue';
+  import { CircleClose } from '@element-plus/icons-vue';
   import { EleMessage } from 'ele-admin-plus/es';
   import { useFormData } from '@/utils/use-form-data';
   import MenuSelect from '@/views/system/menu/components/menu-select.vue';
   import ColumnSelect from './column-select.vue';
+  import StickyTable from './sticky-table.vue';
   import { listDicts } from '@/api/system/dict';
   import { getGenTable, updateGen } from '@/api/tool/gen';
 
@@ -554,113 +583,18 @@
     ]
   });
 
-  // 表格列
-  const columns = reactive([
-    {
-      type: 'index',
-      columnKey: 'index',
-      width: 48,
-      align: 'center',
-      showOverflowTooltip: true,
-      fixed: 'left'
-    },
-    {
-      prop: 'columnName',
-      label: '字段列名',
-      align: 'center',
-      minWidth: 128
-    },
-    {
-      columnKey: 'columnComment',
-      label: '字段描述',
-      slot: 'columnComment',
-      align: 'center',
-      width: 140
-    },
-    {
-      prop: 'columnType',
-      label: '物理类型',
-      align: 'center',
-      minWidth: 128
-    },
-    {
-      columnKey: 'javaType',
-      label: 'Java类型',
-      slot: 'javaType',
-      align: 'center',
-      width: 120
-    },
-    {
-      columnKey: 'javaField',
-      label: 'Java属性',
-      slot: 'javaField',
-      align: 'center',
-      width: 120
-    },
-    {
-      columnKey: 'isInsert',
-      label: '插入',
-      slot: 'isInsert',
-      align: 'center',
-      width: 48
-    },
-    {
-      columnKey: 'isEdit',
-      label: '编辑',
-      slot: 'isEdit',
-      align: 'center',
-      width: 48
-    },
-    {
-      columnKey: 'isList',
-      label: '列表',
-      slot: 'isList',
-      align: 'center',
-      width: 48
-    },
-    {
-      columnKey: 'isQuery',
-      label: '查询',
-      slot: 'isQuery',
-      align: 'center',
-      width: 48
-    },
-    {
-      columnKey: 'queryType',
-      label: '查询方式',
-      slot: 'queryType',
-      align: 'center',
-      width: 100
-    },
-    {
-      columnKey: 'isRequired',
-      label: '必填',
-      slot: 'isRequired',
-      align: 'center',
-      width: 48
-    },
-    {
-      columnKey: 'htmlType',
-      label: '显示类型',
-      slot: 'htmlType',
-      align: 'center',
-      width: 128
-    },
-    {
-      columnKey: 'dictType',
-      label: '字典类型',
-      slot: 'dictType',
-      align: 'center',
-      width: 128
-    }
-  ]);
+  // 表单验证失败提示信息
+  const validMsg = ref('');
 
   /* 保存编辑 */
   const save = () => {
-    formRef.value?.validate?.((valid) => {
+    formRef.value?.validate?.((valid, obj) => {
       if (!valid) {
+        const errors = obj ? Object.keys(obj).length : 0;
+        validMsg.value = ` 共有 ${errors} 项校验不通过`;
         return;
       }
+      validMsg.value = '';
       loading.value = true;
       updateGen({
         ...form,
@@ -698,7 +632,7 @@
     getGenTable(props.data.tableId)
       .then((res) => {
         assignFields(res.info);
-        cols.value = res.info.cols;
+        cols.value = res.info.columns;
         tables.value = res.tables;
         initLoading.value = false;
       })
@@ -714,6 +648,7 @@
       if (!modelValue) {
         resetFields();
         formRef.value?.clearValidate?.();
+        validMsg.value = '';
       }
     }
   );
@@ -729,64 +664,71 @@
 </script>
 
 <style lang="scss" scoped>
-  .form-table :deep(.form-table-cell) {
-    position: static;
-
-    & > .cell {
-      overflow: visible;
-    }
-
-    .el-form-item__content {
-      justify-content: center;
-    }
-  }
-
   /* 表单验证气泡形式 */
-  .form-error-popper.el-form-item > :deep(.el-form-item__content) {
-    & > .el-form-item__error {
-      position: absolute;
-      left: 0;
-      top: calc(0px - 100% - 6px);
-      width: max-content;
-      color: #fff;
-      font-size: 12px;
-      background: var(--el-color-danger);
-      transition: all 0.2s;
-      padding: 10px;
-      border-radius: 4px;
-      z-index: 999;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
+  .form-table :deep(table) {
+    table-layout: fixed;
 
-      &:after {
-        content: '';
-        border: 6px solid transparent;
-        border-top-color: var(--el-color-danger);
+    .el-form-item > .el-form-item__content {
+      justify-content: center;
+
+      & > .el-form-item__error {
         position: absolute;
-        left: 12px;
-        bottom: -11px;
+        left: 0;
+        top: calc(0px - 100% - 6px);
+        width: max-content;
+        color: #fff;
+        font-size: 12px;
+        background: var(--el-color-danger);
+        transition: all 0.2s;
+        padding: 10px;
+        border-radius: 4px;
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        &:after {
+          content: '';
+          border: 6px solid transparent;
+          border-top-color: var(--el-color-danger);
+          position: absolute;
+          left: 12px;
+          bottom: -11px;
+        }
+      }
+
+      &:hover > .el-form-item__error {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
       }
     }
 
-    &:hover > .el-form-item__error {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: all;
-    }
-  }
+    tbody > tr:first-child .el-form-item > .el-form-item__content {
+      & > .el-form-item__error {
+        bottom: calc(0px - 100% - 6px);
+        top: auto;
 
-  .form-table :deep(tbody > .ele-table-tr:first-child) {
-    .form-error-popper > .el-form-item__content > .el-form-item__error {
-      bottom: calc(0px - 100% - 6px);
-      top: auto;
-
-      &:after {
-        top: -11px;
-        bottom: auto;
-        border-bottom-color: var(--el-color-danger);
-        border-top-color: transparent;
+        &:after {
+          top: -11px;
+          bottom: auto;
+          border-bottom-color: var(--el-color-danger);
+          border-top-color: transparent;
+        }
       }
+    }
+
+    tr > td,
+    tr > th {
+      padding-left: 4px;
+      padding-right: 4px;
+      text-align: center;
+    }
+
+    .form-table-index {
+      position: sticky;
+      left: 0;
+      z-index: 998;
     }
   }
 </style>
