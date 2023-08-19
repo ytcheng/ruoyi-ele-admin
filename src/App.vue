@@ -15,6 +15,7 @@
 
 <script setup>
   import { ref } from 'vue';
+  import { useThemeStore } from '@/store/modules/theme';
   import { MAP_KEY, LICENSE_CODE } from '@/config/setting';
   import zh_CN from 'element-plus/es/locale/lang/zh-cn';
   import eleZh_CN from 'ele-admin-plus/es/lang/zh_CN';
@@ -22,6 +23,10 @@
   import 'dayjs/locale/zh-cn';
 
   dayjs.locale('zh-cn');
+
+  // 恢复主题
+  const themeStore = useThemeStore();
+  themeStore.recoverTheme();
 
   // 高级表格全局配置
   const tableConfig = ref({

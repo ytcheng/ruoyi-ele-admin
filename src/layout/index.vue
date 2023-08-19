@@ -79,6 +79,15 @@
       <header-tool>
         <header-user />
       </header-tool>
+      <!-- 夜间模式 -->
+      <header-tool class="dark-switch">
+        <el-switch
+          :active-action-icon="MoonOutlined"
+          :inactive-action-icon="SunOutlined"
+          :model-value="darkMode"
+          @update:modelValue="updateDarkMode"
+        />
+      </header-tool>
     </template>
     <!-- 页签栏右侧下拉菜单 -->
     <template #tabExtra="{ active }">
@@ -136,7 +145,9 @@
     CompressOutlined,
     ExpandOutlined,
     MenuFoldOutlined,
-    MenuUnfoldOutlined
+    MenuUnfoldOutlined,
+    MoonOutlined,
+    SunOutlined
   } from '@/components/icons';
   import {
     PROJECT_NAME,
@@ -190,7 +201,8 @@
     transitionName,
     uniqueOpened,
     fixedHome,
-    roundedTheme
+    roundedTheme,
+    darkMode
   } = storeToRefs(themeStore);
 
   // 是否全屏
@@ -322,6 +334,11 @@
       onTabContextMenu({ command, key: active, active });
     }
   };
+
+  /* 切换暗黑模式 */
+  const updateDarkMode = (value) => {
+    themeStore.setDarkMode(value);
+  };
 </script>
 
 <script>
@@ -332,3 +349,45 @@
     components: MenuIcons
   };
 </script>
+
+<style lang="scss" scoped>
+  .dark-switch {
+    padding: 0 6px;
+    position: relative;
+
+    :deep(.el-switch) {
+      height: 22px;
+      line-height: 22px;
+      position: static;
+
+      .el-switch__core {
+        --el-switch-off-color: var(--el-border-color-extra-light);
+        --el-switch-on-color: var(--el-border-color-extra-light);
+        height: 22px;
+        border-radius: 11px;
+        border: 1px solid var(--el-border-color);
+
+        .el-switch__action {
+          color: var(--el-text-color-regular);
+          background: var(--el-bg-color);
+          width: 18px;
+          height: 18px;
+          font-size: 12px;
+        }
+      }
+
+      &.is-checked .el-switch__core .el-switch__action {
+        left: calc(100% - 18px);
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    }
+  }
+</style>
