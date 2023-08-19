@@ -26,6 +26,9 @@ export const useUserStore = defineStore({
      */
     async fetchUserInfo() {
       const result = await getUserInfo().catch((e) => console.error(e));
+      if (result.user && !result.user.avatar) {
+        result.user.avatar = 'https://cdn.eleadmin.com/20200610/avatar.jpg';
+      }
       // 用户信息
       this.setInfo(result?.user);
       // 用户权限

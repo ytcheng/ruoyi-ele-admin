@@ -6,18 +6,12 @@
     </template>
     <el-scrollbar :view-style="{ position: 'relative', zIndex: 1 }">
       <ele-table class="task-table" size="large">
-        <colgroup>
-          <col width="38" />
-          <col width="78" />
-          <col />
-          <col width="80" />
-        </colgroup>
         <thead style="position: sticky; top: 0; z-index: 2">
           <tr>
-            <th style="position: sticky; left: 0; z-index: 1"></th>
-            <th style="text-align: center">优先级</th>
+            <th style="position: sticky; left: 0; z-index: 1; width: 38px"></th>
+            <th style="text-align: center; width: 78px">优先级</th>
             <th>任务名称</th>
-            <th style="text-align: center">状态</th>
+            <th style="text-align: center; width: 80px">状态</th>
           </tr>
         </thead>
         <vue-draggable
@@ -27,6 +21,7 @@
           handle=".sort-handle"
           :animation="300"
           :set-data="() => void 0"
+          :force-fallback="true"
         >
           <template #item="{ element }">
             <tr>
@@ -37,7 +32,8 @@
                   paddingRight: 0,
                   position: 'sticky',
                   left: 0,
-                  zIndex: 1
+                  zIndex: 1,
+                  width: '38px'
                 }"
               >
                 <ele-text
@@ -47,7 +43,7 @@
                   class="sort-handle"
                 />
               </td>
-              <td style="text-align: center">
+              <td style="text-align: center; width: 78px">
                 <el-tag
                   v-if="element.priority === 1"
                   type="danger"
@@ -73,7 +69,7 @@
                   </el-link>
                 </ele-ellipsis>
               </td>
-              <td style="text-align: center">
+              <td style="text-align: center; width: 80px">
                 <ele-text v-if="element.status === 0" type="warning">
                   未开始
                 </ele-text>
@@ -171,8 +167,22 @@
       border-radius: 50%;
     }
 
+    td,
+    th {
+      box-sizing: border-box;
+    }
+
     tr.sortable-ghost {
       opacity: 0;
+    }
+
+    tr.sortable-fallback {
+      opacity: 1 !important;
+      display: table !important;
+
+      td {
+        background: var(--el-color-primary-light-8);
+      }
     }
   }
 </style>
