@@ -1,6 +1,7 @@
 <template>
   <ele-drawer
     :size="1200"
+    style="max-width: 100%"
     title="调度日志"
     :append-to-body="true"
     :destroy-on-close="true"

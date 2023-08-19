@@ -1,6 +1,7 @@
 <template>
   <ele-drawer
     :size="980"
+    style="max-width: 100%"
     title="分配用户"
     :append-to-body="true"
     :destroy-on-close="true"
