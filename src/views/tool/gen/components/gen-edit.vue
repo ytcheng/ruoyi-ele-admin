@@ -775,4 +775,18 @@
       pointer-events: all;
     }
   }
+
+  .form-table :deep(tbody > .ele-table-tr:first-child) {
+    .form-error-popper > .el-form-item__content > .el-form-item__error {
+      bottom: calc(0px - 100% - 6px);
+      top: auto;
+
+      &:after {
+        top: -11px;
+        bottom: auto;
+        border-bottom-color: var(--el-color-danger);
+        border-top-color: transparent;
+      }
+    }
+  }
 </style>

@@ -25,6 +25,11 @@ export async function getUserMenu() {
       component: 'index',
       meta: { title: '首页', icon: 'House' }
     });
+    // 增加EleAdmin链接
+    temp.push({
+      path: 'https://plus.eleadmin.com',
+      meta: { title: 'EleAdmin', icon: 'Link' }
+    });
     // 修改图标
     return mapTree(temp, (item) => {
       return {

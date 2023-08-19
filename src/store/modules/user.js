@@ -128,11 +128,15 @@ function formatComponent(component) {
   if (!component || isExternalLink(component)) {
     return component;
   }
+  // 修改内链格式
   if ('tool/swagger/index' === component) {
     return `${API_BASE_URL}/swagger-ui/index.html`;
   }
   if ('monitor/druid/index' === component) {
     return `${API_BASE_URL}/druid/login.html`;
+  }
+  if ('tool/build/index' === component) {
+    return 'https://yupk.github.io/vue3-code-generator/';
   }
   return component.startsWith('/') ? component : `/${component}`;
 }

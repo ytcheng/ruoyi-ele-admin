@@ -62,7 +62,16 @@
           :maxlength="200"
           v-model="form.cronExpression"
           placeholder="请输入cron执行表达式"
-        />
+        >
+          <template #append>
+            <el-button class="ele-btn-icon" @click="openCron">
+              <span>生成表达式</span>
+              <el-icon style="margin: 0 -3px 0 4px">
+                <Clock />
+              </el-icon>
+            </el-button>
+          </template>
+        </el-input>
       </el-form-item>
       <el-form-item label="执行策略" prop="misfirePolicy">
         <el-radio-group v-model="form.misfirePolicy">
@@ -92,7 +101,7 @@
 
 <script setup>
   import { ref, reactive, watch } from 'vue';
-  import { Warning } from '@element-plus/icons-vue';
+  import { Warning, Clock } from '@element-plus/icons-vue';
   import { EleMessage } from 'ele-admin-plus/es';
   import { useFormData } from '@/utils/use-form-data';
   import { addJob, updateJob } from '@/api/monitor/job';
@@ -180,6 +189,11 @@
   /* 更新modelValue */
   const updateModelValue = (value) => {
     emit('update:modelValue', value);
+  };
+
+  /* 打开cron表达式生成 */
+  const openCron = () => {
+    window.open('https://www.matools.com/app/cron?embed');
   };
 
   watch(

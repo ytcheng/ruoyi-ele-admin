@@ -17,11 +17,11 @@
         href="https://eleadmin.com/doc/eleadminplus/"
         target="_blank"
       >
-        EleAdminPlus
+        EleAdmin
       </el-link>
     </el-space>
     <div style="margin-top: 8px">
-      Copyright © 2023 RuoYi & EleAdminPlus All Rights Reserved.
+      Copyright © 2023 RuoYi & EleAdmin All Rights Reserved.
     </div>
   </ele-text>
 </template>
