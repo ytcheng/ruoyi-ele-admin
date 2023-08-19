@@ -2,6 +2,7 @@
 <template>
   <ele-dropdown
     :items="[
+      { title: '个人中心', command: 'profile', icon: User },
       { title: '修改密码', command: 'password', icon: Key },
       {
         title: '退出登录',
@@ -42,7 +43,7 @@
   import { logout } from '@/utils/use-page-tab';
   import PasswordModal from './password-modal.vue';
 
-  const { currentRoute } = useRouter();
+  const { push, currentRoute } = useRouter();
   const userStore = useUserStore();
 
   // 是否显示修改密码弹窗
@@ -55,6 +56,8 @@
   const onUserDropClick = (command) => {
     if (command === 'password') {
       passwordVisible.value = true;
+    } else if (command === 'profile') {
+      push('/profile');
     } else if (command === 'logout') {
       // 退出登录
       ElMessageBox.confirm('确定要退出登录吗?', '提示', {

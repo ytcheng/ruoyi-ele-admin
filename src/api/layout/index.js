@@ -26,6 +26,12 @@ export async function getUserMenu() {
       component: 'index',
       meta: { title: '首页', icon: 'House' }
     });
+    // 增加个人中心
+    temp.push({
+      path: '/profile',
+      component: 'profile',
+      meta: { title: '个人中心', icon: 'User', active: '/index', hide: true }
+    });
     // 增加EleAdmin链接
     temp.push({
       path: 'https://plus.eleadmin.com',

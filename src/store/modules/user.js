@@ -26,9 +26,6 @@ export const useUserStore = defineStore({
      */
     async fetchUserInfo() {
       const result = await getUserInfo().catch((e) => console.error(e));
-      if (result.user && !result.user.avatar) {
-        result.user.avatar = 'https://cdn.eleadmin.com/20200610/avatar.jpg';
-      }
       // 用户信息
       this.setInfo(result?.user);
       // 用户权限
@@ -47,8 +44,15 @@ export const useUserStore = defineStore({
     /**
      * 更新用户信息
      */
-    setInfo(value) {
-      this.info = value;
+    setInfo(data) {
+      if (data) {
+        if (!data.avatar) {
+          data.avatar = 'https://cdn.eleadmin.com/20200610/avatar.jpg';
+        } else if (!isExternalLink(data.avatar)) {
+          data.avatar = API_BASE_URL + data.avatar;
+        }
+      }
+      this.info = data || {};
     },
     /**
      * 更新菜单数据
@@ -79,18 +83,17 @@ function formatMenus(data, childField = 'children') {
   let homeTitle;
   const menus = mapTree(
     data,
-    (item, index, parent) => {
+    (item, _index, parent) => {
       const meta = item.meta;
       const { path, rPath } = formatPath(item.path, parent?.path, item.query);
       const menu = {
         path: path,
         component: formatComponent(item.component),
         meta: {
-          title: meta.title,
-          icon: meta.icon,
-          hide: item.hidden,
+          hide: !!item.hidden,
           keepAlive: !meta.noCache,
-          routePath: rPath
+          routePath: rPath,
+          ...meta
         }
       };
       const children = item[childField]?.filter?.(
