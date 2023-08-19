@@ -23,6 +23,7 @@
           size="large"
           :model="form"
           :rules="rules"
+          @keyup.enter="submit"
         >
           <el-form-item prop="username">
             <el-input
@@ -164,6 +165,7 @@
         .catch((e) => {
           EleMessage.error(e.message);
           loading.value = false;
+          changeCaptcha();
         });
     });
   };
