@@ -1,5 +1,6 @@
 import request from '@/utils/request';
 import { mapTree } from 'ele-admin-plus';
+import { toFormData } from '@/utils';
 
 /**
  * 获取当前登录用户的个人信息/权限/角色
@@ -48,11 +49,14 @@ export async function getUserMenu() {
  * 修改当前登录用户的密码
  */
 export async function updatePassword(data) {
-  const res = await request.put('/auth/password', data);
-  if (res.data.code === 0) {
-    return res.data.message ?? '修改成功';
+  const res = await request.put(
+    '/system/user/profile/updatePwd',
+    toFormData(data)
+  );
+  if (res.data.code === 200) {
+    return res.data.msg;
   }
-  return Promise.reject(new Error(res.data.message));
+  return Promise.reject(new Error(res.data.msg));
 }
 
 // 若依默认菜单图标名称

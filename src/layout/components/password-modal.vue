@@ -19,21 +19,21 @@
           placeholder="请输入旧密码"
         />
       </el-form-item>
-      <el-form-item label="新密码" prop="password">
+      <el-form-item label="新密码" prop="newPassword">
         <el-input
           show-password
           type="password"
           :maxlength="20"
-          v-model="form.password"
+          v-model="form.newPassword"
           placeholder="请输入新密码"
         />
       </el-form-item>
-      <el-form-item label="确认密码" prop="password2">
+      <el-form-item label="确认密码" prop="confirmPassword">
         <el-input
           show-password
           type="password"
           :maxlength="20"
-          v-model="form.password2"
+          v-model="form.confirmPassword"
           placeholder="请再次输入新密码"
         />
       </el-form-item>
@@ -68,8 +68,8 @@
   // 表单数据
   const { form, resetFields } = useFormData({
     oldPassword: '',
-    password: '',
-    password2: ''
+    newPassword: '',
+    confirmPassword: ''
   });
 
   // 表单验证规则
@@ -82,24 +82,32 @@
         trigger: 'blur'
       }
     ],
-    password: [
+    newPassword: [
       {
         required: true,
         message: '请输入新密码',
         type: 'string',
         trigger: 'blur'
+      },
+      {
+        type: 'string',
+        trigger: 'blur',
+        pattern: /^[\S]{5,18}$/,
+        message: '密码必须为5-18位非空白字符'
       }
     ],
-    password2: [
+    confirmPassword: [
       {
         required: true,
+        message: '请再次输入新密码',
+        type: 'string',
+        trigger: 'blur'
+      },
+      {
         type: 'string',
         trigger: 'blur',
         validator: (_rule, value, callback) => {
-          if (!value) {
-            return callback(new Error('请再次输入新密码'));
-          }
-          if (value !== form.password) {
+          if (value && value !== form.newPassword) {
             return callback(new Error('两次输入密码不一致'));
           }
           callback();
@@ -121,9 +129,9 @@
       }
       loading.value = true;
       updatePassword(form)
-        .then((msg) => {
+        .then(() => {
           loading.value = false;
-          EleMessage.success(msg);
+          EleMessage.success('修改成功');
           updateModelValue(false);
         })
         .catch((e) => {
