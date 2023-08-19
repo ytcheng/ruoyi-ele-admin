@@ -17,7 +17,10 @@
         :mousewheel="true"
       >
         <template v-for="d in data" :key="d.name" #[d.name]="{ item }">
-          <pre v-html="item.meta?.code" class="code-view"></pre>
+          <div class="code-view">
+            <pre v-html="item.meta?.code"></pre>
+            <ele-copyable :text="item.meta?.text" />
+          </div>
         </template>
       </ele-tabs>
     </ele-loading>
@@ -77,7 +80,8 @@
             label: name,
             meta: {
               language,
-              code: hljs.highlight(result[k], { language }).value
+              code: hljs.highlight(result[k], { language }).value,
+              text: result[k]
             }
           });
         });
@@ -109,14 +113,33 @@
 
 <style lang="scss" scoped>
   .code-view {
-    color: #e6edf3;
-    background: #161b22;
-    padding: 16px;
-    border-radius: 8px;
-    box-sizing: border-box;
-    margin: 0;
     height: 100%;
-    overflow: auto;
+    position: relative;
+
+    & > pre {
+      color: #e6edf3;
+      background: #282c34;
+      padding: 16px;
+      border-radius: 8px;
+      box-sizing: border-box;
+      margin: 0;
+      height: 100%;
+      overflow: auto;
+    }
+
+    & > .ele-copyable {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      background: #161b22;
+      border-radius: 4px;
+
+      :deep(.ele-copyable-icon) {
+        color: #bdc3d0;
+        padding: 6px;
+        margin: 0;
+      }
+    }
   }
 
   .code-wrapper {
