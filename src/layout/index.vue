@@ -40,7 +40,7 @@
     <!-- logo -->
     <template #logo>
       <img src="/src/assets/logo.png" style="width: 42px; height: 42px" />
-      <h1 style="font-size: 17px">{{ PROJECT_NAME }}</h1>
+      <h1 style="font-size: 17px; letter-spacing: 1px">{{ PROJECT_NAME }}</h1>
     </template>
     <!-- 顶栏左侧按钮 -->
     <template #left="{ sidebar }">
