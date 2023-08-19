@@ -128,6 +128,7 @@
     .then((res) => {
       loading.value = false;
       data.value = res;
+      const commandStats = res.commandStats || [];
       //
       Object.assign(commandChartOption, {
         tooltip: {
@@ -147,7 +148,7 @@
             label: {
               formatter: '{b}({d}%)'
             },
-            data: res.commandStats.sort((a, b) => a.name.localeCompare(b.name))
+            data: commandStats.sort((a, b) => a.name.localeCompare(b.name))
           }
         ]
       });
@@ -175,7 +176,7 @@
             },
             data: [
               {
-                value: parseFloat(res.info.used_memory_human),
+                value: parseFloat(res.info?.used_memory_human || 0),
                 name: '内存消耗'
               }
             ]
