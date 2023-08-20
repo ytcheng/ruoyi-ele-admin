@@ -21,6 +21,9 @@ export function download(data, name) {
  * @param params 参数
  */
 export function toURLSearch(params) {
+  if (typeof params !== 'object' || params == null) {
+    return '';
+  }
   const search = new URLSearchParams();
   Object.keys(params).forEach((key) => {
     if (params[key] != null && params[key] != '') {
@@ -36,6 +39,9 @@ export function toURLSearch(params) {
  */
 export function toFormData(params) {
   const formData = new FormData();
+  if (typeof params !== 'object' || params == null) {
+    return formData;
+  }
   Object.keys(params).forEach((key) => {
     if (params[key] != null && params[key] != '') {
       formData.append(key, params[key]);
