@@ -1,27 +1,122 @@
-# Vue 3 + Typescript + Vite
+<p align="center">
+  <img src="https://cdn.eleadmin.com/20200610/20230820a4.png"/>
+</p>
 
-This template should help get you started developing with Vue 3 and Typescript in Vite.
+<h1 align="center">RuoYi EleAdmin</h1>
 
-## Recommended IDE Setup
+<p align="center">RuoYi 框架前端部分使用 Vue3、ElementPlus、EleAdminPlus 的实现</p>
 
-[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
+<p align="center">
+  <a href="https://gitee.com/ele-admin/ruoyi-ele-admin">
+    <img src="https://gitee.com/ele-admin/ruoyi-ele-admin/badge/star.svg?theme=dark"/>
+  </a>
+	<a href="https://gitee.com/y_project/RuoYi-Vue">
+    <img src="https://img.shields.io/badge/RuoYi-v1.1.3-brightgreen"/>
+  </a>
+	<a href="https://plus.eleadmin.com">
+    <img src="https://img.shields.io/badge/EleAdminPlus-v3.8.6-blue"/>
+  </a>
+</p>
 
-### If Using `<script setup>`
+- 🔥 使用 vue3、pinia、element-plus、ele-admin-plus 等主流技术栈
+- 💪 组件丰富、代码规范，使用 Composition API、script setup 语法
+- 🌈 界面美观，对所有主题变量、组件样式都进行重新设计、精心打磨
 
-[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
+## 🌍在线体验
 
-## Type Support For `.vue` Imports in TS
+- 演示地址：https://ruoyi.eleadmin.com
+- 登录账号：admin
+- 登录密码：admin123
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
+## 🔨安装运行
 
-### If Using Volar
+```bash
+# 安装依赖
+npm install --registry=https://registry.npmmirror.com
 
-Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
+# 运行项目
+npm run dev
+```
 
-### If Using Vetur
+运行成功后在浏览器地址栏输入 `http://localhost:5173` 访问。
 
-1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
-2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
-3. Open `src/main.ts` in VSCode
-4. Open the VSCode command palette
-5. Search and run "Select TypeScript version" -> "Use workspace version"
+## 💻系统截图
+
+<table align="center" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082001.jpeg"/>
+      </td>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082002.jpeg"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082003.jpeg"/>
+      </td>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082004.jpeg"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082005.jpeg"/>
+      </td>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082006.jpeg"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082007.jpeg"/>
+      </td>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082008.jpeg"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082009.jpeg"/>
+      </td>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082010.jpeg"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082011.jpeg"/>
+      </td>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082012.jpeg"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082013.jpeg"/>
+      </td>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082014.jpeg"/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082015.jpeg"/>
+      </td>
+      <td align="center" valign="middle">
+        <img width="100%" src="https://cdn.eleadmin.com/20200610/2023082016.jpeg"/>
+      </td>
+    </tr>
+    </tbody>
+</table>
+
+## 📖开发文档
+
+- RuoYi 分离版开发文档：[http://doc.ruoyi.vip/ruoyi-vue/](http://doc.ruoyi.vip/ruoyi-vue/)
+- EleAdminPlus 开发文档：[https://eleadmin.com/doc/eleadminplus/](https://eleadmin.com/doc/eleadminplus/)
+
+## 💎LICENSE
+
+- [RuoYi](https://ruoyi.vip) 为开源项目，使用 MIT License 开源协议
+- [EleAdminPlus](https://eleadmin.com) 为商业项目，需要购买授权后使用
