@@ -9,6 +9,7 @@
         row-key="tokenId"
         :columns="columns"
         :datasource="datasource"
+        :loading="loading"
         highlight-current-row
         cache-key="monitorOnlineTable"
       >
@@ -115,13 +116,24 @@
   ]);
 
   // 表格数据源
-  const datasource = ({ page, limit, where }) => {
-    return pageOnlines({ ...where, pageNum: page, pageSize: limit });
-  };
+  const datasource = ref([]);
+
+  // 请求状态
+  const loading = ref(false);
 
   /* 搜索 */
   const reload = (where) => {
-    tableRef?.value?.reload?.({ page: 1, where });
+    loading.value = true;
+    pageOnlines(where)
+      .then((res) => {
+        loading.value = false;
+        datasource.value = res.rows;
+        tableRef?.value?.reload?.({ page: 1 });
+      })
+      .catch((e) => {
+        loading.value = false;
+        console.error(e);
+      });
   };
 
   /* 强退 */
@@ -138,6 +150,8 @@
         EleMessage.error(e.message);
       });
   };
+
+  reload();
 </script>
 
 <script>
