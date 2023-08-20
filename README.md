@@ -7,14 +7,14 @@
 <p align="center">RuoYi 框架前端部分使用 Vue3、ElementPlus、EleAdminPlus 的实现</p>
 
 <p align="center">
-  <a href="https://gitee.com/ele-admin/ruoyi-ele-admin">
-    <img src="https://gitee.com/ele-admin/ruoyi-ele-admin/badge/star.svg?theme=dark"/>
-  </a>
 	<a href="https://gitee.com/y_project/RuoYi-Vue">
-    <img src="https://img.shields.io/badge/RuoYi-v1.1.3-brightgreen"/>
+    <img src="https://img.shields.io/badge/RuoYi-v3.8.6-brightgreen"/>
   </a>
 	<a href="https://plus.eleadmin.com">
-    <img src="https://img.shields.io/badge/EleAdminPlus-v3.8.6-blue"/>
+    <img src="https://img.shields.io/badge/EleAdminPlus-v1.1.3-blue"/>
+  </a>
+  <a href="https://gitee.com/ele-admin/ruoyi-ele-admin">
+    <img src="https://gitee.com/ele-admin/ruoyi-ele-admin/badge/star.svg?theme=dark"/>
   </a>
 </p>
 
