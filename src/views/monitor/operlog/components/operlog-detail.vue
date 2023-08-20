@@ -31,12 +31,12 @@
         <div>{{ data.operTime }}</div>
       </el-descriptions-item>
       <el-descriptions-item label="登录信息" :span="2">
-        <div>
+        <div style="word-break: break-all">
           {{ data.operName }} / {{ data.operIp }} / {{ data.operLocation }}
         </div>
       </el-descriptions-item>
       <el-descriptions-item label="操作方法" :span="2">
-        <div>{{ data.method }}</div>
+        <div style="word-break: break-all">{{ data.method }}</div>
       </el-descriptions-item>
       <el-descriptions-item label="请求参数" :span="2">
         <ele-ellipsis :max-line="4">{{ data.operParam }}</ele-ellipsis>

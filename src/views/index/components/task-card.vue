@@ -70,15 +70,19 @@
                 </ele-ellipsis>
               </td>
               <td style="text-align: center; width: 80px">
-                <ele-text v-if="element.status === 0" type="warning">
+                <ele-ellipsis v-if="element.status === 0" type="warning">
                   未开始
-                </ele-text>
-                <ele-text v-else-if="element.status === 1" type="success">
+                </ele-ellipsis>
+                <ele-ellipsis v-else-if="element.status === 1" type="success">
                   进行中
-                </ele-text>
-                <ele-text v-else-if="element.status === 2" type="info" deleted>
+                </ele-ellipsis>
+                <ele-ellipsis
+                  v-else-if="element.status === 2"
+                  type="info"
+                  deleted
+                >
                   已完成
-                </ele-text>
+                </ele-ellipsis>
               </td>
             </tr>
           </template>

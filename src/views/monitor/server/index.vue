@@ -114,7 +114,9 @@
           class="detail-table"
         >
           <el-descriptions-item label="服务器名称">
-            <div>{{ data.sys?.computerName }}</div>
+            <div style="word-break: break-all">
+              {{ data.sys?.computerName }}
+            </div>
           </el-descriptions-item>
           <el-descriptions-item label="操作系统">
             <div>{{ data.sys?.osName }}</div>
@@ -142,25 +144,25 @@
           class="detail-table"
         >
           <el-descriptions-item label="Java名称">
-            <div>{{ data.jvm?.name }}</div>
+            <div style="word-break: break-all">{{ data.jvm?.name }}</div>
           </el-descriptions-item>
           <el-descriptions-item label="Java版本">
-            <div>{{ data.jvm?.version }}</div>
+            <div style="word-break: break-all">{{ data.jvm?.version }}</div>
           </el-descriptions-item>
           <el-descriptions-item label="启动时间">
-            <div>{{ data.jvm?.startTime }}</div>
+            <div style="word-break: break-all">{{ data.jvm?.startTime }}</div>
           </el-descriptions-item>
           <el-descriptions-item label="运行时长">
-            <div>{{ data.jvm?.runTime }}</div>
+            <div style="word-break: break-all">{{ data.jvm?.runTime }}</div>
           </el-descriptions-item>
           <el-descriptions-item label="安装路径" :span="2">
-            <div>{{ data.jvm?.home }}</div>
+            <div style="word-break: break-all">{{ data.jvm?.home }}</div>
           </el-descriptions-item>
           <el-descriptions-item label="项目路径" :span="2">
-            <div>{{ data.sys?.userDir }}</div>
+            <div style="word-break: break-all">{{ data.sys?.userDir }}</div>
           </el-descriptions-item>
           <el-descriptions-item label="运行参数" :span="2">
-            <div>{{ data.jvm?.inputArgs }}</div>
+            <div style="word-break: break-all">{{ data.jvm?.inputArgs }}</div>
           </el-descriptions-item>
         </el-descriptions>
       </ele-loading>
@@ -172,7 +174,6 @@
         </el-icon>
         <span>磁盘状态</span>
       </template>
-
       <ele-loading :loading="loading">
         <ele-pro-table
           row-key="dirName"

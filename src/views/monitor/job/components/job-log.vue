@@ -8,7 +8,7 @@
     :model-value="modelValue"
     @update:modelValue="updateModelValue"
   >
-    <job-log-search :data="data" @search="reload" />
+    <job-log-search :data="data" style="margin-bottom: -8px" @search="reload" />
     <ele-pro-table
       ref="tableRef"
       row-key="jobLogId"
@@ -17,7 +17,6 @@
       v-model:selections="selections"
       highlight-current-row
       cache-key="monitorJobLogTable"
-      :toolbar="{ bodyStyle: { marginTop: 0 } }"
     >
       <template #toolbar>
         <el-space>

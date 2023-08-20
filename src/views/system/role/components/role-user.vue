@@ -8,7 +8,7 @@
     :model-value="modelValue"
     @update:modelValue="updateModelValue"
   >
-    <role-user-search @search="reload" />
+    <role-user-search style="margin-bottom: -8px" @search="reload" />
     <ele-pro-table
       ref="tableRef"
       row-key="userId"
@@ -16,7 +16,6 @@
       :datasource="datasource"
       v-model:selections="selections"
       highlight-current-row
-      :toolbar="{ bodyStyle: { marginTop: 0 } }"
     >
       <template #toolbar>
         <el-space>
