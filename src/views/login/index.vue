@@ -391,3 +391,10 @@
     }
   }
 </style>
+
+<style lang="scss">
+  html.dark .login-wrapper {
+    background: #000;
+    filter: brightness(0.88);
+  }
+</style>
