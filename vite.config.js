@@ -1,6 +1,3 @@
-/**
- * 按需引入方式
- */
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
@@ -12,8 +9,7 @@ import { EleAdminResolver } from 'ele-admin-plus/lib/utils/resolvers';
 export default defineConfig(({ command }) => {
   const isBuild = command === 'build';
   const alias = {
-    '@/': resolve('src') + '/',
-    'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js'
+    '@/': resolve('src') + '/'
   };
   const plugins = [vue()];
   if (isBuild) {
@@ -62,8 +58,7 @@ export default defineConfig(({ command }) => {
         'echarts/components',
         'vue-echarts',
         'vuedraggable',
-        'sortablejs',
-        'xlsx'
+        'sortablejs'
       ]
     },
     build: {
