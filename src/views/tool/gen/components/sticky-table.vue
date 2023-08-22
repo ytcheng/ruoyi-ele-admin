@@ -3,9 +3,7 @@
   <div>
     <div
       ref="headerRef"
-      class="ele-scrollbar-hide"
-      style="position: sticky; top: 0; z-index: 999; overflow-x: auto"
-      @scroll="onScroll"
+      style="position: sticky; top: 0; z-index: 999; overflow: hidden"
     >
       <ele-table :class="tableClass" :style="tableStyle">
         <colgroup>
@@ -16,7 +14,7 @@
         </thead>
       </ele-table>
     </div>
-    <div ref="bodyRef" style="overflow-x: auto" @scroll="onScroll">
+    <div style="overflow-x: auto" @scroll="onScroll">
       <ele-table :class="tableClass" :style="tableStyle">
         <colgroup>
           <slot name="colgroup"></slot>
@@ -42,18 +40,12 @@
   // 表头
   const headerRef = ref(null);
 
-  // 主体
-  const bodyRef = ref(null);
-
-  /* 滚动事件 */
+  /* 滚动事件, 同步滚动表头 */
   const onScroll = (e) => {
-    // 同步滚动
-    const target = e.currentTarget;
-    const scrollLeft = target.scrollLeft;
-    [headerRef.value, bodyRef.value].forEach((el) => {
-      if (target !== el) {
-        el.scrollLeft = scrollLeft;
-      }
-    });
+    const el = headerRef.value;
+    const scrollLeft = e.currentTarget.scrollLeft;
+    if (el.scrollLeft != scrollLeft) {
+      el.scrollLeft = scrollLeft;
+    }
   };
 </script>
