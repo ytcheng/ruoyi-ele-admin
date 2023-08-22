@@ -170,8 +170,8 @@
           goHome();
         })
         .catch((e) => {
-          EleMessage.error(e.message);
           loading.value = false;
+          EleMessage.error(e.message);
           changeCaptcha();
         });
     });
@@ -228,17 +228,17 @@
     background-image: url('/src/assets/login-bg.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
-  }
 
-  .login-card {
-    width: 920px;
-    max-width: 100%;
-    overflow: hidden;
+    .login-card {
+      width: 920px;
+      max-width: 100%;
+      overflow: hidden;
 
-    :deep(.el-card__body) {
-      display: flex;
-      padding: 0;
-      height: 462px;
+      :deep(.el-card__body) {
+        display: flex;
+        padding: 0;
+        height: 462px;
+      }
     }
   }
 
@@ -367,17 +367,17 @@
       padding: 0;
       display: block;
       background: #fff;
-    }
 
-    .login-card {
-      width: 100%;
-      background: none;
-      box-shadow: none;
-      border-radius: 0;
+      .login-card {
+        width: 100%;
+        background: none;
+        box-shadow: none;
+        border-radius: 0;
 
-      :deep(.el-card__body) {
-        display: block;
-        height: auto;
+        :deep(.el-card__body) {
+          display: block;
+          height: auto;
+        }
       }
     }
 
