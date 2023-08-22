@@ -173,7 +173,7 @@
 
   /* 搜索 */
   const reload = (where) => {
-    tableRef?.value?.reload?.({ where });
+    tableRef.value?.reload?.({ where });
   };
 
   /* 添加用户 */

@@ -169,7 +169,7 @@
 
   /* 搜索 */
   const reload = (where) => {
-    tableRef?.value?.reload?.({ page: 1, where });
+    tableRef.value?.reload?.({ page: 1, where });
   };
 
   /* 打开编辑弹窗 */

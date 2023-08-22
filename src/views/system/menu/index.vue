@@ -227,7 +227,7 @@
 
   /* 刷新表格 */
   const reload = (where) => {
-    tableRef?.value?.reload?.({ where });
+    tableRef.value?.reload?.({ where });
   };
 
   /* 打开编辑弹窗 */

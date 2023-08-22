@@ -125,7 +125,7 @@
       .then((res) => {
         loading.value = false;
         datasource.value = res.rows;
-        tableRef?.value?.reload?.({ page: 1 });
+        tableRef.value?.reload?.({ page: 1 });
       })
       .catch((e) => {
         loading.value = false;

@@ -281,7 +281,7 @@
       .then(() => {
         loading.close();
         EleMessage.success('清空成功');
-        tableRef?.value?.reload?.();
+        tableRef.value?.reload?.();
       })
       .catch((e) => {
         loading.close();
@@ -296,7 +296,7 @@
       .then(() => {
         loading.close();
         EleMessage.success('删除成功');
-        table2Ref?.value?.reload?.();
+        table2Ref.value?.reload?.();
       })
       .catch((e) => {
         loading.close();
@@ -311,7 +311,7 @@
       .then(() => {
         loading.close();
         EleMessage.success('清空成功');
-        tableRef?.value?.reload?.();
+        tableRef.value?.reload?.();
       })
       .catch((e) => {
         loading.close();
@@ -321,7 +321,7 @@
 
   /* 刷新 */
   const refresh = () => {
-    table2Ref?.value?.reload?.();
+    table2Ref.value?.reload?.();
   };
 
   /* 刷新 */
@@ -344,7 +344,7 @@
 
   /* 查询键名列表 */
   watch(current, () => {
-    table2Ref?.value?.reload?.();
+    table2Ref.value?.reload?.();
   });
 
   /* 查询缓存内容 */

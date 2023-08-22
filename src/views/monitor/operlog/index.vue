@@ -205,7 +205,7 @@
 
   /* 刷新表格 */
   const reload = (where) => {
-    tableRef?.value?.reload?.({ page: 1, where });
+    tableRef.value?.reload?.({ page: 1, where });
   };
 
   /* 详情 */

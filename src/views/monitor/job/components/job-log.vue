@@ -193,7 +193,7 @@
 
   /* 搜索 */
   const reload = (where) => {
-    tableRef?.value?.reload?.({ where });
+    tableRef.value?.reload?.({ where });
   };
 
   /* 批量删除 */
