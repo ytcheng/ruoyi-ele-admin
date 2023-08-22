@@ -50,10 +50,7 @@
           placement="top-end"
           :title="'确认要取消该用户“' + row.userName + '”的角色吗？'"
           :popper-options="{
-            modifiers: [
-              { name: 'arrow', options: { padding: 20 } },
-              { name: 'offset', options: { offset: [20, 6] } }
-            ]
+            modifiers: [{ name: 'offset', options: { offset: [20, 6] } }]
           }"
           @confirm="remove(row)"
         >

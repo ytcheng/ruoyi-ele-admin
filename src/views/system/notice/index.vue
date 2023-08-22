@@ -58,10 +58,7 @@
               placement="top-end"
               :title="'是否确认删除公告编号为“' + row.noticeId + '”的数据项？'"
               :popper-options="{
-                modifiers: [
-                  { name: 'arrow', options: { padding: 20 } },
-                  { name: 'offset', options: { offset: [20, 6] } }
-                ]
+                modifiers: [{ name: 'offset', options: { offset: [20, 6] } }]
               }"
               @confirm="remove(row)"
             >

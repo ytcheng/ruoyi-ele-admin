@@ -20,10 +20,7 @@
               placement="bottom-end"
               :title="'是否确认清空全部缓存？'"
               :popper-options="{
-                modifiers: [
-                  { name: 'arrow', options: { padding: 20 } },
-                  { name: 'offset', options: { offset: [20, 6] } }
-                ]
+                modifiers: [{ name: 'offset', options: { offset: [20, 6] } }]
               }"
               @confirm="clearAll"
             >
@@ -60,7 +57,6 @@
                   :title="'是否确认清空“' + row.cacheName + '”？'"
                   :popper-options="{
                     modifiers: [
-                      { name: 'arrow', options: { padding: 20 } },
                       { name: 'offset', options: { offset: [20, 6] } }
                     ]
                   }"
@@ -114,7 +110,6 @@
                   :title="'是否确认删除“' + row.cacheKey + '”？'"
                   :popper-options="{
                     modifiers: [
-                      { name: 'arrow', options: { padding: 20 } },
                       { name: 'offset', options: { offset: [20, 6] } }
                     ]
                   }"

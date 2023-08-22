@@ -19,10 +19,7 @@
             placement="top-end"
             :title="'是否确认强退名称为“' + row.userName + '”的用户？'"
             :popper-options="{
-              modifiers: [
-                { name: 'arrow', options: { padding: 20 } },
-                { name: 'offset', options: { offset: [20, 6] } }
-              ]
+              modifiers: [{ name: 'offset', options: { offset: [20, 6] } }]
             }"
             @confirm="kickout(row)"
           >
