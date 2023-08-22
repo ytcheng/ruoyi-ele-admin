@@ -37,7 +37,7 @@
 <script setup>
   import { computed, ref, unref } from 'vue';
   import { useRouter } from 'vue-router';
-  import { ElMessageBox } from 'element-plus';
+  import { ElMessageBox } from 'element-plus/es';
   import { User, ArrowDown, Key, SwitchButton } from '@element-plus/icons-vue';
   import { useUserStore } from '@/store/modules/user';
   import { logout } from '@/utils/use-page-tab';

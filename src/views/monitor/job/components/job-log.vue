@@ -70,7 +70,7 @@
 <script setup>
   import { ref, watch, computed } from 'vue';
   import { Delete, Download } from '@element-plus/icons-vue';
-  import { ElMessageBox } from 'element-plus';
+  import { ElMessageBox } from 'element-plus/es';
   import { EleMessage } from 'ele-admin-plus/es';
   import { storeToRefs } from 'pinia';
   import { useUserStore } from '@/store/modules/user';

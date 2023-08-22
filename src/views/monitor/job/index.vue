@@ -106,8 +106,8 @@
     ArrowDown,
     Memo
   } from '@element-plus/icons-vue';
-  import { ElMessageBox } from 'element-plus';
-  import { EleMessage } from 'ele-admin-plus';
+  import { ElMessageBox } from 'element-plus/es';
+  import { EleMessage } from 'ele-admin-plus/es';
   import JobSearch from './components/job-search.vue';
   import JobEdit from './components/job-edit.vue';
   import JobDetail from './components/job-detail.vue';

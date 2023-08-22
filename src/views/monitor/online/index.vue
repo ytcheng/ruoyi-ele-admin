@@ -36,7 +36,7 @@
 <script setup>
   import { ref } from 'vue';
   import dayjs from 'dayjs';
-  import { EleMessage } from 'ele-admin-plus';
+  import { EleMessage } from 'ele-admin-plus/es';
   import OnlineSearch from './components/online-search.vue';
   import { pageOnlines, kickoutOnline } from '@/api/monitor/online';
 

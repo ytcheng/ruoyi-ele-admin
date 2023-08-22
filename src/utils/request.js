@@ -3,7 +3,7 @@
  */
 import axios from 'axios';
 import { unref } from 'vue';
-import { ElMessageBox } from 'element-plus';
+import { ElMessageBox } from 'element-plus/es';
 import { API_BASE_URL, LAYOUT_PATH } from '@/config/setting';
 import router from '@/router';
 import { getToken } from './token-util';

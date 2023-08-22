@@ -90,7 +90,7 @@
 <script setup>
   import { ref, reactive } from 'vue';
   import { Odometer, Monitor, PieChart } from '@element-plus/icons-vue';
-  import { EleMessage } from 'ele-admin-plus';
+  import { EleMessage } from 'ele-admin-plus/es';
   import { use } from 'echarts/core';
   import { CanvasRenderer } from 'echarts/renderers';
   import { PieChart as PieCharts, GaugeChart } from 'echarts/charts';

@@ -74,7 +74,7 @@
 <script setup>
   import { ref, watch } from 'vue';
   import { Plus, Delete, Download } from '@element-plus/icons-vue';
-  import { ElMessageBox } from 'element-plus';
+  import { ElMessageBox } from 'element-plus/es';
   import { EleMessage } from 'ele-admin-plus/es';
   import DictDataSearch from './dict-data-search.vue';
   import DictDataEdit from './dict-data-edit.vue';

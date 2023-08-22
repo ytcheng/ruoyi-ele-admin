@@ -97,8 +97,8 @@
 <script setup>
   import { ref } from 'vue';
   import { Delete, Download, Upload } from '@element-plus/icons-vue';
-  import { ElMessageBox } from 'element-plus';
-  import { EleMessage } from 'ele-admin-plus';
+  import { ElMessageBox } from 'element-plus/es';
+  import { EleMessage } from 'ele-admin-plus/es';
   import GenSearch from './components/gen-search.vue';
   import GenEdit from './components/gen-edit.vue';
   import GenImport from './components/gen-import.vue';

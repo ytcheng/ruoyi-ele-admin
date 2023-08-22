@@ -83,7 +83,7 @@
 <script setup>
   import { ref, nextTick } from 'vue';
   import { Plus, Delete, EditPen } from '@element-plus/icons-vue';
-  import { ElMessageBox } from 'element-plus';
+  import { ElMessageBox } from 'element-plus/es';
   import { EleMessage } from 'ele-admin-plus/es';
   import DictDataList from './components/dict-data-list.vue';
   import DictEdit from './components/dict-edit.vue';

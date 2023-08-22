@@ -78,8 +78,8 @@
 <script setup>
   import { ref } from 'vue';
   import { Plus, Delete } from '@element-plus/icons-vue';
-  import { ElMessageBox } from 'element-plus';
-  import { EleMessage } from 'ele-admin-plus';
+  import { ElMessageBox } from 'element-plus/es';
+  import { EleMessage } from 'ele-admin-plus/es';
   import NoticeSearch from './components/notice-search.vue';
   import NoticeEdit from './components/notice-edit.vue';
   import {

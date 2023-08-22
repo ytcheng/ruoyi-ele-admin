@@ -196,7 +196,7 @@
     CoffeeCup,
     PieChart
   } from '@element-plus/icons-vue';
-  import { EleMessage } from 'ele-admin-plus';
+  import { EleMessage } from 'ele-admin-plus/es';
   import { useMobile } from '@/utils/use-mobile';
   import { getServer } from '@/api/monitor/server';
 

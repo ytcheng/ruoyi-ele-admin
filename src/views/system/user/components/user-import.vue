@@ -44,7 +44,7 @@
 <script setup>
   import { ref, h } from 'vue';
   import { UploadFilled } from '@element-plus/icons-vue';
-  import { ElMessageBox } from 'element-plus';
+  import { ElMessageBox } from 'element-plus/es';
   import { EleMessage } from 'ele-admin-plus/es';
   import { importUsers, downloadTemplate } from '@/api/system/user';
 

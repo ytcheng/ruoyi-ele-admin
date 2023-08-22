@@ -85,8 +85,8 @@
 <script setup>
   import { ref } from 'vue';
   import { Plus, Delete, Download, Refresh } from '@element-plus/icons-vue';
-  import { ElMessageBox } from 'element-plus';
-  import { EleMessage } from 'ele-admin-plus';
+  import { ElMessageBox } from 'element-plus/es';
+  import { EleMessage } from 'ele-admin-plus/es';
   import ConfigSearch from './components/config-search.vue';
   import ConfigEdit from './components/config-edit.vue';
   import {

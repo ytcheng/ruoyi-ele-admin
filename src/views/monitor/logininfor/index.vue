@@ -64,7 +64,7 @@
 <script setup>
   import { ref, computed } from 'vue';
   import { Delete, Download, Unlock } from '@element-plus/icons-vue';
-  import { ElMessageBox } from 'element-plus';
+  import { ElMessageBox } from 'element-plus/es';
   import { EleMessage } from 'ele-admin-plus/es';
   import { storeToRefs } from 'pinia';
   import { useUserStore } from '@/store/modules/user';

@@ -101,7 +101,7 @@
     Upload,
     Download
   } from '@element-plus/icons-vue';
-  import { ElMessageBox } from 'element-plus';
+  import { ElMessageBox } from 'element-plus/es';
   import { EleMessage } from 'ele-admin-plus/es';
   import UserSearch from './user-search.vue';
   import UserEdit from './user-edit.vue';

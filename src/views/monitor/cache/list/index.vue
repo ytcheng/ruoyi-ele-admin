@@ -174,7 +174,7 @@
     Delete,
     RefreshRight
   } from '@element-plus/icons-vue';
-  import { EleMessage } from 'ele-admin-plus';
+  import { EleMessage } from 'ele-admin-plus/es';
   import {
     getCacheNames,
     getCacheKeys,

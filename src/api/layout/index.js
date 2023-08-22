@@ -1,5 +1,5 @@
 import request from '@/utils/request';
-import { mapTree } from 'ele-admin-plus';
+import { mapTree } from 'ele-admin-plus/es';
 import { toFormData } from '@/utils';
 
 /**
