@@ -1,5 +1,5 @@
 <template>
-  <dict-data-search @search="reload" />
+  <dict-data-search style="margin-bottom: -8px" @search="reload" />
   <!-- 表格 -->
   <ele-pro-table
     ref="tableRef"
@@ -9,7 +9,6 @@
     v-model:selections="selections"
     highlight-current-row
     cache-key="systemDictDataTable"
-    :toolbar="{ bodyStyle: { marginTop: 0 } }"
   >
     <template #toolbar>
       <el-space>
