@@ -72,8 +72,7 @@
   import { Delete, Download } from '@element-plus/icons-vue';
   import { ElMessageBox } from 'element-plus/es';
   import { EleMessage } from 'ele-admin-plus/es';
-  import { storeToRefs } from 'pinia';
-  import { useUserStore } from '@/store/modules/user';
+  import { useDictData } from '@/utils/use-dict-data';
   import JobLogSearch from './job-log-search.vue';
   import JobLogDetail from './job-log-detail.vue';
   import {
@@ -92,9 +91,8 @@
     data: Object
   });
 
-  const userStore = useUserStore();
-  const { dicts } = storeToRefs(userStore);
-  const statusDicts = computed(() => dicts.value['sys_common_status'] || []);
+  // 字典数据
+  const [statusDicts] = useDictData(['sys_common_status']);
 
   // 表格实例
   const tableRef = ref(null);

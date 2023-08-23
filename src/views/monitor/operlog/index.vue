@@ -72,8 +72,7 @@
   import { Delete, Download } from '@element-plus/icons-vue';
   import { ElMessageBox } from 'element-plus/es';
   import { EleMessage } from 'ele-admin-plus/es';
-  import { storeToRefs } from 'pinia';
-  import { useUserStore } from '@/store/modules/user';
+  import { useDictData } from '@/utils/use-dict-data';
   import OperlogSearch from './components/operlog-search.vue';
   import OperlogDetail from './components/operlog-detail.vue';
   import {
@@ -83,10 +82,11 @@
     clearOperlogs
   } from '@/api/monitor/operlog';
 
-  const userStore = useUserStore();
-  const { dicts } = storeToRefs(userStore);
-  const statusDicts = computed(() => dicts.value['sys_common_status'] || []);
-  const operTypeDicts = computed(() => dicts.value['sys_oper_type'] || []);
+  // 字典数据
+  const [statusDicts, operTypeDicts] = useDictData([
+    'sys_common_status',
+    'sys_oper_type'
+  ]);
 
   // 表格实例
   const tableRef = ref(null);

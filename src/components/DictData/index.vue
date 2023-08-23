@@ -48,11 +48,7 @@
 </template>
 
 <script setup>
-  import { computed } from 'vue';
-  import { EleMessage } from 'ele-admin-plus/es';
-  import { storeToRefs } from 'pinia';
-  import { useUserStore } from '@/store/modules/user';
-  import { listDictDatas } from '@/api/system/dict-data';
+  import { useDictData } from '@/utils/use-dict-data';
 
   const emit = defineEmits(['update:modelValue']);
 
@@ -69,26 +65,11 @@
     code: String
   });
 
-  const userStore = useUserStore();
-  const { dicts } = storeToRefs(userStore);
-
   // 字典数据
-  const data = computed(() => dicts.value[props.code] || []);
+  const [data] = useDictData([props.code]);
 
   /* 更新选中数据 */
   const updateValue = (value) => {
     emit('update:modelValue', value);
   };
-
-  /* 获取字典数据 */
-  if (dicts.value[props.code] == null) {
-    userStore.setDicts([], props.code);
-    listDictDatas(props.code)
-      .then((list) => {
-        userStore.setDicts(list, props.code);
-      })
-      .catch((e) => {
-        EleMessage.error(e.message);
-      });
-  }
 </script>

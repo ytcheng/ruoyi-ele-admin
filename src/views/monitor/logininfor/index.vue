@@ -66,8 +66,7 @@
   import { Delete, Download, Unlock } from '@element-plus/icons-vue';
   import { ElMessageBox } from 'element-plus/es';
   import { EleMessage } from 'ele-admin-plus/es';
-  import { storeToRefs } from 'pinia';
-  import { useUserStore } from '@/store/modules/user';
+  import { useDictData } from '@/utils/use-dict-data';
   import LogininforSearch from './components/logininfor-search.vue';
   import {
     pageLogininfors,
@@ -77,9 +76,8 @@
     unlockLogininfors
   } from '@/api/monitor/logininfor';
 
-  const userStore = useUserStore();
-  const { dicts } = storeToRefs(userStore);
-  const statusDicts = computed(() => dicts.value['sys_common_status'] || []);
+  // 字典数据
+  const [statusDicts] = useDictData(['sys_common_status']);
 
   // 表格实例
   const tableRef = ref(null);
