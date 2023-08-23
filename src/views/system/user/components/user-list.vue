@@ -1,5 +1,5 @@
 <template>
-  <user-search style="margin-bottom: -8px" @search="reload" />
+  <user-search style="margin-bottom: -14px" @search="reload" />
   <!-- 表格 -->
   <ele-pro-table
     ref="tableRef"
