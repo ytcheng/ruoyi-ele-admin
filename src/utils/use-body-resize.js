@@ -1,11 +1,12 @@
-/**
- * 监听主体区尺寸改变封装
- */
 import { watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useThemeStore } from '@/store/modules/theme';
 
-export function onSizeChange(hook) {
+/**
+ * 主体区尺寸改变hook
+ * @param hook 改变回调
+ */
+export function useBodyResize(hook) {
   if (!hook) {
     return;
   }

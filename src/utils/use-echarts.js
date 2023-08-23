@@ -1,6 +1,3 @@
-/**
- * echarts自动切换主题/重置尺寸封装
- */
 import {
   ref,
   reactive,
@@ -15,8 +12,12 @@ import { storeToRefs } from 'pinia';
 import { THEME_KEY } from 'vue-echarts';
 import { ChartTheme, ChartThemeDark } from 'ele-admin-plus/es';
 import { useThemeStore } from '@/store/modules/theme';
-import { onSizeChange } from './on-size-change';
+import { useBodyResize } from './use-body-resize';
 
+/**
+ * echarts自动切换主题/重置尺寸hook
+ * @param refs 图表ref
+ */
 export function useEcharts(refs) {
   // 是否是暗黑主题
   const themeStore = useThemeStore();
@@ -41,7 +42,7 @@ export function useEcharts(refs) {
   };
 
   /* 屏幕尺寸变化监听 */
-  onSizeChange(() => {
+  useBodyResize(() => {
     resizeCharts();
   });
 

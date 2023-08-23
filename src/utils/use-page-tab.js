@@ -1,16 +1,14 @@
-/**
- * 页签操作封装
- */
 import { unref } from 'vue';
 import { useRouter } from 'vue-router';
 import { EleMessage } from 'ele-admin-plus/es';
 import { useThemeStore } from '@/store/modules/theme';
-import { removeToken } from '@/utils/token-util';
 import { HOME_PATH, LAYOUT_PATH, REDIRECT_PATH } from '@/config/setting';
-const HOME_ROUTE = HOME_PATH || LAYOUT_PATH;
-const BASE_URL = import.meta.env.BASE_URL;
 
+/**
+ * 页签操作hook
+ */
 export const usePageTab = function () {
+  const HOME_ROUTE = HOME_PATH || LAYOUT_PATH;
   const { push, replace, currentRoute } = useRouter();
   const themeStore = useThemeStore();
 
@@ -197,23 +195,3 @@ export const usePageTab = function () {
     goHomeRoute
   };
 };
-
-/**
- * 退出登录
- * @param route 是否使用路由跳转
- * @param from 登录后跳转的地址
- * @param push 路由跳转方法
- */
-export function logout(route, from, push) {
-  removeToken();
-  if (route && push) {
-    push({
-      path: '/login',
-      query: from ? { from: encodeURIComponent(from) } : void 0
-    });
-    return;
-  }
-  // 这样跳转避免再次登录重复注册动态路由
-  const url = BASE_URL + 'login'; // hash 路由模式使用 '#/login'
-  location.replace(from ? `${url}?from=${encodeURIComponent(from)}` : url);
-}

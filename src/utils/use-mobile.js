@@ -2,6 +2,7 @@ import { ref, onBeforeUnmount } from 'vue';
 
 /**
  * 获取是否是移动端hook
+ * @param onChange 值改变回调
  */
 export function useMobile(onChange) {
   const media = window.matchMedia('(max-width: 768px)');
