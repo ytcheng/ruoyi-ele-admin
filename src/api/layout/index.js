@@ -1,6 +1,6 @@
 import request from '@/utils/request';
 import { mapTree } from 'ele-admin-plus/es';
-import { toFormData } from '@/utils';
+import { toFormData } from '@/utils/common';
 
 /**
  * 获取当前登录用户的个人信息/权限/角色

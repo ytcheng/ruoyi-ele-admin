@@ -1,5 +1,5 @@
 import request from '@/utils/request';
-import { toURLSearch } from '@/utils';
+import { toURLSearch } from '@/utils/common';
 
 /**
  * 分页查询在线用户

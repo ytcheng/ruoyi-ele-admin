@@ -1,5 +1,5 @@
 import request from '@/utils/request';
-import { download, toFormData, toURLSearch } from '@/utils';
+import { download, toFormData, toURLSearch } from '@/utils/common';
 
 /**
  * 分页查询调度日志

@@ -1,5 +1,5 @@
 import request from '@/utils/request';
-import { download, toFormData } from '@/utils';
+import { download, toFormData } from '@/utils/common';
 
 /**
  * 查询字典数据列表
