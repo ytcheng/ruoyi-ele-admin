@@ -7,7 +7,7 @@ import { ElMessageBox } from 'element-plus/es';
 import { API_BASE_URL, LAYOUT_PATH } from '@/config/setting';
 import router from '@/router';
 import { getToken } from './token-util';
-import { logout } from './use-page-tab';
+import { logout } from './common';
 
 // 创建axios实例
 const service = axios.create({

@@ -40,7 +40,7 @@
   import { ElMessageBox } from 'element-plus/es';
   import { User, ArrowDown, Key, SwitchButton } from '@element-plus/icons-vue';
   import { useUserStore } from '@/store/modules/user';
-  import { logout } from '@/utils/use-page-tab';
+  import { logout } from '@/utils/common';
   import PasswordModal from './password-modal.vue';
 
   const { push, currentRoute } = useRouter();
