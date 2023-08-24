@@ -86,20 +86,23 @@
                 :icon="RefreshRight"
                 :icon-props="{ size: 17 }"
                 style="cursor: pointer"
-                @click="refresh"
+                @click="queryKeys"
               />
             </ele-tooltip>
           </template>
           <ele-pro-table
-            ref="table2Ref"
             row-key="cacheKey"
             :columns="columns2"
             :datasource="datasource2"
+            :loading="keyLoading"
             :load-on-created="false"
             v-model:current="current2"
             highlight-current-row
             :row-style="{ cursor: 'pointer' }"
-            :pagination="false"
+            :pagination="{
+              layout: 'total, prev, pager, next',
+              hideOnSinglePage: true
+            }"
             :toolbar="false"
           >
             <template #action="{ row }">
@@ -187,9 +190,6 @@
   // 表格实例
   const tableRef = ref(null);
 
-  // 表格实例
-  const table2Ref = ref(null);
-
   // 表格列配置
   const columns = ref([
     {
@@ -257,16 +257,11 @@
     return getCacheNames();
   };
 
-  // 表格数据源
-  const datasource2 = async () => {
-    if (!current.value) {
-      return [];
-    }
-    const result = await getCacheKeys(current.value?.cacheName);
-    return result.map((d) => {
-      return { cacheKey: d, cacheName: current.value.cacheName };
-    });
-  };
+  // 键名列表
+  const datasource2 = ref([]);
+
+  // 键名列表请求状态
+  const keyLoading = ref(false);
 
   // 选中数据
   const data = ref({});
@@ -296,7 +291,7 @@
       .then(() => {
         loading.close();
         EleMessage.success('删除成功');
-        table2Ref.value?.reload?.();
+        queryKeys();
       })
       .catch((e) => {
         loading.close();
@@ -319,9 +314,24 @@
       });
   };
 
-  /* 刷新 */
-  const refresh = () => {
-    table2Ref.value?.reload?.();
+  /* 查询键名列表 */
+  const queryKeys = () => {
+    if (!current.value) {
+      datasource2.value = [];
+      return;
+    }
+    keyLoading.value = true;
+    getCacheKeys(current.value?.cacheName)
+      .then((result) => {
+        keyLoading.value = false;
+        datasource2.value = result.map((d) => {
+          return { cacheKey: d, cacheName: current.value.cacheName };
+        });
+      })
+      .catch((e) => {
+        keyLoading.value = false;
+        EleMessage.error(e.message);
+      });
   };
 
   /* 刷新 */
@@ -344,7 +354,7 @@
 
   /* 查询键名列表 */
   watch(current, () => {
-    table2Ref.value?.reload?.();
+    queryKeys();
   });
 
   /* 查询缓存内容 */
