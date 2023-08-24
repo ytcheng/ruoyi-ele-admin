@@ -3,7 +3,7 @@
   <el-form label-width="72px">
     <el-row :gutter="8">
       <el-col :lg="8" :md="8" :sm="12" :xs="24">
-        <el-form-item label="字典标签">
+        <el-form-item label="数据标签">
           <el-input
             clearable
             v-model.trim="form.dictLabel"

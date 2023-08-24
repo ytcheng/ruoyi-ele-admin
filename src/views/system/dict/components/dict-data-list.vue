@@ -129,6 +129,12 @@
       slot: 'status'
     },
     {
+      prop: 'remark',
+      label: '备注',
+      align: 'center',
+      showOverflowTooltip: true
+    },
+    {
       prop: 'createTime',
       label: '创建时间',
       align: 'center',

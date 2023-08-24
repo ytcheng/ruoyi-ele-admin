@@ -23,7 +23,7 @@
       </el-upload>
     </div>
     <div style="display: flex; align-items: center">
-      <ele-text size="xs" type="secondary" style="line-height: 14px; flex: 1">
+      <ele-text size="xs" type="secondary" style="line-height: 17px; flex: 1">
         <span style="padding-right: 8px">只能上传 xls、xlsx 文件,</span>
         <el-link
           type="primary"

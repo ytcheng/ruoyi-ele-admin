@@ -63,7 +63,7 @@
                 </el-tag>
               </td>
               <td>
-                <ele-ellipsis style="line-height: 1">
+                <ele-ellipsis style="line-height: 20px">
                   <el-link type="primary" :underline="false">
                     {{ element.taskName }}
                   </el-link>
