@@ -16,6 +16,7 @@
           type="primary"
           class="ele-btn-icon"
           :icon="Plus"
+          v-permission="'system:user:add'"
           @click="openEdit()"
         >
           新建
@@ -24,14 +25,25 @@
           type="danger"
           class="ele-btn-icon"
           :icon="Delete"
+          v-permission="'system:user:remove'"
           @click="removeBatch"
         >
           删除
         </el-button>
-        <el-button class="ele-btn-icon" :icon="Upload" @click="openImport">
+        <el-button
+          class="ele-btn-icon"
+          :icon="Upload"
+          v-permission="'system:user:import'"
+          @click="openImport"
+        >
           导入
         </el-button>
-        <el-button class="ele-btn-icon" :icon="Download" @click="exportData">
+        <el-button
+          class="ele-btn-icon"
+          :icon="Download"
+          v-permission="'system:user:export'"
+          @click="exportData"
+        >
           导出
         </el-button>
       </el-space>
@@ -44,11 +56,21 @@
     </template>
     <template #action="{ row }">
       <el-space>
-        <el-link type="primary" :underline="false" @click="openEdit(row)">
+        <el-link
+          type="primary"
+          :underline="false"
+          v-permission="'system:user:edit'"
+          @click="openEdit(row)"
+        >
           修改
         </el-link>
-        <el-divider direction="vertical" style="margin: 0" />
+        <el-divider
+          v-permission="'system:user:remove'"
+          direction="vertical"
+          style="margin: 0"
+        />
         <ele-popconfirm
+          v-if="hasPermission('system:user:remove')"
           :width="226"
           placement="top-end"
           :title="'是否确认删除用户名称为“' + row.userName + '”的数据项？'"
@@ -61,12 +83,14 @@
             <el-link type="danger" :underline="false">删除</el-link>
           </template>
         </ele-popconfirm>
-        <el-divider direction="vertical" style="margin: 0" />
+        <el-divider
+          v-if="moreItems.length"
+          direction="vertical"
+          style="margin: 0"
+        />
         <ele-dropdown
-          :items="[
-            { title: '重置密码', command: 'password' },
-            { title: '分配角色', command: 'role' }
-          ]"
+          v-if="moreItems.length"
+          :items="moreItems"
           @command="(key) => dropClick(key, row)"
         >
           <el-link type="primary" :underline="false">
@@ -93,7 +117,7 @@
 </template>
 
 <script setup>
-  import { ref, watch } from 'vue';
+  import { ref, watch, computed } from 'vue';
   import {
     Plus,
     Delete,
@@ -103,6 +127,7 @@
   } from '@element-plus/icons-vue';
   import { ElMessageBox } from 'element-plus/es';
   import { EleMessage } from 'ele-admin-plus/es';
+  import { usePermission } from '@/utils/use-permission';
   import UserSearch from './user-search.vue';
   import UserEdit from './user-edit.vue';
   import UserImport from './user-import.vue';
@@ -120,6 +145,8 @@
     // 部门id
     deptId: Number
   });
+
+  const { hasPermission } = usePermission();
 
   // 表格实例
   const tableRef = ref(null);
@@ -202,6 +229,18 @@
 
   // 是否显示分配角色弹窗
   const showRole = ref(false);
+
+  // 操作列更多下拉菜单
+  const moreItems = computed(() => {
+    const items = [];
+    if (hasPermission('system:user:resetPwd')) {
+      items.push({ title: '重置密码', command: 'password' });
+    }
+    if (hasPermission('system:user:edit')) {
+      items.push({ title: '分配角色', command: 'role' });
+    }
+    return items;
+  });
 
   // 表格数据源
   const datasource = ({ page, limit, where, orders }) => {
