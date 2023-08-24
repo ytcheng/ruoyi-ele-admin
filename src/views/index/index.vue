@@ -211,7 +211,8 @@
           cacheData();
         }
       },
-      setData: () => {}
+      setData: () => {},
+      forceFallback: true
     });
   });
 
@@ -245,8 +246,18 @@
       cursor: move;
     }
 
-    :deep(.el-col.sortable-chosen > .el-card) {
-      box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.2);
+    :deep(.el-col) {
+      &.sortable-chosen > .el-card {
+        box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      &.sortable-ghost {
+        opacity: 0;
+      }
+
+      &.sortable-fallback {
+        opacity: 1 !important;
+      }
     }
   }
 
