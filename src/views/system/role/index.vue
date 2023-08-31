@@ -76,8 +76,11 @@
               @command="(key) => dropClick(key, row)"
             >
               <el-link type="primary" :underline="false">
-                <span>更多&nbsp;</span>
-                <el-icon :size="12">
+                <span>更多</span>
+                <el-icon
+                  :size="12"
+                  style="vertical-align: -0.65px; margin-left: 2px"
+                >
                   <arrow-down />
                 </el-icon>
               </el-link>

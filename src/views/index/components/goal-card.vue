@@ -8,6 +8,7 @@
       <el-progress
         :width="180"
         :percentage="80"
+        color="#1677ff"
         type="dashboard"
         :format="() => ''"
       />
