@@ -63,4 +63,6 @@
     resetFields();
     search();
   };
+
+  defineExpose({ resetFields });
 </script>
