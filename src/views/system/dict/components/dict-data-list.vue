@@ -1,5 +1,9 @@
 <template>
-  <dict-data-search style="margin-bottom: -14px" @search="reload" />
+  <dict-data-search
+    ref="searchRef"
+    style="margin-bottom: -14px"
+    @search="reload"
+  />
   <!-- 表格 -->
   <ele-pro-table
     ref="tableRef"
@@ -89,6 +93,9 @@
     // 字典类型
     dictType: String
   });
+
+  // 搜索栏实例
+  const searchRef = ref(null);
 
   // 表格实例
   const tableRef = ref(null);
@@ -250,7 +257,8 @@
   watch(
     () => props.dictType,
     () => {
-      reload();
+      searchRef.value?.resetFields?.();
+      reload({});
     }
   );
 </script>
