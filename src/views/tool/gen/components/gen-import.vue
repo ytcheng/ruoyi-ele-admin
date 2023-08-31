@@ -17,6 +17,7 @@
       highlight-current-row
       :toolbar="false"
       :pagination="{ pageSize: 6, pageSizes: [6, 10, 20, 40, 100] }"
+      :bottom-line="false"
     />
     <template #footer>
       <el-button @click="updateModelValue(false)">取消</el-button>

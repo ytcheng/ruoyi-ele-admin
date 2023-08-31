@@ -1,25 +1,25 @@
 <!-- 项目进度 -->
 <template>
-  <ele-card :header="title" :body-style="{ padding: '12px', height: '370px' }">
+  <ele-card :header="title" :body-style="{ padding: '10px', height: '370px' }">
     <template #extra>
       <more-icon @command="onCommand" />
     </template>
     <ele-pro-table
-      :height="350"
+      :height="352"
       row-key="id"
       :columns="columns"
       :datasource="projectList"
+      highlight-current-row
       :pagination="false"
       :toolbar="false"
+      :bottom-line="false"
       size="large"
       class="project-table"
     >
       <template #projectName="{ row }">
-        <ele-ellipsis :tooltip="false">
-          <el-link type="primary" :underline="false">
-            {{ row.projectName }}
-          </el-link>
-        </ele-ellipsis>
+        <el-link type="primary" :underline="false">
+          {{ row.projectName }}
+        </el-link>
       </template>
       <template #status="{ row }">
         <ele-text v-if="row.status === 0" type="success">进行中</ele-text>
@@ -158,13 +158,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .project-table {
-    :deep(.el-table__inner-wrapper::before) {
-      background-color: transparent;
-    }
-
-    :deep(.el-progress__text) {
-      font-size: 12px !important;
-    }
+  .project-table :deep(.el-progress__text) {
+    font-size: 12px !important;
   }
 </style>

@@ -1,10 +1,13 @@
 <!-- 我的任务 -->
 <template>
-  <ele-card :header="title" :body-style="{ padding: '7px', height: '370px' }">
+  <ele-card
+    :header="title"
+    :body-style="{ height: '370px', padding: '7px 8px 6px 8px' }"
+  >
     <template #extra>
       <more-icon @command="onCommand" />
     </template>
-    <el-scrollbar :view-style="{ position: 'relative', zIndex: 1 }">
+    <el-scrollbar :wrap-style="{ position: 'relative', zIndex: 1 }">
       <ele-table class="task-table" size="large">
         <thead style="position: sticky; top: 0; z-index: 2">
           <tr>
@@ -70,19 +73,15 @@
                 </ele-ellipsis>
               </td>
               <td style="text-align: center; width: 80px">
-                <ele-ellipsis v-if="element.status === 0" type="warning">
+                <ele-text v-if="element.status === 0" type="warning">
                   未开始
-                </ele-ellipsis>
-                <ele-ellipsis v-else-if="element.status === 1" type="success">
+                </ele-text>
+                <ele-text v-else-if="element.status === 1" type="success">
                   进行中
-                </ele-ellipsis>
-                <ele-ellipsis
-                  v-else-if="element.status === 2"
-                  type="info"
-                  deleted
-                >
+                </ele-text>
+                <ele-text v-else-if="element.status === 2" type="info" deleted>
                   已完成
-                </ele-ellipsis>
+                </ele-text>
               </td>
             </tr>
           </template>
@@ -183,6 +182,7 @@
     tr.sortable-fallback {
       opacity: 1 !important;
       display: table !important;
+      table-layout: fixed !important;
 
       td {
         background: var(--el-color-primary-light-8);

@@ -181,6 +181,7 @@
           :datasource="data.sysFiles || []"
           :pagination="false"
           :toolbar="false"
+          :bottom-line="false"
         />
       </ele-loading>
     </ele-card>

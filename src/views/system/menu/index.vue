@@ -12,6 +12,7 @@
         :datasource="datasource"
         :default-expand-all="false"
         :pagination="false"
+        :bottom-line="false"
         cache-key="systemMenuTable"
       >
         <template #toolbar>

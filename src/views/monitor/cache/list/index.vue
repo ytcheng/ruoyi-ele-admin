@@ -48,6 +48,7 @@
             :row-style="{ cursor: 'pointer' }"
             :pagination="false"
             :toolbar="false"
+            :bottom-line="false"
           >
             <template #action="{ row }">
               <div @click.stop="">
@@ -104,6 +105,7 @@
               hideOnSinglePage: true
             }"
             :toolbar="false"
+            :bottom-line="false"
           >
             <template #action="{ row }">
               <div @click.stop="">
@@ -374,10 +376,6 @@
     width: 88px;
     text-align: right;
     font-weight: normal;
-  }
-
-  .ele-pro-table :deep(.el-table > .el-table__inner-wrapper::before) {
-    display: none;
   }
 
   @media screen and (max-width: 992px) {

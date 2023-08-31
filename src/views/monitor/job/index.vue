@@ -11,6 +11,7 @@
         :datasource="datasource"
         v-model:selections="selections"
         highlight-current-row
+        :bottom-line="false"
         cache-key="monitorJobTable"
       >
         <template #toolbar>

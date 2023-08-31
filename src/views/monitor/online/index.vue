@@ -11,6 +11,7 @@
         :datasource="datasource"
         :loading="loading"
         highlight-current-row
+        :bottom-line="false"
         cache-key="monitorOnlineTable"
       >
         <template #action="{ row }">

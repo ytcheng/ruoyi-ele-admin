@@ -12,6 +12,7 @@
         :datasource="datasource"
         :default-expand-all="true"
         :pagination="false"
+        :bottom-line="false"
         cache-key="systemDeptTable"
       >
         <template #toolbar>

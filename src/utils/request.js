@@ -41,7 +41,7 @@ service.interceptors.response.use(
       const { path, fullPath } = unref(router.currentRoute);
       if (path == LAYOUT_PATH) {
         logout(true, void 0, router.push);
-      } else {
+      } else if (path !== '/login') {
         ElMessageBox.close();
         ElMessageBox.alert('登录状态已过期, 请退出重新登录!', '系统提示', {
           confirmButtonText: '重新登录',
