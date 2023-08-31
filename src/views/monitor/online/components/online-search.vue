@@ -1,7 +1,7 @@
 <!-- 搜索表单 -->
 <template>
   <ele-card :body-style="{ paddingBottom: '2px' }">
-    <el-form label-width="72px">
+    <el-form label-width="72px" @keyup.enter="search">
       <el-row :gutter="8">
         <el-col :lg="6" :md="8" :sm="12" :xs="24">
           <el-form-item label="登录地址">
@@ -55,4 +55,11 @@
     resetFields();
     search();
   };
+
+  /* 获取当前搜索参数 */
+  const getWhere = () => {
+    return form;
+  };
+
+  defineExpose({ getWhere });
 </script>

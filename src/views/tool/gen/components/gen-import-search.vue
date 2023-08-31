@@ -1,6 +1,6 @@
 <!-- 搜索表单 -->
 <template>
-  <el-form label-width="72px">
+  <el-form label-width="72px" @keyup.enter="search">
     <el-row :gutter="8">
       <el-col :lg="8" :md="8" :sm="24" :xs="24">
         <el-form-item label="表名称">

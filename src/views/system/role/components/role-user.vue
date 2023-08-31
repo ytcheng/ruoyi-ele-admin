@@ -16,6 +16,7 @@
       :datasource="datasource"
       v-model:selections="selections"
       highlight-current-row
+      :bottom-line="false"
     >
       <template #toolbar>
         <el-space>

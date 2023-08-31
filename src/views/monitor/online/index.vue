@@ -1,7 +1,7 @@
 <template>
   <ele-page>
     <!-- 搜索表单 -->
-    <online-search @search="reload" />
+    <online-search ref="searchRef" @search="reload" />
     <ele-card :body-style="{ paddingTop: '8px' }">
       <!-- 表格 -->
       <ele-pro-table
@@ -13,6 +13,7 @@
         highlight-current-row
         :bottom-line="false"
         cache-key="monitorOnlineTable"
+        @refresh="reload(getWhere())"
       >
         <template #action="{ row }">
           <ele-popconfirm
@@ -40,6 +41,9 @@
   import { EleMessage } from 'ele-admin-plus/es';
   import OnlineSearch from './components/online-search.vue';
   import { pageOnlines, kickoutOnline } from '@/api/monitor/online';
+
+  //
+  const searchRef = ref(null);
 
   // 表格实例
   const tableRef = ref(null);
@@ -147,6 +151,11 @@
         loading.close();
         EleMessage.error(e.message);
       });
+  };
+
+  /* 获取当前搜索条件 */
+  const getWhere = () => {
+    return searchRef.value?.getWhere?.();
   };
 
   reload();

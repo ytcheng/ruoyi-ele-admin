@@ -16,6 +16,7 @@
       v-model:selections="selections"
       highlight-current-row
       :toolbar="false"
+      :bottom-line="false"
     >
       <template #status="{ row }">
         <dict-data
