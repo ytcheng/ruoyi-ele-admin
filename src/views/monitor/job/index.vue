@@ -46,6 +46,7 @@
         </template>
         <template #status="{ row }">
           <el-switch
+            size="small"
             :model-value="row.status == 0"
             @change="(checked) => editStatus(checked, row)"
           />
