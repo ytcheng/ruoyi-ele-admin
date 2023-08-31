@@ -173,25 +173,29 @@
       prop: 'userName',
       label: '用户名称',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'nickName',
       label: '用户昵称',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'dept.deptName',
       label: '部门',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'phonenumber',
       label: '手机号码',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'status',
@@ -205,7 +209,8 @@
       prop: 'createTime',
       label: '创建时间',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       columnKey: 'action',

@@ -106,37 +106,42 @@
         label: '用户名称',
         sortable: 'custom',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         prop: 'ipaddr',
         label: '登录地址',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         prop: 'loginLocation',
         label: '登录地点',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         prop: 'browser',
         label: '浏览器',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         prop: 'os',
         label: '操作系统',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         columnKey: 'status',
         prop: 'status',
         label: '登录状态',
-        width: 120,
+        width: 110,
         slot: 'status',
         align: 'center',
         filters: statusDicts.value.map((d) => {
@@ -148,14 +153,16 @@
         prop: 'msg',
         label: '操作信息',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         prop: 'loginTime',
         label: '登录日期',
         sortable: 'custom',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       }
     ];
   });

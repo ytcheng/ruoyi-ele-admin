@@ -112,25 +112,29 @@
       prop: 'userName',
       label: '用户名称',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'nickName',
       label: '用户昵称',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'email',
       label: '邮箱',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'phonenumber',
       label: '手机号码',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'status',
@@ -152,7 +156,8 @@
       label: '操作',
       width: 88,
       align: 'center',
-      slot: 'action'
+      slot: 'action',
+      fixed: 'right'
     }
   ]);
 

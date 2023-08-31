@@ -135,19 +135,22 @@
       prop: 'roleName',
       label: '角色名称',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'roleKey',
       label: '权限字符',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'roleSort',
       label: '显示顺序',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'status',
@@ -161,7 +164,8 @@
       prop: 'createTime',
       label: '创建时间',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       columnKey: 'action',

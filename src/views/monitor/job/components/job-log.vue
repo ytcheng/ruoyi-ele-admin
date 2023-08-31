@@ -120,32 +120,36 @@
         prop: 'jobName',
         label: '任务名称',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         prop: 'jobGroup',
         label: '任务组名',
         align: 'center',
         showOverflowTooltip: true,
+        minWidth: 110,
         slot: 'jobGroup'
       },
       {
         prop: 'invokeTarget',
         label: '调用目标字符串',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 140
       },
       {
         prop: 'jobMessage',
         label: '日志信息',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         columnKey: 'status',
         prop: 'status',
         label: '执行状态',
-        width: 90,
+        width: 110,
         align: 'center',
         showOverflowTooltip: true,
         slot: 'status',
@@ -158,12 +162,13 @@
         prop: 'createTime',
         label: '执行时间',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         columnKey: 'action',
         label: '操作',
-        width: 90,
+        width: 80,
         align: 'center',
         slot: 'action',
         fixed: 'right'

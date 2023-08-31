@@ -64,12 +64,14 @@
     {
       prop: 'roleName',
       label: '角色名称',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'roleKey',
       label: '权限字符',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'createTime',

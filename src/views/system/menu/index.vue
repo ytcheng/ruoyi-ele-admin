@@ -154,7 +154,8 @@
       columnKey: 'index',
       width: 48,
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      fixed: 'left'
     },
     {
       prop: 'menuName',
@@ -166,17 +167,20 @@
     {
       prop: 'path',
       label: '路由地址',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'component',
       label: '组件路径',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'perms',
       label: '权限标识',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'orderNum',

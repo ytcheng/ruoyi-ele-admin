@@ -114,13 +114,14 @@
         prop: 'title',
         label: '系统模块',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         columnKey: 'businessType',
         prop: 'businessType',
         label: '操作类型',
-        width: 120,
+        width: 110,
         slot: 'businessType',
         align: 'center',
         filters: operTypeDicts.value.map((d) => {
@@ -133,25 +134,28 @@
         label: '操作人员',
         sortable: 'custom',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         prop: 'operIp',
         label: '操作地址',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         prop: 'operLocation',
         label: '操作地点',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         columnKey: 'status',
         prop: 'status',
         label: '操作状态',
-        width: 120,
+        width: 110,
         slot: 'status',
         align: 'center',
         filters: statusDicts.value.map((d) => {
@@ -164,19 +168,21 @@
         label: '操作日期',
         sortable: 'custom',
         align: 'center',
-        showOverflowTooltip: true
+        showOverflowTooltip: true,
+        minWidth: 110
       },
       {
         prop: 'costTime',
         label: '消耗时间',
         sortable: 'custom',
         align: 'center',
-        formatter: (row) => `${row.costTime}毫秒`
+        formatter: (row) => `${row.costTime}毫秒`,
+        width: 110
       },
       {
         columnKey: 'action',
         label: '操作',
-        width: 90,
+        width: 80,
         align: 'center',
         slot: 'action',
         fixed: 'right'

@@ -106,18 +106,20 @@
       prop: 'dictLabel',
       label: '数据标签',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'dictValue',
       label: '数据键值',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'dictSort',
       label: '显示排序',
-      width: 120,
+      width: 110,
       align: 'center'
     },
     {
@@ -132,13 +134,15 @@
       prop: 'remark',
       label: '备注',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'createTime',
       label: '创建时间',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       columnKey: 'action',

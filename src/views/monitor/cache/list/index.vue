@@ -206,13 +206,15 @@
       label: '缓存名称',
       align: 'center',
       showOverflowTooltip: true,
+      minWidth: 80,
       formatter: (row) => row.cacheName.replace(':', '')
     },
     {
       prop: 'remark',
       label: '备注',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 80
     },
     {
       columnKey: 'action',
@@ -237,6 +239,7 @@
       label: '缓存键名',
       align: 'center',
       showOverflowTooltip: true,
+      minWidth: 80,
       formatter: (row) => row.cacheKey.replace(row.cacheName, '')
     },
     {

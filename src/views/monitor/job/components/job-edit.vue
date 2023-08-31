@@ -86,7 +86,7 @@
           <el-radio-button label="1">禁止</el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="状态" prop="cronExpression">
+      <el-form-item label="状态">
         <dict-data code="sys_job_status" type="radio" v-model="form.status" />
       </el-form-item>
     </el-form>

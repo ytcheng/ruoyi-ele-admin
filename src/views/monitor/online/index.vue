@@ -62,49 +62,56 @@
       prop: 'tokenId',
       label: '会话编号',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'userName',
       label: '登录名称',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'deptName',
       label: '部门名称',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'ipaddr',
       label: '登录地址',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'loginLocation',
       label: '登录地点',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'browser',
       label: '浏览器',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'os',
       label: '操作系统',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'loginTime',
       label: '登录时间',
       align: 'center',
-      minWidth: 100,
+      minWidth: 110,
       showOverflowTooltip: true,
       formatter: (row) => dayjs(row.loginTime).format('YYYY-MM-DD HH:mm:ss')
     },
@@ -113,7 +120,8 @@
       label: '操作',
       width: 80,
       align: 'center',
-      slot: 'action'
+      slot: 'action',
+      fixed: 'right'
     }
   ]);
 

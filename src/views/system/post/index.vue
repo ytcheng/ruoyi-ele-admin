@@ -114,19 +114,22 @@
       prop: 'postCode',
       label: '岗位编码',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'postName',
       label: '岗位名称',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'postSort',
       label: '岗位排序',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'status',
@@ -134,13 +137,15 @@
       width: 90,
       align: 'center',
       showOverflowTooltip: true,
+      minWidth: 110,
       slot: 'status'
     },
     {
       prop: 'createTime',
       label: '创建时间',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       columnKey: 'action',

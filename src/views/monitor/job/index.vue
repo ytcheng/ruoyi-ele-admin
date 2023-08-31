@@ -147,30 +147,34 @@
       prop: 'jobName',
       label: '任务名称',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'jobGroup',
       label: '任务组名',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'invokeTarget',
       label: '调用目标字符串',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 140
     },
     {
       prop: 'cronExpression',
       label: 'cron执行表达式',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 140
     },
     {
       prop: 'status',
       label: '状态',
-      width: 90,
+      width: 80,
       align: 'center',
       showOverflowTooltip: true,
       slot: 'status'

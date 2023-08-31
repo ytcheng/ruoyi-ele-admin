@@ -15,7 +15,7 @@
         cache-key="systemConfigTable"
       >
         <template #toolbar>
-          <el-space>
+          <el-space wrap>
             <el-button
               type="primary"
               class="ele-btn-icon"
@@ -122,19 +122,22 @@
       prop: 'configName',
       label: '参数名称',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'configKey',
       label: '参数键名',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'configValue',
       label: '参数键值',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'configType',
@@ -148,13 +151,15 @@
       prop: 'remark',
       label: '备注',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       prop: 'createTime',
       label: '创建时间',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       columnKey: 'action',

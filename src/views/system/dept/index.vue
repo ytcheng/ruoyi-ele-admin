@@ -111,7 +111,8 @@
       columnKey: 'index',
       width: 48,
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      fixed: 'left'
     },
     {
       prop: 'deptName',
@@ -123,20 +124,23 @@
       prop: 'orderNum',
       label: '排序',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 90
     },
     {
       prop: 'status',
       label: '状态',
       align: 'center',
       showOverflowTooltip: true,
-      slot: 'status'
+      slot: 'status',
+      minWidth: 90
     },
     {
       prop: 'createTime',
       label: '创建时间',
       align: 'center',
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      minWidth: 110
     },
     {
       columnKey: 'action',
