@@ -11,12 +11,21 @@
     >
       <ele-split-panel
         flex-table
-        size="266px"
+        size="249px"
         allow-collapse
         :custom-style="{ borderWidth: '0 1px 0 0', padding: '16px 0' }"
         :body-style="{ padding: '16px 16px 16px 0', overflow: 'hidden' }"
         :style="{ height: '100%', overflow: 'visible' }"
       >
+        <div style="padding: 0 16px 12px 0">
+          <el-input
+            clearable
+            :maxlength="20"
+            v-model="keywords"
+            placeholder="输入字典名称搜索"
+            :prefix-icon="Search"
+          />
+        </div>
         <el-space style="display: flex; margin-bottom: 12px">
           <el-button
             type="primary"
@@ -53,6 +62,7 @@
             node-key="dictId"
             :expand-on-click-node="false"
             :default-expand-all="true"
+            :filter-node-method="filterNode"
             @node-click="onNodeClick"
           >
             <template #default="{ data: d }">
@@ -81,8 +91,8 @@
 </template>
 
 <script setup>
-  import { ref, nextTick } from 'vue';
-  import { Plus, Delete, EditPen } from '@element-plus/icons-vue';
+  import { ref, nextTick, watch } from 'vue';
+  import { Plus, Delete, EditPen, Search } from '@element-plus/icons-vue';
   import { ElMessageBox } from 'element-plus/es';
   import { EleMessage } from 'ele-admin-plus/es';
   import DictDataList from './components/dict-data-list.vue';
@@ -100,6 +110,9 @@
 
   // 选中数据
   const current = ref(null);
+
+  // 部门搜索关键字
+  const keywords = ref('');
 
   // 是否显示编辑弹窗
   const showEdit = ref(false);
@@ -164,6 +177,19 @@
       })
       .catch(() => {});
   };
+
+  /* 树过滤方法 */
+  const filterNode = (value, data) => {
+    if (value) {
+      return data.dictName && data.dictName.includes(value);
+    }
+    return true;
+  };
+
+  /* 树过滤 */
+  watch(keywords, (value) => {
+    treeRef.value?.filter?.(value);
+  });
 
   query();
 </script>

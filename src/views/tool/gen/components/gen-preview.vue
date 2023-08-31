@@ -19,7 +19,10 @@
         <template v-for="d in data" :key="d.name" #[d.name]="{ item }">
           <div class="code-view">
             <pre v-html="item.meta?.code"></pre>
-            <ele-copyable :text="item.meta?.text" />
+            <ele-copyable
+              :text="item.meta?.text"
+              :iconProps="{ style: { color: '#bdc3d0' } }"
+            />
           </div>
         </template>
       </ele-tabs>
@@ -135,7 +138,6 @@
       border-radius: 4px;
 
       :deep(.ele-copyable-icon) {
-        color: #bdc3d0;
         padding: 6px;
         margin: 0;
       }

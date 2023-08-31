@@ -11,18 +11,19 @@
     >
       <ele-split-panel
         flex-table
-        size="266px"
+        size="249px"
         allow-collapse
         :custom-style="{ borderWidth: '0 1px 0 0', padding: '16px 0' }"
         :body-style="{ padding: '16px 16px 16px 0', overflow: 'hidden' }"
         :style="{ height: '100%', overflow: 'visible' }"
       >
-        <div style="padding: 0 16px 10px 0">
+        <div style="padding: 0 16px 12px 0">
           <el-input
             clearable
             :maxlength="20"
             v-model="keywords"
             placeholder="输入部门名称搜索"
+            :prefix-icon="Search"
           />
         </div>
         <div class="org-tree">
@@ -48,6 +49,7 @@
 
 <script setup>
   import { ref, nextTick, watch } from 'vue';
+  import { Search } from '@element-plus/icons-vue';
   import { EleMessage, toTree } from 'ele-admin-plus/es';
   import UserList from './components/user-list.vue';
   import { listDepts } from '@/api/system/dept';
