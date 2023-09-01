@@ -36,6 +36,7 @@
             <template #label>
               <ele-tooltip
                 content="控制器中定义的权限字符, 如: @PreAuthorize(`@ss.hasRole('admin')`)"
+                :bodyStyle="{ maxWidth: '268px' }"
               >
                 <el-icon
                   :size="16"

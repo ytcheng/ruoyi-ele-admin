@@ -10,6 +10,7 @@
       :body-style="{ padding: '0 0 0 16px', overflow: 'hidden' }"
     >
       <ele-split-panel
+        ref="splitRef"
         flex-table
         size="249px"
         allow-collapse
@@ -95,9 +96,16 @@
   import { Plus, Delete, EditPen, Search } from '@element-plus/icons-vue';
   import { ElMessageBox } from 'element-plus/es';
   import { EleMessage } from 'ele-admin-plus/es';
+  import { useMobile } from '@/utils/use-mobile';
   import DictDataList from './components/dict-data-list.vue';
   import DictEdit from './components/dict-edit.vue';
   import { listDicts, removeDict } from '@/api/system/dict';
+
+  // 是否是移动端
+  const { mobile } = useMobile();
+
+  // 分割面板组件
+  const splitRef = ref(null);
 
   // 树组件
   const treeRef = ref(null);
@@ -139,6 +147,10 @@
 
   /* 选择数据 */
   const onNodeClick = (row) => {
+    // 移动端自动收起左侧
+    if (current.value != null && mobile.value) {
+      splitRef.value?.toggleCollapse?.(true);
+    }
     if (row && row.dictId) {
       current.value = row;
       treeRef.value?.setCurrentKey?.(row.dictId);

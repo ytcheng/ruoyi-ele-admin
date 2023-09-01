@@ -26,12 +26,15 @@ export const useUserStore = defineStore({
      */
     async fetchUserInfo() {
       const result = await getUserInfo().catch((e) => console.error(e));
+      if (!result) {
+        return {};
+      }
       // 用户信息
-      this.setInfo(result?.user);
+      this.setInfo(result.user);
       // 用户权限
-      this.authorities = result?.permissions;
+      this.authorities = result.permissions;
       // 用户角色
-      this.roles = result?.roles;
+      this.roles = result.roles;
       // 用户菜单
       const userMenu = await getUserMenu().catch((e) => console.error(e));
       if (!userMenu) {
