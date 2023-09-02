@@ -90,7 +90,7 @@
 </template>
 
 <script setup>
-  import { ref, reactive, unref, computed } from 'vue';
+  import { ref, reactive, unref } from 'vue';
   import { useRouter } from 'vue-router';
   import { EleMessage } from 'ele-admin-plus/es';
   import { User, Lock, RefreshRight } from '@element-plus/icons-vue';
@@ -121,33 +121,31 @@
   });
 
   // 表单验证规则
-  const rules = computed(() => {
-    return {
-      username: [
-        {
-          required: true,
-          message: '请输入登录账号',
-          type: 'string',
-          trigger: 'blur'
-        }
-      ],
-      password: [
-        {
-          required: true,
-          message: '请输入登录密码',
-          type: 'string',
-          trigger: 'blur'
-        }
-      ],
-      code: [
-        {
-          required: true,
-          message: '请输入验证码',
-          type: 'string',
-          trigger: 'blur'
-        }
-      ]
-    };
+  const rules = reactive({
+    username: [
+      {
+        required: true,
+        message: '请输入登录账号',
+        type: 'string',
+        trigger: 'blur'
+      }
+    ],
+    password: [
+      {
+        required: true,
+        message: '请输入登录密码',
+        type: 'string',
+        trigger: 'blur'
+      }
+    ],
+    code: [
+      {
+        required: true,
+        message: '请输入验证码',
+        type: 'string',
+        trigger: 'blur'
+      }
+    ]
   });
 
   // 图形验证码

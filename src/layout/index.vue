@@ -121,7 +121,7 @@
 </template>
 
 <script setup>
-  import { ref, computed } from 'vue';
+  import { ref, computed, shallowRef } from 'vue';
   import { useRouter } from 'vue-router';
   import { storeToRefs } from 'pinia';
   import {
@@ -211,42 +211,40 @@
   const isFullscreen = ref(false);
 
   // 页签右键菜单
-  const tabContext = computed(() => {
-    return [
-      {
-        title: '刷新当前',
-        command: 'reload',
-        icon: RefreshRight
-      },
-      {
-        title: '关闭当前',
-        command: 'close',
-        icon: Close
-      },
-      {
-        title: '关闭左侧',
-        command: 'left',
-        icon: Back,
-        divided: true
-      },
-      {
-        title: '关闭右侧',
-        command: 'right',
-        icon: Right
-      },
-      {
-        title: '关闭其它',
-        command: 'other',
-        icon: Remove,
-        divided: true
-      },
-      {
-        title: '关闭全部',
-        command: 'all',
-        icon: CircleClose
-      }
-    ];
-  });
+  const tabContext = shallowRef([
+    {
+      title: '刷新当前',
+      command: 'reload',
+      icon: RefreshRight
+    },
+    {
+      title: '关闭当前',
+      command: 'close',
+      icon: Close
+    },
+    {
+      title: '关闭左侧',
+      command: 'left',
+      icon: Back,
+      divided: true
+    },
+    {
+      title: '关闭右侧',
+      command: 'right',
+      icon: Right
+    },
+    {
+      title: '关闭其它',
+      command: 'other',
+      icon: Remove,
+      divided: true
+    },
+    {
+      title: '关闭全部',
+      command: 'all',
+      icon: CircleClose
+    }
+  ]);
 
   // 页签栏右侧下拉菜单
   const tabExtra = computed(() => {
