@@ -70,9 +70,7 @@
         <div v-if="notice.length" class="bottom-tools">
           <div class="bottom-tool" @click="clearNotice">清空通知</div>
           <el-divider direction="vertical" style="margin: 0; width: 0" />
-          <router-link to="/user/message?type=notice" class="bottom-tool">
-            查看更多
-          </router-link>
+          <div class="bottom-tool">查看更多</div>
         </div>
         <el-empty v-else description="已查看所有通知" :image-size="68" />
       </template>
@@ -94,9 +92,7 @@
         <div v-if="letter.length" class="bottom-tools">
           <div class="bottom-tool" @click="clearLetter">清空私信</div>
           <el-divider direction="vertical" style="margin: 0; width: 0" />
-          <router-link to="/user/message?type=letter" class="bottom-tool">
-            查看更多
-          </router-link>
+          <div class="bottom-tool">查看更多</div>
         </div>
         <el-empty v-else description="已读完所有私信" :image-size="68" />
       </template>
@@ -137,9 +133,7 @@
         <div v-if="todo.length" class="bottom-tools">
           <div class="bottom-tool" @click="clearTodo">清空待办</div>
           <el-divider direction="vertical" style="margin: 0; width: 0" />
-          <router-link to="/user/message?type=todo" class="bottom-tool">
-            查看更多
-          </router-link>
+          <div class="bottom-tool">查看更多</div>
         </div>
         <el-empty v-else description="已完成所有任务" :image-size="68" />
       </template>
