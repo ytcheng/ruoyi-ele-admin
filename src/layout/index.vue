@@ -22,9 +22,9 @@
     :fixed-home="fixedHome"
     :home-path="HOME_PATH"
     :redirectPath="REDIRECT_PATH"
-    :tab-context-menu="!mobile"
+    :tab-sortable="!mobileDevice"
+    :tab-context-menu="!mobileDevice"
     :tab-context-menus="tabContext"
-    :tab-sortable="!mobile"
     :keep-alive="TAB_KEEP_ALIVE"
     :transition-name="transitionName"
     @update:collapse="updateCollapse"
@@ -157,7 +157,7 @@
   } from '@/config/setting';
   import { useUserStore } from '@/store/modules/user';
   import { useThemeStore } from '@/store/modules/theme';
-  import { useMobile } from '@/utils/use-mobile';
+  import { useMobileDevice } from '@/utils/use-mobile';
   import { usePageTab } from '@/utils/use-page-tab';
   import RouterLayout from '@/components/RouterLayout/index.vue';
   import HeaderUser from './components/header-user.vue';
@@ -175,7 +175,7 @@
     reloadPageTab,
     setPageTabs
   } = usePageTab();
-  const { mobile } = useMobile();
+  const { mobileDevice } = useMobileDevice();
   const userStore = useUserStore();
   const themeStore = useThemeStore();
 

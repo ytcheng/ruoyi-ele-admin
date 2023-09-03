@@ -27,7 +27,7 @@
             :prefix-icon="Search"
           />
         </div>
-        <div class="org-tree">
+        <ele-loading :loading="loading" class="org-tree">
           <el-tree
             ref="treeRef"
             :data="data"
@@ -39,7 +39,7 @@
             :filter-node-method="filterNode"
             @node-click="onNodeClick"
           />
-        </div>
+        </ele-loading>
         <template #body>
           <user-list v-if="current" :dept-id="current.deptId" />
         </template>

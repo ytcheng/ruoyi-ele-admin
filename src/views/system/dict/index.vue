@@ -55,7 +55,7 @@
             删除
           </el-button>
         </el-space>
-        <div class="dict-tree">
+        <ele-loading :loading="loading" class="dict-tree">
           <el-tree
             ref="treeRef"
             :data="data"
@@ -77,7 +77,7 @@
               </span>
             </template>
           </el-tree>
-        </div>
+        </ele-loading>
         <template #body>
           <dict-data-list
             v-if="current && current.dictType"
