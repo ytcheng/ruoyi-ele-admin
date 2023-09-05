@@ -83,7 +83,7 @@
                 <span>更多</span>
                 <el-icon
                   :size="12"
-                  style="vertical-align: -0.65px; margin-left: 2px"
+                  style="vertical-align: -1px; margin-left: 2px"
                 >
                   <arrow-down />
                 </el-icon>

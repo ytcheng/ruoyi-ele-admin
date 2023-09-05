@@ -19,7 +19,7 @@
     "cropperjs": "^1.6.0",
     "dayjs": "^1.11.9",
     "echarts": "^5.4.3",
-    "ele-admin-plus": "^1.1.4-beta.2",
+    "ele-admin-plus": "^1.1.4",
     "element-plus": "^2.3.12",
     "highlight.js": "^11.8.0",
     "jsbarcode": "^3.11.5",
