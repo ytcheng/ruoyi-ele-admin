@@ -226,7 +226,8 @@
 </script>
 
 <style>
-  body .tox-tinymce-aux {
+  body .tox.tox-tinymce-aux,
+  body.tox-fullscreen .tox.tox-tinymce-aux {
     z-index: 19990000;
   }
 
