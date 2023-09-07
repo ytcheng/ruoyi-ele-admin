@@ -12,7 +12,7 @@
 .zoom-out-leave-active,
 .zoom-out-enter-active {
   & + .ele-footer {
-    display: none;
+    visibility: hidden;
   }
 }
 

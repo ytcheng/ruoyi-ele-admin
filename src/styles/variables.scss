@@ -79,5 +79,6 @@
 );
 
 @forward 'ele-admin-plus/es/style/themes/default.scss' with (
+  $scrollbar-selector: 'pc',
   $ele: $ele-rounded
 );
